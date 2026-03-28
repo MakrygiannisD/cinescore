@@ -1,0 +1,3170 @@
+[
+  {
+    "title": "Superman",
+    "year": "2025",
+    "genre": "Action, Adventure, Sci-Fi",
+    "imdbRating": 7,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOGMwZGJiM2EtMzEwZC00YTYzLWIxNzYtMmJmZWNlZjgxZTMwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt5950044"
+  },
+  {
+    "title": "Sinners",
+    "year": "2025",
+    "genre": "Action, Drama, Horror",
+    "imdbRating": 7.5,
+    "rtRating": 97,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjIwZWY4ZDEtMmIxZS00NDA4LTg4ZGMtMzUwZTYyNzgxMzk5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31193180"
+  },
+  {
+    "title": "F1: The Movie",
+    "year": "2025",
+    "genre": "Action, Drama, Sport",
+    "imdbRating": 7.6,
+    "rtRating": 82,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNGI0MDI4NjEtOWU3ZS00ODQyLWFhYTgtNGYxM2ZkM2Q2YjE3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt16311594"
+  },
+  {
+    "title": "Thunderbolts*",
+    "year": "2025",
+    "genre": "Action, Adventure, Crime",
+    "imdbRating": 7.1,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYWE2NmNmYTItZGY0ZC00MmY2LTk1NDAtMGUyMGEzMjcxNWM0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt20969586"
+  },
+  {
+    "title": "Weapons",
+    "year": "2025",
+    "genre": "Horror, Mystery",
+    "imdbRating": 7.4,
+    "rtRating": 93,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTBhNWJjZWItYzY3NS00M2NkLThmOWYtYTlmNzBmN2UxZWFjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26581740"
+  },
+  {
+    "title": "Jurassic World: Rebirth",
+    "year": "2025",
+    "genre": "Action, Adventure, Sci-Fi",
+    "imdbRating": 5.8,
+    "rtRating": 50,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjg2NTcwYWQtYzk4NS00MTJhLWEzZjItMzIxNjk3YzlkYzU0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31036941"
+  },
+  {
+    "title": "One Battle After Another",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 7.7,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzBkZmQ0NjMtNTZlMy00ZjdlLTg5ODUtYWFlNGM0YzE3MTg0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30144839"
+  },
+  {
+    "title": "Mission: Impossible - The Final Reckoning",
+    "year": "2025",
+    "genre": "Action, Adventure, Thriller",
+    "imdbRating": 7.2,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGQ5NGEyYTItMjNiMi00Y2EwLTkzOWItMjc5YjJiMjMyNTI0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt9603208"
+  },
+  {
+    "title": "Frankenstein",
+    "year": "2025",
+    "genre": "Drama, Fantasy, Horror",
+    "imdbRating": 7.5,
+    "rtRating": 85,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzYzNDYxMTQtMTU4OS00MTdlLThhMTQtZjI4NGJmMTZmNmRiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt1312221"
+  },
+  {
+    "title": "28 Years Later",
+    "year": "2025",
+    "genre": "Horror, Sci-Fi, Thriller",
+    "imdbRating": 6.6,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjgwYTI0YjctMWYzNS00MmI1LWI5YTctNmE1YjBkNDFlNWMxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt10548174"
+  },
+  {
+    "title": "KPop Demon Hunters",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 7.5,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTBiYWJlMjQtOTIyMy00NTY4LWFhOWItOWZhNzc3NGMyMjc2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14205554"
+  },
+  {
+    "title": "Predator: Badlands",
+    "year": "2025",
+    "genre": "Action, Adventure, Sci-Fi",
+    "imdbRating": 7.3,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTdjZGUxMTItNjRkNS00N2VhLWE4MjMtMjVhODMwMGIxNjUwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31227572"
+  },
+  {
+    "title": "Final Destination: Bloodlines",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 6.7,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzc3OWFhZWItMTE2Yy00N2NmLTg1YTktNGVlNDY0ODQ5YjNlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt9619824"
+  },
+  {
+    "title": "How to Train Your Dragon",
+    "year": "2025",
+    "genre": "Action, Adventure, Comedy",
+    "imdbRating": 7.7,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODA5Y2M0NjctNWQzMy00ODRhLWE0MzUtYmE1YTAzZjYyYmQyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26743210"
+  },
+  {
+    "title": "The Amateur",
+    "year": "2025",
+    "genre": "Action, Thriller",
+    "imdbRating": 6.5,
+    "rtRating": 62,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjhkZjM3ZWYtMjUxMS00YzhlLTkxZWYtMzhkMzFhOTQ1NjRkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt0899043"
+  },
+  {
+    "title": "Nobody 2",
+    "year": "2025",
+    "genre": "Action, Comedy, Crime",
+    "imdbRating": 6.3,
+    "rtRating": 76,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWViZjhjYjQtZDI1MC00MWMyLTlhZTktNmIzY2Y0ZWVkMWFhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28996126"
+  },
+  {
+    "title": "The Accountant 2",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 6.6,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjFiY2I0NTEtNjdjNy00MTljLThkOWYtMzNiYjYyMDcxYjhkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt7068946"
+  },
+  {
+    "title": "The Naked Gun",
+    "year": "2025",
+    "genre": "Action, Comedy, Crime",
+    "imdbRating": 6.5,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNGFlNDhkNzItZjgxNC00OGYzLWFjZDAtZTJmNDY5ZmEyZDc0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt3402138"
+  },
+  {
+    "title": "Zootopia 2",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 7.4,
+    "rtRating": 91,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjg1Mjc3MjQtMTZjNy00YWVlLWFhMWEtMWI3ZTgxYjJmNmRlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26443597"
+  },
+  {
+    "title": "Bugonia",
+    "year": "2025",
+    "genre": "Comedy, Crime, Sci-Fi",
+    "imdbRating": 7.4,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzIzNWQxMjEtZmQ3MS00OTk2LWFlZjktZDUyYWRkM2M3NWVlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt12300742"
+  },
+  {
+    "title": "The Running Man",
+    "year": "2025",
+    "genre": "Action, Adventure, Sci-Fi",
+    "imdbRating": 6.4,
+    "rtRating": 63,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTk5NjU4OTAtNTEyMS00ZjBiLTg0ZjMtOGJiMGJhNjQ3MzYxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14107334"
+  },
+  {
+    "title": "The Housemaid",
+    "year": "2025",
+    "genre": "Drama, Mystery, Thriller",
+    "imdbRating": 6.8,
+    "rtRating": 73,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27543632"
+  },
+  {
+    "title": "Lilo & Stitch",
+    "year": "2025",
+    "genre": "Action, Adventure, Comedy",
+    "imdbRating": 6.7,
+    "rtRating": 72,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmFmZjM1ZTEtYzQ5ZS00MTRmLTkzMDktYWMxNTg2NGE3YjY4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt11655566"
+  },
+  {
+    "title": "Warfare",
+    "year": "2025",
+    "genre": "Action, Drama, War",
+    "imdbRating": 7.1,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzEyYjE1NmEtOTFmNy00ZmQxLThlYzctOGRjNmQ0N2VjMmNmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31434639"
+  },
+  {
+    "title": "The Long Walk",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 6.7,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmE4YmIxNWQtMzJhMy00NDI5LWFmYjEtMGYyMmFhNzdjODVmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt10374610"
+  },
+  {
+    "title": "Tron: Ares",
+    "year": "2025",
+    "genre": "Action, Adventure, Sci-Fi",
+    "imdbRating": 6.2,
+    "rtRating": 53,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzNlY2RiYWEtMDA0YS00MTZkLWI5YmUtMDNiZDZlN2E4MTVlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt6604188"
+  },
+  {
+    "title": "Bring Her Back",
+    "year": "2025",
+    "genre": "Horror, Mystery",
+    "imdbRating": 7.1,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTlhYTk1ZTEtOWY3NC00NWQ5LTlkOTctNjQ3ZDYyZGE5ZWNlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32246771"
+  },
+  {
+    "title": "A House of Dynamite",
+    "year": "2025",
+    "genre": "Drama, Thriller",
+    "imdbRating": 6.4,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjAzMjQ4YTUtOGI1Yy00YTFkLTlkMDQtMDEwOWNjYmE3MTU1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32376165"
+  },
+  {
+    "title": "Fountain of Youth",
+    "year": "2025",
+    "genre": "Action, Adventure, Fantasy",
+    "imdbRating": 5.7,
+    "rtRating": 35,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWRlZmU3ZTItM2JlYi00YTg1LTgxNTItMjMyNzIyZWY5YWJmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27075958"
+  },
+  {
+    "title": "Heads of State",
+    "year": "2025",
+    "genre": "Action, Adventure, Comedy",
+    "imdbRating": 6.4,
+    "rtRating": 68,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYWFmNjg0ZGMtZmI5OC00YTAwLWFiMmMtOWRkNzQ0OTE1YWEwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13357520"
+  },
+  {
+    "title": "Happy Gilmore 2",
+    "year": "2025",
+    "genre": "Comedy, Sport",
+    "imdbRating": 6.1,
+    "rtRating": 62,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTQyNTRmYjItMDBjYi00YWNhLWEwMmQtNzJhODNiNjEzOWJlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31868189"
+  },
+  {
+    "title": "The Thursday Murder Club",
+    "year": "2025",
+    "genre": "Comedy, Crime, Mystery",
+    "imdbRating": 6.5,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmQ4NWVjN2EtN2U3NC00YzZhLWIzYmMtNjQ0ZjNiN2MzNDI0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt12001534"
+  },
+  {
+    "title": "M3GAN 2.0",
+    "year": "2025",
+    "genre": "Action, Sci-Fi, Thriller",
+    "imdbRating": 6,
+    "rtRating": 57,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzFmNjVjZWQtZjI5Zi00YThiLTg0ZWItZDdjYzhhZDE1NTE2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26342662"
+  },
+  {
+    "title": "Avatar: Fire and Ash",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 7.4,
+    "rtRating": 66,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDYxY2I1OGMtN2Y4MS00ZmU1LTgyNDAtODA0MzAyYjI0N2Y2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt1757678"
+  },
+  {
+    "title": "Marty Supreme",
+    "year": "2025",
+    "genre": "Drama, Sport",
+    "imdbRating": 8.1,
+    "rtRating": 94,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTRhYjI1MTItMWYwMi00MjY5LWI1OTktMzQwNzA3MWJlN2QyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32916440"
+  },
+  {
+    "title": "Havoc",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 5.6,
+    "rtRating": 64,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZWJjMjdhNGEtZjEyMi00OTg2LTllMzQtN2JlZWNjYzI4YzFhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14123284"
+  },
+  {
+    "title": "Until Dawn",
+    "year": "2025",
+    "genre": "Drama, Horror, Mystery",
+    "imdbRating": 5.7,
+    "rtRating": 51,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZWU4NDY0ODktOGI3OC00NWE1LWIwYmQtNmJiZWU3NmZlMDhkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30955489"
+  },
+  {
+    "title": "Predator: Killer of Killers",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 7.4,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjM2MjA4YzQtYjBkNS00YmU3LTllOTgtMDQzMjkzM2Q4MmM5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36463894"
+  },
+  {
+    "title": "The Old Guard 2",
+    "year": "2025",
+    "genre": "Action, Adventure, Fantasy",
+    "imdbRating": 5.1,
+    "rtRating": 27,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmFhNWY1MjEtZTkyZS00ZWIzLTk4ZWItMDM0MzliNmE1ZGZhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14961624"
+  },
+  {
+    "title": "Materialists",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 6.3,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmQxMTI1YmEtOGY3Yi00NzVlLWEzMjAtYTI1NWZkNDFiMDg1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30253473"
+  },
+  {
+    "title": "Roofman",
+    "year": "2025",
+    "genre": "Biography, Crime, Drama",
+    "imdbRating": 7,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjU4OTkyN2MtYjI0Mi00MjE3LWFkNTktZDNjODc3OTdiMDdiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt4627382"
+  },
+  {
+    "title": "The Woman in Cabin 10",
+    "year": "2025",
+    "genre": "Drama, Mystery, Thriller",
+    "imdbRating": 5.8,
+    "rtRating": 28,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNDY0YmEyNDMtNTQ0Yi00MWVmLWFiYjMtODM5NmUzZWQ5MDMxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt7130300"
+  },
+  {
+    "title": "Caught Stealing",
+    "year": "2025",
+    "genre": "Action, Comedy, Crime",
+    "imdbRating": 6.9,
+    "rtRating": 85,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTk0YTIyYmMtMTJjOC00NmNiLTkxMTktYTU0ZDFhNjJlMTJiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt1493274"
+  },
+  {
+    "title": "Wicked: For Good",
+    "year": "2025",
+    "genre": "Drama, Family, Fantasy",
+    "imdbRating": 6.7,
+    "rtRating": 66,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzRhNTE4ZTYtNTM0Mi00MzU3LTk4MTktYWE3MzQ2NTU0MDNlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt19847976"
+  },
+  {
+    "title": "The Lost Bus",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 6.8,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTIzNmQzYzUtNTdlNi00NmY5LThmNTYtMGFmZjUxMTgzOGNmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt21103218"
+  },
+  {
+    "title": "Together",
+    "year": "2025",
+    "genre": "Horror, Romance",
+    "imdbRating": 6.7,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWI1Mzg0OWUtNDYxYy00Mzk3LTgxMjMtYWYxZjJhMjI4NDcyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31184028"
+  },
+  {
+    "title": "Drop",
+    "year": "2025",
+    "genre": "Drama, Mystery, Thriller",
+    "imdbRating": 6.1,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWUyOTNlMjItNWUyZC00ZGJiLTg3MDMtODJmMGQyMGY3NzU3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32149847"
+  },
+  {
+    "title": "Nuremberg",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 7.4,
+    "rtRating": 72,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWUzODNkYWUtMmMzOC00NzZjLTlkMTctOTkwM2I2ZWI1MTlmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29567915"
+  },
+  {
+    "title": "Elio",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 6.6,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWE5ZDMyMWEtOTZjMi00YzFhLWE4OTEtNDc3MDMzZjFmMmIzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt4900148"
+  },
+  {
+    "title": "Sisu: Road to Revenge",
+    "year": "2025",
+    "genre": "Action, War",
+    "imdbRating": 6.8,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2ZiNDZiZDQtMjYyOC00MWY1LTkyZjgtNDM1MmMwZTdhOWFkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31844586"
+  },
+  {
+    "title": "Black Phone 2",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 6.1,
+    "rtRating": 72,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTVjMzNmZGYtOWU5NS00NDYzLThhZTktZGNlODIwYWVhMDRmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29644189"
+  },
+  {
+    "title": "Rental Family",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 7.6,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzFiNTViOTQtOTUxNi00ODczLWI0MTgtNDE1ZWU5YmIzMjY2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14142060"
+  },
+  {
+    "title": "Hamnet",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 8.1,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMDQ5ZmY0OWYtOTYzZi00Mzg5LWE3N2EtMjYwZTAzZmJhYjkyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14905854"
+  },
+  {
+    "title": "Good Fortune",
+    "year": "2025",
+    "genre": "Comedy, Fantasy, Romance",
+    "imdbRating": 6.5,
+    "rtRating": 78,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjk3ZTgwZmUtOTVlMy00ODExLTkzMTUtYzRhM2FjNGYyMzZkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27543578"
+  },
+  {
+    "title": "Eternity",
+    "year": "2025",
+    "genre": "Comedy, Drama, Fantasy",
+    "imdbRating": 6.9,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzlmZTNiOTAtNzhlOC00ZTA1LWJhNTgtMDQ4YmY4NWIyNTA4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt24950660"
+  },
+  {
+    "title": "The Life of Chuck",
+    "year": "2024",
+    "genre": "Drama, Fantasy, Sci-Fi",
+    "imdbRating": 7.3,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDhlMzJhMTgtN2FhZS00OWQ1LTk3Y2ItZGNiNTQ0ZmUzYmIzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt12908150"
+  },
+  {
+    "title": "Train Dreams",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 7.5,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDkzNzkyNTktYzNhMi00YjhiLWI5YmUtZjliMTY0ZDc5NmMyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29768334"
+  },
+  {
+    "title": "Deep Cover",
+    "year": "2025",
+    "genre": "Action, Comedy, Crime",
+    "imdbRating": 6.7,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjQ5ZTJjZTEtZWRiOC00NGM3LTg5NGItMTkxZmJmZjg5NzA3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31121295"
+  },
+  {
+    "title": "The Phoenician Scheme",
+    "year": "2025",
+    "genre": "Action, Comedy, Crime",
+    "imdbRating": 6.6,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTJmODQzYmItNTZlMy00Mjg0LTk1NjctYjM4ZGI0NTM3ZTVjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30840798"
+  },
+  {
+    "title": "The Roses",
+    "year": "2025",
+    "genre": "Comedy",
+    "imdbRating": 6.6,
+    "rtRating": 64,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzliNTEyYjEtNGE3Mi00ZDIzLTg1NzYtZDBhNTQ5ZDVkMmM3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31973693"
+  },
+  {
+    "title": "Playdate",
+    "year": "2025",
+    "genre": "Action, Comedy",
+    "imdbRating": 5.5,
+    "rtRating": 23,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWQ4N2Y5YjYtNGE1Ni00YWExLWIzNDYtMmM2ZTc0OGJmMDA1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31425731"
+  },
+  {
+    "title": "Ice Road: Vengeance",
+    "year": "2025",
+    "genre": "Action, Adventure, Thriller",
+    "imdbRating": 4.8,
+    "rtRating": 15,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjNlOGE0ZmMtNTk2MC00NTBhLTg2Y2QtZjdkZjIwNjQzYzY3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27621210"
+  },
+  {
+    "title": "The Bad Guys 2",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 7,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2YwODhmODctMjE2OS00Y2EyLWEyZTEtOGU3ODk5MGIzYmU1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30017619"
+  },
+  {
+    "title": "Chainsaw Man - The Movie: Reze Arc",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 8.4,
+    "rtRating": 96,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmMzNGVhODktYmU5MS00MDg1LThlNTEtNTMyYTg5MDA0Njk4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30472557"
+  },
+  {
+    "title": "War of the Worlds",
+    "year": "2025",
+    "genre": "Horror, Sci-Fi, Thriller",
+    "imdbRating": 2.5,
+    "rtRating": 4,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWVlZDUzNTgtYzcxNC00OTYyLThlZjYtZDc1MTM2ZmI1Y2IzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13186306"
+  },
+  {
+    "title": "G20",
+    "year": "2025",
+    "genre": "Action, Thriller",
+    "imdbRating": 5.1,
+    "rtRating": 55,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTc5MTg3MTEtNzQwMi00Y2VkLWI4N2UtNDdmMzFjMGIyNTEzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23476986"
+  },
+  {
+    "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 8.4,
+    "rtRating": 98,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOGQ3YWUzYjEtMTJiYy00ZjQ0LWI0YjktYjhiNGVhNGExYTM3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32820897"
+  },
+  {
+    "title": "Nonnas",
+    "year": "2025",
+    "genre": "Comedy",
+    "imdbRating": 6.8,
+    "rtRating": 82,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODM0M2M4YWQtMzhlNy00NjdkLWFkODktOGNlNTc4OTFiZjZmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28309594"
+  },
+  {
+    "title": "Dracula",
+    "year": "2025",
+    "genre": "Fantasy, Horror, Romance",
+    "imdbRating": 6.2,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2IyZTVkOWMtOTJjZS00NzM2LWFmYTgtM2NlMjhkY2E5NWZjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31434030"
+  },
+  {
+    "title": "Relay",
+    "year": "2024",
+    "genre": "Action, Drama, Thriller",
+    "imdbRating": 7,
+    "rtRating": 82,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzFhMjljODMtYTY3MS00NmFiLWEzOTAtNTczZjQ1NGMwMjE4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt11539996"
+  },
+  {
+    "title": "Eddington",
+    "year": "2025",
+    "genre": "Comedy, Drama, Western",
+    "imdbRating": 6.6,
+    "rtRating": 69,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmM0Yzc1ZjAtZTg4My00NDI3LWEwMzAtY2ZkNzMxMWMwOTFlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31176520"
+  },
+  {
+    "title": "Highest 2 Lowest",
+    "year": "2025",
+    "genre": "Crime, Drama, Mystery",
+    "imdbRating": 5.5,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTExYmRjMmMtMGRjMi00ZGIyLTkwZTAtOWExOTYwNmM4NTk3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31194612"
+  },
+  {
+    "title": "Brick",
+    "year": "2025",
+    "genre": "Drama, Mystery, Sci-Fi",
+    "imdbRating": 5.5,
+    "rtRating": 44,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMGRjZTI5NmEtNWQzNi00ZDUxLWFmZmQtOGFiZmNkZGY1MDc5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31806049"
+  },
+  {
+    "title": "Freakier Friday",
+    "year": "2025",
+    "genre": "Comedy, Family, Fantasy",
+    "imdbRating": 6.4,
+    "rtRating": 74,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2Q0M2NmMjctODEwMi00NGIyLTk4NjUtMzBlNDAxYTZlZGJiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31956415"
+  },
+  {
+    "title": "The Pickup",
+    "year": "2025",
+    "genre": "Action, Comedy",
+    "imdbRating": 5.4,
+    "rtRating": 25,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjNhNzQ5NmQtY2Q1Ny00NzI0LTgyMmUtYjU2MmI5NDE3MGQ0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30445556"
+  },
+  {
+    "title": "Five Nights at Freddy's 2",
+    "year": "2025",
+    "genre": "Horror, Mystery, Thriller",
+    "imdbRating": 5.1,
+    "rtRating": 16,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmQ3NmIxNTgtYjFiNS00NzliLWI0YzAtZDkxY2E0YWIxZDEwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30274401"
+  },
+  {
+    "title": "Straw",
+    "year": "2025",
+    "genre": "Drama, Thriller",
+    "imdbRating": 6.5,
+    "rtRating": 53,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmZjOTU5MGQtYTcyMi00ZGJjLTk4NzQtZTcwMmI0MTczNTUwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32550101"
+  },
+  {
+    "title": "Exterritorial",
+    "year": "2025",
+    "genre": "Action, Mystery, Thriller",
+    "imdbRating": 5.8,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjVkMzI2MjAtYzA3NC00OGE1LWEyZDMtODc0YTc5NTZjYzFiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30876483"
+  },
+  {
+    "title": "Dangerous Animals",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 6.4,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTg5M2ZjNjItZThiZi00NDFiLTg3NmYtMmFhZTkxZWQ2OWVmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32299316"
+  },
+  {
+    "title": "Fight or Flight",
+    "year": "2024",
+    "genre": "Action, Comedy",
+    "imdbRating": 6.4,
+    "rtRating": 76,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmE4YTQxMjctMWFlZC00OTY5LWJiNTctZjFhNTJlMmIxMmViXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13652286"
+  },
+  {
+    "title": "No Other Choice",
+    "year": "2025",
+    "genre": "Comedy, Crime, Drama",
+    "imdbRating": 7.6,
+    "rtRating": 98,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjg3NzY0N2ItZGFlMy00NzAzLTk2NjItMDk2YTU3ZWU0MDA1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt1527793"
+  },
+  {
+    "title": "Good Boy",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 6.1,
+    "rtRating": 91,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODJhM2JhYjktN2JlMC00YzVjLWI3NjctMTgzYjhhZDk3ZjU2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35521922"
+  },
+  {
+    "title": "Code 3",
+    "year": "2025",
+    "genre": "Action, Comedy, Drama",
+    "imdbRating": 7.2,
+    "rtRating": 78,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTMyYjEwNzAtNjgwNS00ZDE0LTg0NWMtZjA5NjgyODliY2ZmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26394837"
+  },
+  {
+    "title": "Friendship",
+    "year": "2024",
+    "genre": "Comedy",
+    "imdbRating": 6.6,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzljN2M1MWMtYmUwMi00YWM5LTllMGItNzZlMmU1NWM2NTY5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30505698"
+  },
+  {
+    "title": "Sentimental Value",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 7.8,
+    "rtRating": 97,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTMwMTk0Y2QtY2VhNy00OGYwLThkMjMtZjkwMGI3MTJiMjAyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27714581"
+  },
+  {
+    "title": "Another Simple Favor",
+    "year": "2025",
+    "genre": "Comedy, Crime, Mystery",
+    "imdbRating": 5.3,
+    "rtRating": 58,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMDBhNTg1MWMtMDc5Ni00YTk1LWFjNGUtMmE2Y2Q5MGQ2M2Q2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt20214908"
+  },
+  {
+    "title": "Echo Valley",
+    "year": "2025",
+    "genre": "Drama, Thriller",
+    "imdbRating": 6.2,
+    "rtRating": 52,
+    "poster": "https://m.media-amazon.com/images/M/MV5BN2RmMTUzY2YtYTBlZC00OTVhLWE0YTEtMmU3OGY5YWM2NjhhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27052633"
+  },
+  {
+    "title": "The Perfect Neighbor",
+    "year": "2025",
+    "genre": "Documentary, Crime, Drama",
+    "imdbRating": 7.1,
+    "rtRating": 99,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmYxZjA5YmItMjJkYi00NzllLWJjMzgtZjFjZjBlZGQwMmRkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34962891"
+  },
+  {
+    "title": "Cleaner",
+    "year": "2025",
+    "genre": "Action, Drama, Thriller",
+    "imdbRating": 5.2,
+    "rtRating": 51,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmE1MzkyMDctZjgzNC00YzkxLWI1YTctY2E4YzNjNmI1YTljXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27812086"
+  },
+  {
+    "title": "The Astronaut",
+    "year": "2025",
+    "genre": "Horror, Sci-Fi, Thriller",
+    "imdbRating": 4.7,
+    "rtRating": 42,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGRlMDA5NGYtOWNmYy00YWI3LWFlMzMtYjlhMTkxZmI1NDRjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13964560"
+  },
+  {
+    "title": "Unknown Number: The High School Catfish",
+    "year": "2025",
+    "genre": "Documentary, Crime",
+    "imdbRating": 6.9,
+    "rtRating": 85,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODQ3MTdhNTQtODk3ZC00MTNmLWEwZjEtYmFkNWM2NTI3N2IyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt37674426"
+  },
+  {
+    "title": "The Smashing Machine",
+    "year": "2025",
+    "genre": "Action, Biography, Drama",
+    "imdbRating": 6.4,
+    "rtRating": 71,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWYxZTM1ZGMtMjg5MC00NzcyLTk0ZTEtZWI0ZThkNDJiYjZmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt11214558"
+  },
+  {
+    "title": "Eenie Meanie",
+    "year": "2025",
+    "genre": "Action, Comedy, Drama",
+    "imdbRating": 5.9,
+    "rtRating": 43,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMDJiMDM4YzYtOWY3Zi00ODEwLTgxNjAtOTdiMDc2ZDI1MjczXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt15514498"
+  },
+  {
+    "title": "My Oxford Year",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 5.9,
+    "rtRating": 29,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWU0YTc0OWYtOWJjNy00ZDYzLWFlMTItMGZkNzM4YjQ5OWQzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt4978342"
+  },
+  {
+    "title": "Fear Street: Prom Queen",
+    "year": "2025",
+    "genre": "Horror, Mystery, Thriller",
+    "imdbRating": 5.1,
+    "rtRating": 27,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjJlMDJjZTctNDlkYi00YTNmLWIyZjUtZjdmZTFhNDQwMTQ4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31433402"
+  },
+  {
+    "title": "Clown in a Cornfield",
+    "year": "2025",
+    "genre": "Horror, Mystery, Thriller",
+    "imdbRating": 5.6,
+    "rtRating": 74,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOGUwNzQwMzYtZTkyYi00OTM3LWJiOGEtNzVkN2UxOGZlMmE3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23060698"
+  },
+  {
+    "title": "Sirat",
+    "year": "2025",
+    "genre": "Action, Adventure, Drama",
+    "imdbRating": 7,
+    "rtRating": 94,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzA1OTkyN2MtMGZjYy00NTcxLTg4Y2ItZjc4NjM2NmQzMzdjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32298285"
+  },
+  {
+    "title": "I Swear",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 8.4,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMGM0ODliY2EtOGU1OC00YThlLWJkZjMtOTg0YjYxYTg5MjkxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31514146"
+  },
+  {
+    "title": "The Unholy Trinity",
+    "year": "2024",
+    "genre": "Action, Adventure, Crime",
+    "imdbRating": 5.5,
+    "rtRating": 42,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODU0MjBkNmEtNGVkZi00MjcwLWJlY2EtMGFlN2I1ODY2YzVkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt6300910"
+  },
+  {
+    "title": "Mountainhead",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 5.4,
+    "rtRating": 74,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTRjMzU5MDAtZWRlMC00MDY5LTgyMGYtOTU5MDI2MTJiYzRiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35396529"
+  },
+  {
+    "title": "Song Sung Blue",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 7.3,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmQ2YjhjNjgtNGQxNC00NmI0LWEzMjktNWEzMWY2OTUwZjFiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30343021"
+  },
+  {
+    "title": "The Toxic Avenger",
+    "year": "2023",
+    "genre": "Action, Comedy, Horror",
+    "imdbRating": 5.9,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWFkNmFhMGMtNjY1OC00NjFhLTg2MmUtNTFmMDdmZTIzMWVlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt1633359"
+  },
+  {
+    "title": "If I Had Legs I'd Kick You",
+    "year": "2025",
+    "genre": "Drama, Thriller",
+    "imdbRating": 6.7,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMGRlMjIzMDctNzNkMS00MzEwLTlhZWEtM2FjYmE1ZmFjMzZlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt18382850"
+  },
+  {
+    "title": "Downton Abbey: The Grand Finale",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 7.3,
+    "rtRating": 91,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTUxOWRkN2UtZjBlMS00NWU0LWE2M2ItZmY5MDJjMzlhYTk4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31888477"
+  },
+  {
+    "title": "The Surfer",
+    "year": "2024",
+    "genre": "Thriller",
+    "imdbRating": 6,
+    "rtRating": 84,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmNjNTZiNTEtMWQ1NC00YmQ4LWFhYjktMzZhOGM2MDhmMTAxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27813235"
+  },
+  {
+    "title": "Him",
+    "year": "2025",
+    "genre": "Horror, Sport",
+    "imdbRating": 5.1,
+    "rtRating": 30,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZjE1OGY1OGItZWIxZi00ZDc0LTg0OTgtMzMwNTdiNzNhZDhhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt20990442"
+  },
+  {
+    "title": "Titan: The OceanGate Disaster",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 6.7,
+    "rtRating": 74,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGIyYTE0ZjgtZjUyZC00NGVhLTk5OTQtNTBkOWFjZDRmZDZkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35628853"
+  },
+  {
+    "title": "Freaky Tales",
+    "year": "2024",
+    "genre": "Action, Adventure, Comedy",
+    "imdbRating": 6.2,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTYyNmYyN2EtYTFjNS00ZWY5LWJiZmMtNTk5N2MyYzkzMDhmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt21942598"
+  },
+  {
+    "title": "She Rides Shotgun",
+    "year": "2025",
+    "genre": "Drama, Thriller",
+    "imdbRating": 6.9,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMGY1NGU4ZDMtMTNiZS00ZDVlLTllNjQtNDViZTI3M2MxYTkxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27986457"
+  },
+  {
+    "title": "Trap House",
+    "year": "2025",
+    "genre": "Action, Crime",
+    "imdbRating": 5.4,
+    "rtRating": 58,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmY0OTk0ZDktMmJkNy00NjQwLWE0NjQtOTY4Y2VhODdhOTJjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt10799690"
+  },
+  {
+    "title": "Regretting You",
+    "year": "2025",
+    "genre": "Drama, Romance",
+    "imdbRating": 6,
+    "rtRating": 28,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTNlM2MzM2MtZGU3OC00ZTM0LWFhYmYtYTQ1M2RhZTcwYjViXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33088452"
+  },
+  {
+    "title": "Springsteen: Deliver Me from Nowhere",
+    "year": "2025",
+    "genre": "Biography, Drama, Music",
+    "imdbRating": 6.7,
+    "rtRating": 60,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGE4NzJiNTUtNWQ3Mi00ZGE5LWI3NmUtMjQwNWIxMWMyZDA2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31923069"
+  },
+  {
+    "title": "Jay Kelly",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 6.6,
+    "rtRating": 76,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWRlNDM1NjktZDkyYi00Zjk0LWE5MTQtNWEyNzMwODY1Njc5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30446847"
+  },
+  {
+    "title": "Shadow Force",
+    "year": "2025",
+    "genre": "Action, Drama, Thriller",
+    "imdbRating": 4.7,
+    "rtRating": 30,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTUyZTUyOTMtOGU5OC00MmM1LTk0NWUtMjNlMTU4ZTkwMDRjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt11092020"
+  },
+  {
+    "title": "Hunting Season",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 5.7,
+    "rtRating": 60,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTJmN2E2YTYtNDc2Ni00ZjZlLWIzMjEtMjgyMzY2ZWU2YjRlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32537226"
+  },
+  {
+    "title": "It Was Just an Accident",
+    "year": "2025",
+    "genre": "Crime, Drama, Mystery",
+    "imdbRating": 7.5,
+    "rtRating": 98,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWJkZmZlNjUtM2Q1OC00MmNjLWFkOWEtNjRhN2FkM2ZlMjI3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36491653"
+  },
+  {
+    "title": "Ballad of a Small Player",
+    "year": "2025",
+    "genre": "Crime, Drama, Mystery",
+    "imdbRating": 5.9,
+    "rtRating": 48,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWZhYzE5ODctNTUwYi00ZGE3LTliNTgtZTNkYjcxZWMxMWJjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32063098"
+  },
+  {
+    "title": "Guns Up",
+    "year": "2025",
+    "genre": "Action, Comedy",
+    "imdbRating": 5.5,
+    "rtRating": 61,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTIzODM0YzgtM2ZjZi00MjYzLWEyMGMtMjcyY2QwYTVhZmQ3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28026215"
+  },
+  {
+    "title": "The Wrong Paris",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 6.1,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODI5YjkzZTAtYTE1ZC00ZWMxLTk4ODUtOGIwMzg3MzcyZjMyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33039440"
+  },
+  {
+    "title": "Swiped",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 6.5,
+    "rtRating": 44,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2IxNjJkMGEtNTE2Yy00ODc5LWFjOTItNjlmODc2YmRlMDAwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31909270"
+  },
+  {
+    "title": "The Shadow's Edge",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 7.1,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BN2ZhMGU1MTItMzBkMi00MjZmLWI2MDQtMWE1ODNjMWFhZjY4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34610311"
+  },
+  {
+    "title": "We Bury the Dead",
+    "year": "2024",
+    "genre": "Horror, Thriller",
+    "imdbRating": 5.6,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzQwZDIzMWEtZDNkOS00ODI5LWI1YmYtNDU3MTM0NWQ0MDVmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29713093"
+  },
+  {
+    "title": "A Big Bold Beautiful Journey",
+    "year": "2025",
+    "genre": "Drama, Fantasy, Romance",
+    "imdbRating": 6.2,
+    "rtRating": 37,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzMwZWJiYjEtM2RkMi00ZDhjLTk4ZmMtZDQ2NDY2YTJkOTE5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13650700"
+  },
+  {
+    "title": "Osiris",
+    "year": "2025",
+    "genre": "Action, Horror, Sci-Fi",
+    "imdbRating": 4.7,
+    "rtRating": 50,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYThkNDg5NTktZjViZC00NzY2LTkxNDItODgzMWIyNGQwZDM4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31179712"
+  },
+  {
+    "title": "The Hand That Rocks the Cradle",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 5.3,
+    "rtRating": 41,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYWRhYzA1NDUtY2ExZC00MTQzLWE4MjYtMGJlODJkNTYwNzI5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33502160"
+  },
+  {
+    "title": "Neighborhood Watch",
+    "year": "2025",
+    "genre": "Crime, Thriller",
+    "imdbRating": 6.2,
+    "rtRating": 70,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZWZjZWViYTUtNmJiNS00Y2Q0LTkyODktMGNkODNkZDRmMjM4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt1714918"
+  },
+  {
+    "title": "Vicious",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 4.9,
+    "rtRating": 44,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzNiMjhmNWQtNjJhZS00MGFkLTk3MDEtOWRmMjBjYTUwZTdlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31511689"
+  },
+  {
+    "title": "The Ballad of Wallis Island",
+    "year": "2025",
+    "genre": "Comedy, Drama, Music",
+    "imdbRating": 7.4,
+    "rtRating": 96,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODZlMjExYTAtYmJjNi00NzdjLTg3YzMtYTE1YTNlZDRhMWU2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27674982"
+  },
+  {
+    "title": "Night Always Comes",
+    "year": "2025",
+    "genre": "Crime, Drama, Thriller",
+    "imdbRating": 5.9,
+    "rtRating": 51,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjI4NDI1ZDEtN2Q5Zi00ZGU4LWJmNzctNjI1NzdlOWQxMGNkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31567422"
+  },
+  {
+    "title": "Bullet Train Explosion",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 6.2,
+    "rtRating": 66,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODNiYjcwY2UtYzZiNS00M2EzLWI2NmMtMmYzNTQ2ZTRjYWUzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33452974"
+  },
+  {
+    "title": "Sovereign",
+    "year": "2025",
+    "genre": "Crime, Drama, Thriller",
+    "imdbRating": 6.5,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjNmZmI5YzMtMzgyZC00MTBiLWJmNDktYWNkZDM3YmZmZTIxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26843513"
+  },
+  {
+    "title": "Sorry, Baby",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 7.1,
+    "rtRating": 97,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzJhZWNiMTktNjdiMi00ZTFkLTg5OTAtYzdiZjZjNDBlMmFhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32843349"
+  },
+  {
+    "title": "Splitsville",
+    "year": "2025",
+    "genre": "Comedy",
+    "imdbRating": 6.5,
+    "rtRating": 84,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODA3YTA1YzEtMDhjNy00ODFjLTlmYTItMjYzZWNhYzFmZjE2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33247023"
+  },
+  {
+    "title": "After the Hunt",
+    "year": "2025",
+    "genre": "Crime, Drama, Thriller",
+    "imdbRating": 5.7,
+    "rtRating": 37,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzYyOTAwODEtZTY4My00MjVkLWJjYjUtMjE2N2UzYTE3MTY3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32159989"
+  },
+  {
+    "title": "Bride Hard",
+    "year": "2025",
+    "genre": "Action, Comedy",
+    "imdbRating": 4.4,
+    "rtRating": 14,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzE4ZDEzMzctNWMzMC00YWY4LWIzMjgtMjc5MWVkM2VmZjc5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt21317634"
+  },
+  {
+    "title": "Smurfs",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 4.3,
+    "rtRating": 20,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMDMyNDViNTMtMmQwYy00ZWUzLThjODYtZWNiOTMzMWFjMzg1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt18069420"
+  },
+  {
+    "title": "Hallow Road",
+    "year": "2025",
+    "genre": "Drama, Horror, Thriller",
+    "imdbRating": 6,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWE4YjM4NDQtNmIxYy00NTU5LTlkNjUtMmQ2N2E5YmZlYmEzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt19403516"
+  },
+  {
+    "title": "The Ritual",
+    "year": "2025",
+    "genre": "Drama, Horror, Thriller",
+    "imdbRating": 4.5,
+    "rtRating": 9,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjc5ZTA4ZjUtOTY2ZS00MjA0LTkxNGUtNDc1ZDVlOTU2ZGQ2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32194932"
+  },
+  {
+    "title": "The Map That Leads to You",
+    "year": "2025",
+    "genre": "Drama, Romance",
+    "imdbRating": 6.2,
+    "rtRating": 38,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmViMTI1OTktOGRkZS00YjdmLWFhNGMtMWMwNTRmZWY3MmI4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33549478"
+  },
+  {
+    "title": "Diablo",
+    "year": "2025",
+    "genre": "Action, Thriller",
+    "imdbRating": 5.6,
+    "rtRating": 71,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzM0Mjc2NzMtMzJhNy00Nzc3LTg4Y2MtOTkzYzEwYmMzZDZkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27757546"
+  },
+  {
+    "title": "Bone Lake",
+    "year": "2024",
+    "genre": "Horror, Thriller",
+    "imdbRating": 5.7,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzUzODVlYTItMDFlNC00ODM2LTg0ZDYtZjRlZWI2ZGMzMTljXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26783625"
+  },
+  {
+    "title": "In Your Dreams",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 6.5,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmFjOGIwMDUtMjEyYi00MzE0LWEwMmMtMjYyMGUzM2RkMjlhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27604215"
+  },
+  {
+    "title": "Prisoner of War",
+    "year": "2025",
+    "genre": "Action, Thriller, War",
+    "imdbRating": 5.7,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BN2JjMjNjNzItYWIzZS00YTliLWJjNjMtODAzYjI3ZGRmZGZkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33057137"
+  },
+  {
+    "title": "Steve",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 6.4,
+    "rtRating": 78,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmE4N2ZlNWQtMDRhNC00ZmYzLWI5ODMtODAzZjRiOTkxZGZhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32985279"
+  },
+  {
+    "title": "MadS",
+    "year": "2024",
+    "genre": "Horror, Thriller",
+    "imdbRating": 6.4,
+    "rtRating": 94,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTg2Yzk1NGQtYzhhYS00YWI4LWFmYTAtNmI5ZmM5MzczNWY5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28821371"
+  },
+  {
+    "title": "The SpongeBob Movie: Search for SquarePants",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 5.7,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzdlYmM2YmEtMmQ3Zi00ZjAxLTg2ZjctNzU3NDVkY2RiOTBjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23572848"
+  },
+  {
+    "title": "Primitive War",
+    "year": "2025",
+    "genre": "Action, Horror, Sci-Fi",
+    "imdbRating": 5.4,
+    "rtRating": 65,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTk4OTlmZDQtYjM2ZC00ZTg3LThlYzItNzk1YjVmYTlkNGUwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt18312380"
+  },
+  {
+    "title": "Keeper",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 5.5,
+    "rtRating": 53,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYWEwYmY5NGYtOWFkNy00YTAxLWJmNzMtZWM0M2Y1NjcxMDMyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32332404"
+  },
+  {
+    "title": "The Luckiest Man in America",
+    "year": "2024",
+    "genre": "Thriller",
+    "imdbRating": 6.2,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWI2MmZmZjUtYTRhYi00ZWVhLWEwZjYtYjgwMGI4NDg2YzMxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32331377"
+  },
+  {
+    "title": "Rust",
+    "year": "2024",
+    "genre": "Drama, Western",
+    "imdbRating": 5.6,
+    "rtRating": 58,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzkzMzVmMGItYjFmOC00MzU2LThmNDItMzY4MDRkYzM1MDZjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt11001074"
+  },
+  {
+    "title": "Blue Moon",
+    "year": "2025",
+    "genre": "Biography, Comedy, Drama",
+    "imdbRating": 6.8,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODQ0NjNlN2MtNGRmZi00OGYzLWFjNGYtMjkyMTlmMWFkNTQ2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32536315"
+  },
+  {
+    "title": "The Legend of Ochi",
+    "year": "2025",
+    "genre": "Adventure, Family, Fantasy",
+    "imdbRating": 5.8,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BN2MzMDg4MmUtMzAyZS00YTU2LWE2OTgtYjhhNmJhZGExNzYxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt8866456"
+  },
+  {
+    "title": "John Candy: I Like Me",
+    "year": "2025",
+    "genre": "Documentary, Biography, Comedy",
+    "imdbRating": 8,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmI2MWE2YzctOTVkYi00ZWU5LTkwZGEtMzViNzA0ODBjNzQ3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26683420"
+  },
+  {
+    "title": "Twinless",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 7.4,
+    "rtRating": 97,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTAyZWE5ZTEtMjkwZC00ZGU4LTk0OTktYWY4MjhhMDg0ZmVlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31322753"
+  },
+  {
+    "title": "Something in the Water",
+    "year": "2024",
+    "genre": "Adventure, Drama, Horror",
+    "imdbRating": 4.1,
+    "rtRating": 46,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzViMTY5YjktMjMwYy00M2E5LWE2NzgtN2FjOGE2NTZjOWNiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt22863968"
+  },
+  {
+    "title": "Last Bullet",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 6.3,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGJkM2I2MjAtMmRiNy00MTkyLTg4ZDUtZjI1MmQxNzljNTUxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29768333"
+  },
+  {
+    "title": "Tin Soldier",
+    "year": "2025",
+    "genre": "Action, Thriller",
+    "imdbRating": 3.4,
+    "rtRating": 8,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWU1YjExZmMtNjg5OS00MGVlLWExNTMtMDAyMmYxNTM5YWZjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt20258920"
+  },
+  {
+    "title": "The Age of Disclosure",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 6.9,
+    "rtRating": 30,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzExZmFjYjctYzlmNS00YmJlLTk2OWUtZThlYjU4Y2RlMDhlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35520315"
+  },
+  {
+    "title": "Sketch",
+    "year": "2024",
+    "genre": "Adventure, Comedy, Family",
+    "imdbRating": 7.2,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTk4OTkzNGEtYWU1Yy00ZGM5LWE0ZDMtYzY3NjU1NjIwOGY2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26238710"
+  },
+  {
+    "title": "Pillion",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 6.8,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWEyNTlhYjQtYzNkYi00NTI0LWIzNTYtNjI2Mjg1OGRlMjgxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32321317"
+  },
+  {
+    "title": "Oh, Hi!",
+    "year": "2025",
+    "genre": "Comedy",
+    "imdbRating": 6.2,
+    "rtRating": 64,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTlmNzJlODYtOTVkNC00NWQwLWE5MTUtMGIwMGViNmE1MmY0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33292655"
+  },
+  {
+    "title": "Wall to Wall",
+    "year": "2025",
+    "genre": "Drama, Thriller",
+    "imdbRating": 5.9,
+    "rtRating": 59,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2Y1MjcwMWMtN2IyZi00MGIwLWFiM2YtZjkzZWE1NmJlMGFhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32237537"
+  },
+  {
+    "title": "Americana",
+    "year": "2023",
+    "genre": "Comedy, Crime, Drama",
+    "imdbRating": 5.9,
+    "rtRating": 64,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODEzNDU5NDktNTg3YS00MDE1LWFjZTktYjYxMGM4MmI1MjNiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt17676734"
+  },
+  {
+    "title": "40 Acres",
+    "year": "2024",
+    "genre": "Action, Drama, Sci-Fi",
+    "imdbRating": 6.5,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTRmZTIzMzQtZDQwOS00NGM5LWI1YTItMTc0MjE0NjczMDhlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29634843"
+  },
+  {
+    "title": "Madea's Destination Wedding",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 5.1,
+    "rtRating": 11,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzRkM2JmM2EtNTgzZi00MzdlLTkxM2ItNTlhNmQzZjM2NjA2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33299083"
+  },
+  {
+    "title": "Ziam",
+    "year": "2025",
+    "genre": "Action, Horror, Sci-Fi",
+    "imdbRating": 4.9,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDdlN2Q0ZjktNWI3Ny00NGYzLWJmNmItN2Y3YmNhMmZmNjY3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35669009"
+  },
+  {
+    "title": "Hell of a Summer",
+    "year": "2023",
+    "genre": "Comedy, Horror, Mystery",
+    "imdbRating": 5.3,
+    "rtRating": 49,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzE3MjhmM2QtYmU3ZS00ZDdkLTlkMWMtOTU4MDBiOTI1YzBhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt21267296"
+  },
+  {
+    "title": "Maintenance Required",
+    "year": "2025",
+    "genre": "Comedy, Romance",
+    "imdbRating": 5.2,
+    "rtRating": 38,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNGZlN2Y5ZGEtMmU0MS00ZWI0LThlMjQtMjIyZTIxMWRlYjNlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33335602"
+  },
+  {
+    "title": "Beast of War",
+    "year": "2025",
+    "genre": "Action, Biography, Drama",
+    "imdbRating": 5.4,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjI0OGNiNGEtY2VmOC00NmYyLWE2NmMtMGE0ZmUwNTA0ZTRlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29468874"
+  },
+  {
+    "title": "The Penguin Lessons",
+    "year": "2024",
+    "genre": "Drama",
+    "imdbRating": 7.1,
+    "rtRating": 78,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTU1MmE0NDEtNjM0OC00MjExLThmNjUtNTE4ZGU0NjRmY2NlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26677014"
+  },
+  {
+    "title": "Christy",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 6.3,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2E5MjhjODgtYzg0MS00NTlhLWIyZTktYjRjOTM1MDJlZWI4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32323252"
+  },
+  {
+    "title": "The Elixir",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 5.3,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzUyZTgyODctNWY2MC00NDMxLThhZjUtNDUxODA4YTYwZWIzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32643830"
+  },
+  {
+    "title": "Off the Grid",
+    "year": "2025",
+    "genre": "Action, Drama",
+    "imdbRating": 4.4,
+    "rtRating": 8,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjdkNzg4NzUtOWM2My00Nzc3LWFlMWYtMTg5NzQ3N2I4YmE5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27424511"
+  },
+  {
+    "title": "It Feeds",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 5.6,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2YwY2U1ZmYtNjI1Yy00MDY2LTk1MzMtYmVjMDU2OWQzOThkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28230296"
+  },
+  {
+    "title": "Gunslingers",
+    "year": "2025",
+    "genre": "Action, Drama, Western",
+    "imdbRating": 3.6,
+    "rtRating": 5,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGI2NzY0ZTktODZkOC00Yjg1LTkxNTEtYjIzYTUxMzNkZmFkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt24850708"
+  },
+  {
+    "title": "Is This Thing On?",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 6.8,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmY0N2YzMTItYmQyNi00MjdjLTk4NDYtOGU5NzhkM2RiMmEzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28083456"
+  },
+  {
+    "title": "Adulthood",
+    "year": "2025",
+    "genre": "Comedy, Crime, Drama",
+    "imdbRating": 5.5,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2Y2NGY3ZTMtMDhmOC00ZjJkLThmNzctZDc4MmYzZmIxNjY1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26657977"
+  },
+  {
+    "title": "Lost in Starlight",
+    "year": "2025",
+    "genre": "Animation, Comedy, Drama",
+    "imdbRating": 7.3,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNGY3OWYxMzAtNzllNC00MGU0LThhNDUtMjU1MjNhMWIxYjg1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28664733"
+  },
+  {
+    "title": "Anniversary",
+    "year": "2025",
+    "genre": "Thriller",
+    "imdbRating": 6.7,
+    "rtRating": 66,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTgzNTU4MjctNGYxYy00NzA0LTk5MTgtNGRiMDhmYTVjYzI5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt12583926"
+  },
+  {
+    "title": "All of You",
+    "year": "2024",
+    "genre": "Drama",
+    "imdbRating": 6.3,
+    "rtRating": 71,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNjA3N2Q2Y2UtNzljMC00NDhhLWI3ODQtZGQ2ZmMxNTIwNTFkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30852384"
+  },
+  {
+    "title": "Ocean with David Attenborough",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 8.5,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BN2I2ZjI0YWItM2I3My00NGE3LTk5ZDgtM2M2MWY2ZjFlNmNiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33022710"
+  },
+  {
+    "title": "Dora and the Search for Sol Dorado",
+    "year": "2025",
+    "genre": "Action, Adventure, Comedy",
+    "imdbRating": 5.4,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODZkYTZhZjEtYmFlZi00ZGRjLWEzZWQtNDIxNDA0NDY2NjhlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32621553"
+  },
+  {
+    "title": "The Shrouds",
+    "year": "2024",
+    "genre": "Drama, Horror, Sci-Fi",
+    "imdbRating": 5.8,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTk4ODIyOGEtZjk0MS00MGZmLTkxNGItMjgxZDRjZDUzMGFlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt20212786"
+  },
+  {
+    "title": "The Mastermind",
+    "year": "2025",
+    "genre": "Crime",
+    "imdbRating": 6.3,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmEzYzMwZDUtMjdiYi00YmRlLWJiNjYtYzY2N2E3ZWZjOTcxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33455099"
+  },
+  {
+    "title": "Fixed",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 5.4,
+    "rtRating": 56,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTljYWQwNmQtYTMxNC00ZTJmLTg4ODEtNjg0ZmViY2Q1NzI5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt8785038"
+  },
+  {
+    "title": "Tornado",
+    "year": "2025",
+    "genre": "Action, Drama, Thriller",
+    "imdbRating": 5.6,
+    "rtRating": 66,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTdmMjUzY2YtZDY4Yy00ZGI1LWI1ODktYmMyZjUzZmYwYWUwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27721490"
+  },
+  {
+    "title": "The Voice of Hind Rajab",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 8.4,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZWVlM2RjYTctODU4Mi00NTQzLWEzMDktZGVmYTQ2NTEwOWFiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36943034"
+  },
+  {
+    "title": "The Last Rodeo",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 6.3,
+    "rtRating": 69,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTI4NjcwODMtZGVhMi00ODhhLWIwODItZTQ4MmY0ZmU5OTliXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30908405"
+  },
+  {
+    "title": "Sharp Corner",
+    "year": "2024",
+    "genre": "Thriller",
+    "imdbRating": 5.9,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzA4ZWIyNDEtMDdkMi00ODlhLTljZWYtNWNlNDBkMmNlZTA0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt9569096"
+  },
+  {
+    "title": "Gabby's Dollhouse: The Movie",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 5.5,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmUwNTg3ODMtZGQxZi00Y2VmLWJhMTEtZTc5ZGM1Nzc5MDViXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32214143"
+  },
+  {
+    "title": "Redux Redux",
+    "year": "2025",
+    "genre": "Action, Adventure, Crime",
+    "imdbRating": 6.3,
+    "rtRating": 97,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzI2YzliMjAtODE0NC00NDE2LTgwMWUtN2NhNWY0YzRkNjQ5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33295741"
+  },
+  {
+    "title": "The Captive",
+    "year": "2025",
+    "genre": "Adventure, Biography, Drama",
+    "imdbRating": 6.1,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzJlNjJkMzUtNzEyOS00NDQ4LWFkYjItMTAyMDkzYzk4YmU2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31101921"
+  },
+  {
+    "title": "Ella McCay",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 5,
+    "rtRating": 24,
+    "poster": "https://m.media-amazon.com/images/M/MV5BN2Q2NGYyYTMtYWQyNC00NzJhLWFjODUtMzlkMmIxNDU4ODI1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30096221"
+  },
+  {
+    "title": "Night of the Reaper",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 5.9,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWFkOTkwZjYtOTA2NS00NDYzLWIyMTMtN2RlYWU1YjM2NWY4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34379050"
+  },
+  {
+    "title": "A Nice Indian Boy",
+    "year": "2024",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 7.3,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2UwMDlhZDktMTc4ZS00MWRhLWE5OTEtNGVkNDdiM2U3NzU4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt16431330"
+  },
+  {
+    "title": "Marshmallow",
+    "year": "2025",
+    "genre": "Horror, Sci-Fi",
+    "imdbRating": 5.7,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmJjYWU0ZDctNDk4Ny00ZjIzLWI5NDUtMTBiYjI5OTBhOTQyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt15220066"
+  },
+  {
+    "title": "A Very Jonas Christmas Movie",
+    "year": "2025",
+    "genre": "Comedy, Musical",
+    "imdbRating": 5.9,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWFjODc1NDYtNTAzMS00NDdjLTk3ZDItNTJjMDcwZTY0NWU1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35600079"
+  },
+  {
+    "title": "Arco",
+    "year": "2025",
+    "genre": "Animation, Adventure, Fantasy",
+    "imdbRating": 7.5,
+    "rtRating": 91,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2IzNjdiNzUtNTJjMy00Mjk5LTg3MzItNzA2ZjYzOWE2MGIyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14883538"
+  },
+  {
+    "title": "Our Times",
+    "year": "2025",
+    "genre": "Drama, Sci-Fi",
+    "imdbRating": 5.3,
+    "rtRating": 40,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzI5YWVjYTktY2YxNy00YjA4LWIwNGQtYmIyNDQwMjQ4MzAwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35630700"
+  },
+  {
+    "title": "The Twits",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 4.8,
+    "rtRating": 50,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTNmODkxN2MtMzJlNC00ODc4LWFhNjctMTIzZTk5ODc0MjExXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt0498396"
+  },
+  {
+    "title": "100 Meters",
+    "year": "2025",
+    "genre": "Animation, Drama, Sport",
+    "imdbRating": 7.9,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTYyNWZiNTktNzhiYi00YWVmLWJhZTctZTc4MDRkZGMyZjVhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32600395"
+  },
+  {
+    "title": "Winter Spring Summer or Fall",
+    "year": "2024",
+    "genre": "Drama, Romance",
+    "imdbRating": 6.1,
+    "rtRating": 31,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmQ2MGRhYWQtZjQ4Ni00Y2EyLWI2OGQtOTYzNDkwZGU1NmI4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt24515124"
+  },
+  {
+    "title": "The Man in My Basement",
+    "year": "2025",
+    "genre": "Mystery, Thriller",
+    "imdbRating": 4.6,
+    "rtRating": 40,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGE0MTFjMDAtNDhkOC00MWUyLWEyYWEtNDY4MzJhMWZjZWFlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt12619462"
+  },
+  {
+    "title": "David",
+    "year": "2025",
+    "genre": "Animation, Adventure, Drama",
+    "imdbRating": 7,
+    "rtRating": 76,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODczZDkzMDgtYzRjMi00YWNkLWJhNzMtNGNiMzQxNzE1ZDc3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt15678738"
+  },
+  {
+    "title": "Jewel Thief: The Heist Begins",
+    "year": "2025",
+    "genre": "Action, Adventure, Thriller",
+    "imdbRating": 4.1,
+    "rtRating": 5,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWM5ZGVkNjItZDg0MC00YjIwLTkyNjEtYjdlMGM2Mjc4ODFmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27843798"
+  },
+  {
+    "title": "It Ends",
+    "year": "2025",
+    "genre": "Comedy, Horror, Thriller",
+    "imdbRating": 8.3,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTFlYjUzMTktM2ZiOC00NmUyLWI2ZWUtN2Y4MmJmNDc5NmJjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35519455"
+  },
+  {
+    "title": "Wick Is Pain",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 7.6,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGU0MzZkODAtNmRjZC00NDg3LWJmNDgtMDcxMjk4MTA4OWFjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36751759"
+  },
+  {
+    "title": "Silent Night, Deadly Night",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 6.2,
+    "rtRating": 78,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2JhYTRkNTctOGJhZC00MDY0LWEwMDItYTU3MzUzZTIyZTE4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34508974"
+  },
+  {
+    "title": "The Threesome",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 6.2,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDJhY2RkYjItN2M0Yi00NWNlLWI5OTgtYzc3YjNlZTc3NDI2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt21187592"
+  },
+  {
+    "title": "The Plague",
+    "year": "2025",
+    "genre": "Drama, Thriller",
+    "imdbRating": 6.5,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOGViOTRlZGYtZWE3OS00OTBlLWI5NTItMmJkZjYzNWEyNmIzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32792934"
+  },
+  {
+    "title": "Strange Harvest",
+    "year": "2024",
+    "genre": "Horror",
+    "imdbRating": 6.3,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTM2ZjVmMjAtZWVlMC00NzdjLTg4NWEtYTE5ODU3NmM0NGFjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33400719"
+  },
+  {
+    "title": "Rosario",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 4.4,
+    "rtRating": 70,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZWFhZDJiODYtZTA5My00NWYyLTgzY2YtOTUwMGYxZTFkYzdjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27674700"
+  },
+  {
+    "title": "The Salt Path",
+    "year": "2024",
+    "genre": "Drama",
+    "imdbRating": 6.8,
+    "rtRating": 84,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2E3MDcxNGQtZDQ4OS00YmJiLTljYjEtNTM3YjlkOTgyMDk4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27766440"
+  },
+  {
+    "title": "Bambi: The Reckoning",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 5,
+    "rtRating": 63,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTk2OWUzNjktOTc5MC00ZjJlLTgwYjEtMmE1NjY0MjMzY2UwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23621682"
+  },
+  {
+    "title": "On Swift Horses",
+    "year": "2024",
+    "genre": "Drama, Romance",
+    "imdbRating": 6,
+    "rtRating": 53,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWFiNTA2MzItNzY1Mi00YzRlLTljY2MtMTQ2MDJhMmUzOTM3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt15042300"
+  },
+  {
+    "title": "Left-Handed Girl",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 7.4,
+    "rtRating": 99,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTE2OWQxZWMtNjdjNC00NGNhLWE5OTUtZDA2ZjhhMjk0MmRmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27722618"
+  },
+  {
+    "title": "The Baltimorons",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 6.9,
+    "rtRating": 94,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTBlZDQ4Y2EtMzgwYi00ZDQ3LTgxNGUtMmI5NDY5ZTYyOTdlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35520290"
+  },
+  {
+    "title": "The King of Kings",
+    "year": "2025",
+    "genre": "Animation, Biography, Family",
+    "imdbRating": 6.8,
+    "rtRating": 61,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDhkZDE5NmUtZDI1Ny00MDQxLWFjMzEtMWM4YTFmNTIyMTJjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt7967302"
+  },
+  {
+    "title": "Hurry Up Tomorrow",
+    "year": "2025",
+    "genre": "Thriller",
+    "imdbRating": 4.2,
+    "rtRating": 14,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNDQ2MGIyNDQtYjVhOS00ZjI1LWFmYzctMWI2MGZhZGFhZWM4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26927452"
+  },
+  {
+    "title": "Stans",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 7.5,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2I0NDA3NTgtOTFkYi00NzM1LTllMGEtOGUwODQzMDUxNmUxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31313835"
+  },
+  {
+    "title": "The Strangers: Chapter 3",
+    "year": "2026",
+    "genre": "Horror",
+    "imdbRating": 4.1,
+    "rtRating": 21,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGQ2ZDJlMjgtYmMwNi00MjAxLWIzOWYtMzE0YTFjZWYyNmEzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28682323"
+  },
+  {
+    "title": "American Sweatshop",
+    "year": "2025",
+    "genre": "Drama, Mystery, Thriller",
+    "imdbRating": 5.3,
+    "rtRating": 81,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzFlMzlkZDctOWVhNC00MTRiLWE2OTAtNzliNDlkN2U1MjdkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32387554"
+  },
+  {
+    "title": "Influencers",
+    "year": "2025",
+    "genre": "Horror, Thriller",
+    "imdbRating": 5.9,
+    "rtRating": 96,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTRkODYwZjItYjNhZi00OWU5LWI0ODItZDhhNWQ1MDhlNGZlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36833584"
+  },
+  {
+    "title": "825 Forest Road",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 5,
+    "rtRating": 33,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2YyZDdkMjEtMWQ2YS00NDI5LWE0ZTEtNjJlYjRmYWU2ODE5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt15173952"
+  },
+  {
+    "title": "Grenfell: Uncovered",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 7.4,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzI3OWQzZjEtYmFiZC00MGM1LTlmYTctMjFjMmVhYjYyMzVjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt37024060"
+  },
+  {
+    "title": "Saiyaara",
+    "year": "2025",
+    "genre": "Drama, Musical, Romance",
+    "imdbRating": 6.3,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTk2ZmFhYjctYWZiYy00N2IxLWEzMWItZGRiMDY4ZDQwZWFlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28037987"
+  },
+  {
+    "title": "Deathstalker",
+    "year": "2025",
+    "genre": "Action, Adventure, Fantasy",
+    "imdbRating": 5.7,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzEyNzI3NjUtODFiNy00OGQwLWI4ODAtZjU4ZGU4ODlkYWY2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33996087"
+  },
+  {
+    "title": "Lurker",
+    "year": "2025",
+    "genre": "Crime, Drama, Music",
+    "imdbRating": 6.8,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTlmZjU0ZTEtMjBlYy00N2M5LTkwY2QtMTY5ZWU2MzU1MTQwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13651462"
+  },
+  {
+    "title": "Plainclothes",
+    "year": "2025",
+    "genre": "Drama, Romance, Thriller",
+    "imdbRating": 7.1,
+    "rtRating": 84,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWJjYTFkYzYtYTUzNi00Y2Q0LWJkY2YtN2YwNzM3YTQ1MGYxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27550504"
+  },
+  {
+    "title": "The Alabama Solution",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 9.5,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmQ2YjFlNTEtMzcxNy00ZTVhLWJhNTYtMDg0ZGUxMGQ1MWY1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35307139"
+  },
+  {
+    "title": "The Wedding Banquet",
+    "year": "2025",
+    "genre": "Comedy, Romance",
+    "imdbRating": 6.3,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTAxZjI4ZTEtODc2Ny00ZjVlLTkzNTYtYjM1ZmNjY2EwNTQ3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32214413"
+  },
+  {
+    "title": "Eleanor the Great",
+    "year": "2025",
+    "genre": "Drama, War",
+    "imdbRating": 6.6,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmJlMzQwM2MtZjZkNy00OTA3LTk1YzYtNzllNWE2MjVhZjU1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30268321"
+  },
+  {
+    "title": "Summer of 69",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 5.8,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTA5MTQ2NmEtZGNiYy00MjAzLTgyNDctOTgzN2VmN2Y2YzhlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32378300"
+  },
+  {
+    "title": "Shell",
+    "year": "2024",
+    "genre": "Comedy, Horror, Thriller",
+    "imdbRating": 4.9,
+    "rtRating": 63,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWJkY2QxODEtZWM0Ni00NGM0LWExMTktZWFmMDdjMDFjZTE5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt12706836"
+  },
+  {
+    "title": "Witchboard",
+    "year": "2024",
+    "genre": "Drama, Horror, Mystery",
+    "imdbRating": 5.1,
+    "rtRating": 60,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTliNzk4ZWItYTkzZS00MGQzLWIzOGYtNjU5OTRkYjZkMzE1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt2256055"
+  },
+  {
+    "title": "My Mom Jayne",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 8.4,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTk2YTM0Y2MtZmYxZi00NDUwLWI0OGEtNjU3MmVkYjBmNjFlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36464353"
+  },
+  {
+    "title": "The Carpenter's Son",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 4.4,
+    "rtRating": 31,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGI4NGY0Y2UtNzRhOC00YTk4LTkzNTctODhkOTRjOTI5ZGI2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32304349"
+  },
+  {
+    "title": "Jaws @ 50: The Definitive Inside Story",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 7.6,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTUzZjUzOTUtMTZmZS00MWMyLWIxOTMtOTRiMWQxMmRmMzY0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32743685"
+  },
+  {
+    "title": "Raid 2",
+    "year": "2025",
+    "genre": "Crime, Drama, Thriller",
+    "imdbRating": 6.6,
+    "rtRating": 33,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTI4YWMzOGYtODkzYS00NTEyLWFmMzYtMzJkOGZmOWZlNThhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28089700"
+  },
+  {
+    "title": "Nouvelle Vague",
+    "year": "2025",
+    "genre": "Biography, Comedy, Drama",
+    "imdbRating": 7.4,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGUyNWRjMTMtYTgxZS00YWI4LTg2MDAtNzEwZDgyZjk4YzMzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31688586"
+  },
+  {
+    "title": "Coyotes",
+    "year": "2025",
+    "genre": "Comedy, Drama, Thriller",
+    "imdbRating": 4.8,
+    "rtRating": 59,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZjg2ZGZkZDgtZTIxZC00MTMzLThkYWYtN2EwOTcyZjNlMzM0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34581826"
+  },
+  {
+    "title": "The Best You Can",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 6.2,
+    "rtRating": 82,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOGFlNTAyMGYtNzlmNC00MTI5LWIwYTMtZjA4ZGFlZTI1OWRlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30150769"
+  },
+  {
+    "title": "What We Hide",
+    "year": "2025",
+    "genre": "Drama, Mystery, Thriller",
+    "imdbRating": 6.1,
+    "rtRating": 82,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjM0ZmE2MGMtM2ZjZS00ZDhkLWEwNjctNWRkOTk3MjdmYjE4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt22475426"
+  },
+  {
+    "title": "Sew Torn",
+    "year": "2024",
+    "genre": "Comedy, Thriller",
+    "imdbRating": 6,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzk3MmFiNzYtY2VlYi00YzlkLTlkOWQtMTFmYjYxYzdhODgyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23157384"
+  },
+  {
+    "title": "Hedda",
+    "year": "2025",
+    "genre": "Drama, Romance",
+    "imdbRating": 5.8,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTYyN2VlZDctNTk4Ny00NDRkLWI0ZDAtMDVkNjhiZDE5MGJmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27953589"
+  },
+  {
+    "title": "Monster Island",
+    "year": "2024",
+    "genre": "Horror",
+    "imdbRating": 5.2,
+    "rtRating": 63,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMGRmYjNlNjMtMzIxOS00ZDY2LTk5NjAtZTQ2MGZlNWJjZDViXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29262075"
+  },
+  {
+    "title": "Killing Faith",
+    "year": "2025",
+    "genre": "Thriller, Western",
+    "imdbRating": 5.6,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjc3Yzk4NzctMjFkNy00YmZhLTg3YmUtM2ZkZmQ4MmQ4MWRjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29101725"
+  },
+  {
+    "title": "The Surrender",
+    "year": "2025",
+    "genre": "Drama, Horror, Thriller",
+    "imdbRating": 7.5,
+    "rtRating": 85,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjdlNjFhNWEtOTBlYy00MmEwLWI1OTktMDYzOGIyYTRhMTdhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33270263"
+  },
+  {
+    "title": "Ick",
+    "year": "2024",
+    "genre": "Horror, Sci-Fi",
+    "imdbRating": 5.5,
+    "rtRating": 69,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTQ4ZWM4MTAtNjMwZS00MTBiLWFlOGItODNjM2NkY2I4NTJmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31795447"
+  },
+  {
+    "title": "Sitaare Zameen Par",
+    "year": "2025",
+    "genre": "Comedy, Drama, Sport",
+    "imdbRating": 7.4,
+    "rtRating": 65,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZjdjODdiMTQtYWIwZi00NTQyLWE0YWItMzk3MTBhOGUyNDY3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29471573"
+  },
+  {
+    "title": "Truth & Treason",
+    "year": "2025",
+    "genre": "Drama, History, Thriller",
+    "imdbRating": 7.1,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTk5MjI4MWEtMjczMy00YWNlLWI0NTAtYTRiZjdiODBjZThlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt21825416"
+  },
+  {
+    "title": "Sacramento",
+    "year": "2024",
+    "genre": "Comedy",
+    "imdbRating": 5.9,
+    "rtRating": 85,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMGIzYWM0YmUtZjFkZS00N2MwLWEyMDUtZGU5NTgwOTFiZGJhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13491834"
+  },
+  {
+    "title": "The Testament of Ann Lee",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 7.1,
+    "rtRating": 89,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTU3Y2U1MTQtYjA1NS00YmJlLTk3NDktZGViYTAwY2I0NDM1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34819091"
+  },
+  {
+    "title": "War 2",
+    "year": "2025",
+    "genre": "Action, Adventure, Thriller",
+    "imdbRating": 5.3,
+    "rtRating": 30,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2U0MGFkNzctOGI5OC00MzhhLWExYTctZjE5YjY3MzcwYjMzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27425164"
+  },
+  {
+    "title": "Cover-Up",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 7.5,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjc0MTQ3YTctZjRlZC00NTdjLWFmYzYtZGY5OGMwYWJlMWYyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt37660887"
+  },
+  {
+    "title": "Anemone",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 5.6,
+    "rtRating": 53,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2UyNzdjZTQtN2IzNy00Yjc5LTgyMzUtN2UxMjdjYTQzMTkzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33549447"
+  },
+  {
+    "title": "Father Mother Sister Brother",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 6.8,
+    "rtRating": 82,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWI5OTEzMzEtZTdiNS00NTdjLWFjMTQtZDM5MjRjYWE1M2ZkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31189315"
+  },
+  {
+    "title": "Dead Mail",
+    "year": "2024",
+    "genre": "Crime, Drama, Horror",
+    "imdbRating": 6.7,
+    "rtRating": 93,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzVkYmRjZDgtMjdlYy00ODRjLWJjNmUtNGQ0ZmQyN2ZmNmI3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26474783"
+  },
+  {
+    "title": "Tatami",
+    "year": "2023",
+    "genre": "Drama, Sport, Thriller",
+    "imdbRating": 7.4,
+    "rtRating": 94,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjNiNmEzOTItMGMxYS00NGY1LTliNDEtZGVhMGI5NzU2NjQ3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26674818"
+  },
+  {
+    "title": "Kesari Chapter 2: The Untold Story of Jallianwala Bagh",
+    "year": "2025",
+    "genre": "Drama, History",
+    "imdbRating": 8,
+    "rtRating": 39,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTJiYTA4NDItMWNiYy00YmE3LTg4ZGItNjVlOGZlZGY4MjExXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt3562110"
+  },
+  {
+    "title": "Good News",
+    "year": "2025",
+    "genre": "Action, Comedy, Crime",
+    "imdbRating": 6.4,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTVmNDk1YzQtNTNiMy00NDhlLWFhZTYtYzk2ZGI4MzNiZTkzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33550069"
+  },
+  {
+    "title": "Nirvanna the Band the Show the Movie",
+    "year": "2025",
+    "genre": "Adventure, Comedy, Sci-Fi",
+    "imdbRating": 8.4,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjMwYmZmZjgtOTYwZC00MzMyLTllMTMtNTcxNTVmNjdhODVhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35522483"
+  },
+  {
+    "title": "Colours of Time",
+    "year": "2025",
+    "genre": "Comedy, Drama, Romance",
+    "imdbRating": 7.5,
+    "rtRating": 93,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmViMmY2YjAtNTEwMC00ZTVlLWFhYjktMDI3M2EzMTZkYWI3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31411349"
+  },
+  {
+    "title": "Everything's Going to Be Great",
+    "year": "2025",
+    "genre": "Comedy, Drama, Music",
+    "imdbRating": 5.6,
+    "rtRating": 56,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjljZGY0MWMtNzgyNy00MDc2LWIwZDEtYzNhMzk5Y2M3NmZjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27560723"
+  },
+  {
+    "title": "Apocalypse in the Tropics",
+    "year": "2024",
+    "genre": "Documentary, History",
+    "imdbRating": 7.6,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTNhOTY1YmQtYTE0ZS00NTU0LThlNDYtMmYwZTY4YmQwYmNlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30012657"
+  },
+  {
+    "title": "Frozen: The Hit Broadway Musical",
+    "year": "2025",
+    "genre": "Adventure, Comedy, Family",
+    "imdbRating": 7.3,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYWEwZGQ1YTctNDc2My00ZDMzLTljNzgtNzQ1OTVkNmNjY2U2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36985837"
+  },
+  {
+    "title": "Nightmare City",
+    "year": "1980",
+    "genre": "Horror, Sci-Fi, Thriller",
+    "imdbRating": 5.6,
+    "rtRating": 40,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzM3MDZkNTktNjlkNC00MjA3LWEwNDgtNzRiMmVlYTU1NDdhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt0080931"
+  },
+  {
+    "title": "I Am Paul Walker",
+    "year": "2018",
+    "genre": "Documentary, Biography",
+    "imdbRating": 7.6,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzRkYTIzYzAtYTViMy00YzMxLWFlNmQtMTAzYTU5MWJiMzRiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt8068936"
+  },
+  {
+    "title": "Salvable",
+    "year": "2025",
+    "genre": "Action, Adventure, Crime",
+    "imdbRating": 6.1,
+    "rtRating": 57,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMThhOGI4MGItZGQ4OS00MDgyLTg3YWQtZTUwYTEyNjE3MDRmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31249107"
+  },
+  {
+    "title": "Stolen",
+    "year": "2023",
+    "genre": "Drama, Thriller",
+    "imdbRating": 7.5,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOThmMTZjMTUtMTE5OC00OTA0LWIzNjktZTA5NTBmZDc4Mjk0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28494851"
+  },
+  {
+    "title": "King Ivory",
+    "year": "2024",
+    "genre": "Crime, Drama, Thriller",
+    "imdbRating": 7.1,
+    "rtRating": 68,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2IxOGE5OWQtYmIzMy00NWRhLTk2NGUtNzdhN2Y2NzBiZWUzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt25147850"
+  },
+  {
+    "title": "Sebastian",
+    "year": "2024",
+    "genre": "Drama",
+    "imdbRating": 6.7,
+    "rtRating": 76,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjljNWNiZjMtOWFlZC00ODBmLWFiOTYtNjljMzc5MmE4Zjg5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30317033"
+  },
+  {
+    "title": "Violent Ends",
+    "year": "2025",
+    "genre": "Thriller",
+    "imdbRating": 5.8,
+    "rtRating": 69,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDg2YzE5OGYtNjU1Zi00ODZmLTllOTAtZWFhMDMxYjg5MDBmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt6902560"
+  },
+  {
+    "title": "Xeno",
+    "year": "2025",
+    "genre": "Adventure, Drama, Mystery",
+    "imdbRating": 5.1,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTdkODIzYmUtNWJhMS00NWQyLWEyYTEtMmUyMWY0YWM4Yzg4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27629220"
+  },
+  {
+    "title": "I Don't Understand You",
+    "year": "2024",
+    "genre": "Comedy, Horror",
+    "imdbRating": 5.4,
+    "rtRating": 52,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTZkZTNmMzUtM2FiYy00YjEyLWFiMDktOWVhOWVmZGZmNDkwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27623406"
+  },
+  {
+    "title": "Bhool Chuk Maaf",
+    "year": "2025",
+    "genre": "Comedy, Fantasy, Romance",
+    "imdbRating": 5.8,
+    "rtRating": 27,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjlhZTI1YmEtZDMyYi00YTM5LWI4ZGEtMzYwMjYxZjUyNzQzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32058735"
+  },
+  {
+    "title": "The Dutchman",
+    "year": "2025",
+    "genre": "Thriller",
+    "imdbRating": 7.1,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTIyYTNmN2UtYTMzYS00MjRmLWIxNmYtZDY0NWZlY2Y0MTUzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29214162"
+  },
+  {
+    "title": "The Cut",
+    "year": "2024",
+    "genre": "Thriller",
+    "imdbRating": 5.6,
+    "rtRating": 69,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTMzMmZkNTctMGQyNy00OGJiLThlZjMtM2VjMTgyMzM3OTdjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26697087"
+  },
+  {
+    "title": "Come See Me in the Good Light",
+    "year": "2025",
+    "genre": "Documentary, Biography, Family",
+    "imdbRating": 7.6,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTEwNjRiMzUtMmU1OC00OWE5LTkwYjItMGE1NTQwMTFiM2NmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34966013"
+  },
+  {
+    "title": "Saint Clare",
+    "year": "2024",
+    "genre": "Horror, Mystery, Thriller",
+    "imdbRating": 7.7,
+    "rtRating": 32,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTlhOTI3Y2EtODUzYy00NmJkLTk5NDQtNDdiMTg1Yzg0ZDhkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt9024562"
+  },
+  {
+    "title": "Alpha",
+    "year": "2025",
+    "genre": "Drama, Horror",
+    "imdbRating": 5.9,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzQ3OTI0ZTUtMzkwMC00MzZhLWJiZmYtODFmZjZmMmJiMTc5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32275943"
+  },
+  {
+    "title": "Islands",
+    "year": "2025",
+    "genre": "Crime, Drama, Thriller",
+    "imdbRating": 6.4,
+    "rtRating": 96,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmNhYzg4MjEtYjI3Yy00ZDNiLWIwNjUtMzFlODQ0ZmZmZmUxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27796126"
+  },
+  {
+    "title": "The Old Woman with the Knife",
+    "year": "2025",
+    "genre": "Action, Crime, Thriller",
+    "imdbRating": 6,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZGJjZGVkN2MtNWI2Zi00NzE3LThmNjUtOGZjNzVkNjc0NWY3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34509472"
+  },
+  {
+    "title": "Urchin",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 6.9,
+    "rtRating": 96,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmU1Mjc0MTItYWNhZS00YTk4LWIxOGMtZDBlZDcyNGI2OTI5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35715953"
+  },
+  {
+    "title": "Words of War",
+    "year": "2025",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 6,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTE4ZTM3ODktZmJmNS00ZGIyLWI4NjgtMGE2NzY4YTVjODMwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt8679660"
+  },
+  {
+    "title": "Housefull 5",
+    "year": "2025",
+    "genre": "Comedy, Mystery, Thriller",
+    "imdbRating": 3.4,
+    "rtRating": 13,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmIzMThjNTYtNjkwZi00NmM3LTliNGItZWIxYTUwMGU1YzM0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt9104736"
+  },
+  {
+    "title": "Holy Night: Demon Hunters",
+    "year": "2025",
+    "genre": "Action, Fantasy, Horror",
+    "imdbRating": 4.8,
+    "rtRating": 79,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDZhYjUwMTUtNTcyZS00MWNkLWI3NGItMDZlZGNmMjQxYTQ2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt15766876"
+  },
+  {
+    "title": "Pretty Thing",
+    "year": "2025",
+    "genre": "Thriller",
+    "imdbRating": 4.1,
+    "rtRating": 47,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWQwZmRmMzMtYWZiNC00YTVhLWI1ZDAtZDM3MTE5ZDViYzE3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29474633"
+  },
+  {
+    "title": "It's Never Over, Jeff Buckley",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 8,
+    "rtRating": 98,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34966650"
+  },
+  {
+    "title": "Kiss of the Spider Woman",
+    "year": "2025",
+    "genre": "Drama, Musical",
+    "imdbRating": 5.7,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzBkNmYzN2MtNDVmMi00ZjQ0LTk0MDYtMDMwOGVmYjBiODk1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30400277"
+  },
+  {
+    "title": "The Choral",
+    "year": "2025",
+    "genre": "Drama, History, Music",
+    "imdbRating": 6.5,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNDI4ODRhODEtOTQ3ZS00YTY3LWIxMTgtNDdmY2JiNzQ4OGVhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31851518"
+  },
+  {
+    "title": "Queens of the Dead",
+    "year": "2025",
+    "genre": "Comedy, Horror",
+    "imdbRating": 5.1,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWQwYjNhZWYtM2ZhMS00NjE0LWIzZTAtZWRlMzhmYWI5ZWNjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32986431"
+  },
+  {
+    "title": "Metro in Dino",
+    "year": "2025",
+    "genre": "Drama, Musical, Romance",
+    "imdbRating": 6.6,
+    "rtRating": 69,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODQ1NmJlNjEtODdmZi00YzY0LTgyNTctZTUwNjVkYjY0MWI1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt24225606"
+  },
+  {
+    "title": "Jaat",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 6,
+    "rtRating": 36,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTgxZDY1ZmMtN2M2NC00NzJjLWFiNzYtZWYzODI4MGM4ZmE2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32223398"
+  },
+  {
+    "title": "A Private Life",
+    "year": "2025",
+    "genre": "Crime, Drama, Mystery",
+    "imdbRating": 6.3,
+    "rtRating": 76,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2Y4OWIzMTQtMzk0OC00NGM5LTgxMGUtZDM1ZDIxMGRhZjEzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33852162"
+  },
+  {
+    "title": "Cheech & Chong's Last Movie",
+    "year": "2024",
+    "genre": "Documentary, Comedy",
+    "imdbRating": 7.3,
+    "rtRating": 87,
+    "poster": "https://m.media-amazon.com/images/M/MV5BY2VlZDAxOTgtMTVlMC00MmFhLWJlYzUtYTgyNDM2ZTE5NmViXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30833959"
+  },
+  {
+    "title": "Unit 234",
+    "year": "2024",
+    "genre": "Thriller",
+    "imdbRating": 5.2,
+    "rtRating": 62,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmM3NWQ3ZmEtZDU2OS00YTg5LWFkZDItNjkwNmNjMWNlNThjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt6906106"
+  },
+  {
+    "title": "Hell House LLC: Lineage",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 4.1,
+    "rtRating": 26,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNThkYjVjZDUtYzhhOS00M2I0LWI4ZTgtYTFjMDZmMDNlOGM2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32916228"
+  },
+  {
+    "title": "Kryptic",
+    "year": "2024",
+    "genre": "Drama, Horror, Mystery",
+    "imdbRating": 3.9,
+    "rtRating": 67,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODJkOTBlYjMtNDYxZC00ZmU1LTk4NGEtNTY3ZTkwNGVlOGY3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt22697898"
+  },
+  {
+    "title": "The Ruse",
+    "year": "2024",
+    "genre": "Horror, Mystery, Thriller",
+    "imdbRating": 7.1,
+    "rtRating": 19,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOTE3ZGEyYjItYWQwYy00NTk4LTgxM2ItYTVjOTg1ODM2OGE1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27146069"
+  },
+  {
+    "title": "Mr Burton",
+    "year": "2025",
+    "genre": "Biography, Drama",
+    "imdbRating": 7.3,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNGEyYzdhNTgtZjNiOS00Mjk2LWE4ZjYtZjM3ZDQ2Zjk0MWUyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt5171016"
+  },
+  {
+    "title": "Bono: Stories of Surrender",
+    "year": "2025",
+    "genre": "Documentary, Biography, Drama",
+    "imdbRating": 7.2,
+    "rtRating": 75,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmNkMTBkOGYtYjIwYy00Njk5LTk2ODktN2U1MjAzNmY3NzZmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35931046"
+  },
+  {
+    "title": "Stiller & Meara: Nothing Is Lost",
+    "year": "2025",
+    "genre": "Documentary, Biography",
+    "imdbRating": 7.2,
+    "rtRating": 93,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNDIwMDIwYjktY2M2OS00NjhjLThjOTItMmNhNGQwMzQzNWE2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt37674658"
+  },
+  {
+    "title": "Leave One Day",
+    "year": "2025",
+    "genre": "Comedy, Drama, Musical",
+    "imdbRating": 6.3,
+    "rtRating": 57,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDZiMzY1ZjQtYTFmOS00ZGUwLTg0ZGYtNGY1MTlhMmJkZGZlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35453969"
+  },
+  {
+    "title": "EPiC: Elvis Presley in Concert",
+    "year": "2025",
+    "genre": "Documentary, Music",
+    "imdbRating": 8.6,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZWQzMTBiYjMtYzMyNS00MzAyLWE2N2UtZTA0ODVmN2E4ZDMwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35003538"
+  },
+  {
+    "title": "Mother of Flies",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 6.7,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzJkN2U5YWEtYWJkNi00YmFjLWFhMDQtYmM2OWIxMWViZmJmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt36871027"
+  },
+  {
+    "title": "Sikandar",
+    "year": "2025",
+    "genre": "Action, Drama",
+    "imdbRating": 3.6,
+    "rtRating": 5,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzA3NGNjMjktOGQ0OS00YzZmLThiY2ItNzA5YTE1NjEzYzFmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31712434"
+  },
+  {
+    "title": "One More Shot",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 7.5,
+    "rtRating": 65,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzQwNjhlNWEtMjE4Ny00OTJkLTkzYTQtNjBjNGYwMjNlYTM3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt9425856"
+  },
+  {
+    "title": "Caught by the Tides",
+    "year": "2024",
+    "genre": "Drama",
+    "imdbRating": 6.7,
+    "rtRating": 99,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZTA3Y2YyMTEtNzlhYy00ODRkLWE0ZGYtOTI5MDc1N2QyNmE3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27958252"
+  },
+  {
+    "title": "Scarlet",
+    "year": "2025",
+    "genre": "Animation, Action, Adventure",
+    "imdbRating": 6.4,
+    "rtRating": 74,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzIxNjYwZjctYzU4NS00OTJiLTg5YmItOTRiODRlOGQ2ODhmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt35114460"
+  },
+  {
+    "title": "Stitch Head",
+    "year": "2025",
+    "genre": "Animation, Comedy, Family",
+    "imdbRating": 5.8,
+    "rtRating": 71,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYWUwNWE1YjctMDYyOC00YmJjLWFkZTMtYzhjNmI3NTI4ZTMxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt26720001"
+  },
+  {
+    "title": "Resurrection",
+    "year": "2025",
+    "genre": "Drama, Sci-Fi",
+    "imdbRating": 7.3,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODZmOGMxNTEtOWYzMC00OWU4LTk3NjQtMWZmMmE4MTMxZDkyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt29002950"
+  },
+  {
+    "title": "Sunny Sanskari Ki Tulsi Kumari",
+    "year": "2025",
+    "genre": "Family, Romance",
+    "imdbRating": 6.7,
+    "rtRating": 21,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWNjOWFmYTEtMWU1MC00MDZhLWI1NDEtZTkxNzhjODZiNTBhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30742355"
+  },
+  {
+    "title": "Test",
+    "year": "2025",
+    "genre": "Drama, Sport",
+    "imdbRating": 5.1,
+    "rtRating": 18,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWRmYjAwZjktZGVjMi00OWJjLTllMDktNjYyOGQzNGRjMDU2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27477888"
+  },
+  {
+    "title": "Param Sundari",
+    "year": "2025",
+    "genre": "Romance",
+    "imdbRating": 5.2,
+    "rtRating": 7,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjBhNDMyYWItMmYyMC00ZjMwLWE3MmUtZGMwZWM0ZWExYjVkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33996113"
+  },
+  {
+    "title": "Bad Shabbos",
+    "year": "2024",
+    "genre": "Comedy",
+    "imdbRating": 8.7,
+    "rtRating": 84,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODAzYTFmNjYtNWVjZS00YTgxLTgzMDMtYzBhYzQ0MGQ4MjllXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt14402042"
+  },
+  {
+    "title": "Sally",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 8.2,
+    "rtRating": 88,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMzk0MzVkOWEtZWIzMS00ZGZjLTk4ODctZTRiOTNmYzY1NDA1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31193771"
+  },
+  {
+    "title": "Thug Life",
+    "year": "2025",
+    "genre": "Action, Crime, Drama",
+    "imdbRating": 4.2,
+    "rtRating": 25,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWY4MThkMzUtNDc4Zi00MTIzLTkxZTctNDNlODUxYWQ2M2QyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23398540"
+  },
+  {
+    "title": "Devo",
+    "year": "2024",
+    "genre": "Documentary, Music",
+    "imdbRating": 7.6,
+    "rtRating": 85,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNTlmM2U5ZDItMzUzMC00YzViLThhYTQtM2MyNTFmOTdkYzg5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27210519"
+  },
+  {
+    "title": "Baahubali: The Epic",
+    "year": "2025",
+    "genre": "Action, Drama",
+    "imdbRating": 8.5,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmIwYTI3ODItMzRkOS00MzlhLWI4NzQtNDFmOGJhZGJhM2VkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt37893389"
+  },
+  {
+    "title": "Ghost Killer",
+    "year": "2024",
+    "genre": "Action, Crime, Horror",
+    "imdbRating": 6.2,
+    "rtRating": 96,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmY2NzA3OWMtOWQxZC00MDU2LWI0NWYtMzhkYTAzOTU2NGQyXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33305290"
+  },
+  {
+    "title": "The Chronology of Water",
+    "year": "2025",
+    "genre": "Biography, Drama, Romance",
+    "imdbRating": 6.6,
+    "rtRating": 91,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODgxOGZiZmUtMWI1MS00OWQ5LTg0OTAtNTcyYWYyNTViODRmXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt8667404"
+  },
+  {
+    "title": "Push",
+    "year": "2024",
+    "genre": "Horror, Thriller",
+    "imdbRating": 4.7,
+    "rtRating": 65,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTNhYWRiZTktYjc1NS00Yjk1LThkOTEtZDFlZmFmZGI5YmFhXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt25756108"
+  },
+  {
+    "title": "Honey Bunch",
+    "year": "2025",
+    "genre": "Comedy, Fantasy, Horror",
+    "imdbRating": 5.8,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNzAzNzQ1ZDQtMGE5Yy00YmZiLWExNjMtZTMzMGM2MDExMjk3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33270103"
+  },
+  {
+    "title": "Maa",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 4.9,
+    "rtRating": 14,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTZiYThhODYtN2QxOS00ZmMxLTkzMjktMGE0N2M0ZGE5Mzc2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30496762"
+  },
+  {
+    "title": "Case 137",
+    "year": "2025",
+    "genre": "Crime, Drama",
+    "imdbRating": 7.1,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTdlN2RkOTEtMGRjMC00YTQ4LWIxZjktM2M0YTQ5NGM1ZDdjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34794183"
+  },
+  {
+    "title": "Restless",
+    "year": "2024",
+    "genre": "Drama, Thriller",
+    "imdbRating": 6.3,
+    "rtRating": 94,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzAxZjlhZTUtYzZkNS00MGExLThiOGItN2YxMTE5NWNhNWY0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27689356"
+  },
+  {
+    "title": "100 Nights of Hero",
+    "year": "2025",
+    "genre": "Drama, Fantasy, Romance",
+    "imdbRating": 5.9,
+    "rtRating": 69,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjFmNjYxNjEtMGM3My00ZjY1LWEyZDAtZmYyY2NjNTIyZTY2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33350512"
+  },
+  {
+    "title": "Traumatika",
+    "year": "2024",
+    "genre": "Horror",
+    "imdbRating": 6.4,
+    "rtRating": 68,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYjg1N2Q3ZDMtZmY5Ni00OTBkLWJlNTAtNGEwOWQ0M2QwNjBlXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32903867"
+  },
+  {
+    "title": "Mad Love",
+    "year": "2001",
+    "genre": "Biography, Drama, History",
+    "imdbRating": 6.5,
+    "rtRating": 50,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmM2YjZjM2ItM2U2Ni00MWQwLWI0ZTMtYWJlMGFmZWZmNjk0XkEyXkFqcGdeQXVyMTcwOTQzOTYy._V1_SX300.jpg",
+    "imdbId": "tt0270480"
+  },
+  {
+    "title": "Dreams",
+    "year": "2025",
+    "genre": "Drama, Romance, Thriller",
+    "imdbRating": 5.8,
+    "rtRating": 68,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmZhYmJjYzUtODU3Ny00ZjcwLTlhOWQtOGM4MzNmYmRiYWM2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt31710990"
+  },
+  {
+    "title": "Don't Let's Go to the Dogs Tonight",
+    "year": "2024",
+    "genre": "Drama, War",
+    "imdbRating": 7.1,
+    "rtRating": 91,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMDdiZmZiNmUtZWU3Yi00NmY0LWJmN2UtOTRiOWI3Y2Y2YWU4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32944883"
+  },
+  {
+    "title": "Orwell: 2+2=5",
+    "year": "2025",
+    "genre": "Documentary, Biography, History",
+    "imdbRating": 6.8,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTdkNTNhMGItYTQ3Mi00ZWIwLTlkNzYtYjgwYTM2ODM4ZThkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27052428"
+  },
+  {
+    "title": "The Little Sister",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 6.5,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmU4ZTQxZDktOTM1MC00ODY1LWFlNDktMGU0ODk1NzllMDMzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28326501"
+  },
+  {
+    "title": "The Uninvited",
+    "year": "2024",
+    "genre": "Comedy, Drama",
+    "imdbRating": 5.2,
+    "rtRating": 77,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTA1OGRlOTctZmQyYy00NDE4LWJlZTQtZDk2ODBjN2JiOTA0XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23732034"
+  },
+  {
+    "title": "Eye for an Eye",
+    "year": "2025",
+    "genre": "Horror",
+    "imdbRating": 4.9,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODg0ZjgyODYtZjJmYi00MTU4LTgyYTEtYmJiOGRhMjg4NTliXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt28088571"
+  },
+  {
+    "title": "Tim Travers & the Time Travelers Paradox",
+    "year": "2024",
+    "genre": "Comedy, Fantasy, Sci-Fi",
+    "imdbRating": 5.6,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmEwYmRmYWYtYWMwZS00NDk1LWI3NGEtZDVmM2Y4OGM5NzM2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt22884216"
+  },
+  {
+    "title": "Four Letters of Love",
+    "year": "2024",
+    "genre": "Drama",
+    "imdbRating": 6,
+    "rtRating": 44,
+    "poster": "https://m.media-amazon.com/images/M/MV5BZmUxNTYxN2ItYWU2ZC00NGRmLTgxMmUtZTc5NjVlM2UyZWY1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13020386"
+  },
+  {
+    "title": "Pavements",
+    "year": "2024",
+    "genre": "Documentary, Biography, Drama",
+    "imdbRating": 7.1,
+    "rtRating": 95,
+    "poster": "https://m.media-amazon.com/images/M/MV5BM2VhNzcyYjUtNjI4OS00YjFmLWIxNmItYWM0NjEwNDY0M2U4XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt30253514"
+  },
+  {
+    "title": "Enzo",
+    "year": "2025",
+    "genre": "Drama",
+    "imdbRating": 6.7,
+    "rtRating": 86,
+    "poster": "https://m.media-amazon.com/images/M/MV5BN2IxYmMwMDQtMjQ0MC00NzQ0LTk2MzctOTQ2Y2NlMzZhZTU3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32646557"
+  },
+  {
+    "title": "Harvest",
+    "year": "2024",
+    "genre": "Drama, History",
+    "imdbRating": 6,
+    "rtRating": 74,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWM4NDY4MTUtNGVmMS00MGJkLWFkN2YtZmQwNzNmYmFjYzJkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt13610344"
+  },
+  {
+    "title": "Bang Bang",
+    "year": "2024",
+    "genre": "Drama",
+    "imdbRating": 6.2,
+    "rtRating": 81,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTY1MDZiYzAtNmQ2MS00YmExLWE5MWMtMTUxZjg1YzYzMWY5XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt7132924"
+  },
+  {
+    "title": "The Wizard of the Kremlin",
+    "year": "2025",
+    "genre": "Drama, History, Thriller",
+    "imdbRating": 6.1,
+    "rtRating": 50,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOWU5MTEzZDctNTkyZS00NTg1LWE3NDctNDQ5M2E2ZDQ1Y2EzXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32386654"
+  },
+  {
+    "title": "Magic Farm",
+    "year": "2025",
+    "genre": "Comedy, Drama",
+    "imdbRating": 5.8,
+    "rtRating": 51,
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmMwZmFkNTQtZDY1My00OTEzLWEyNDMtNTFhM2FhMWQzZjZjXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34966919"
+  },
+  {
+    "title": "Deaf President Now!",
+    "year": "2025",
+    "genre": "Documentary",
+    "imdbRating": 8,
+    "rtRating": 100,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmE0MjYwMmYtNmE4Mi00YjBhLTk3NjktY2Q3NDQyZWQ5YjE3XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt34965967"
+  },
+  {
+    "title": "Sneaks",
+    "year": "2025",
+    "genre": "Animation, Adventure, Comedy",
+    "imdbRating": 3.8,
+    "rtRating": 29,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNWU1YzM3NTMtYmYwNC00M2U1LWJlZjctMjAwZTgwY2Q4ODYxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt9254940"
+  },
+  {
+    "title": "Looking Through Water",
+    "year": "2025",
+    "genre": "Drama, Family",
+    "imdbRating": 5.9,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYWYxNDg4OTgtMzM2My00NDVlLWI3NzktMTUwZGM5Njk5ZDNiXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt23469812"
+  },
+  {
+    "title": "A Desert",
+    "year": "2024",
+    "genre": "Horror, Thriller",
+    "imdbRating": 6.2,
+    "rtRating": 83,
+    "poster": "https://m.media-amazon.com/images/M/MV5BOGY3NTI1ZjQtZjJmZC00NDYwLWFhYjQtOGYyNmMzZTk0MWQ2XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt32139458"
+  },
+  {
+    "title": "One to One: John & Yoko",
+    "year": "2024",
+    "genre": "Documentary, Biography",
+    "imdbRating": 7.3,
+    "rtRating": 90,
+    "poster": "https://m.media-amazon.com/images/M/MV5BODdlMjhkODYtYWI1My00NTAxLWFkMzItZWE4MzQ4YzFjZGMwXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt33029955"
+  },
+  {
+    "title": "The Mannequin",
+    "year": "2025",
+    "genre": "Crime, Horror, Mystery",
+    "imdbRating": 4.7,
+    "rtRating": 80,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYzI4MzU2ZDQtNjNjNy00YjNhLTg1MWEtOTY0Yjg3MWJjZTQxXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt11261532"
+  },
+  {
+    "title": "Amrum",
+    "year": "2025",
+    "genre": "Drama, History, War",
+    "imdbRating": 7.2,
+    "rtRating": 92,
+    "poster": "https://m.media-amazon.com/images/M/MV5BNGI4MWQzZmUtZDZhOS00MGM0LTkzNzctMDgxOGY1NTA4OTc1XkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt22507216"
+  },
+  {
+    "title": "Bonjour Tristesse",
+    "year": "2024",
+    "genre": "Drama, Romance",
+    "imdbRating": 5.6,
+    "rtRating": 68,
+    "poster": "https://m.media-amazon.com/images/M/MV5BYTg0Zjc1MGMtMTRmZS00ZTEzLWI5Y2MtOTllODMzMzdhZjlkXkEyXkFqcGc@._V1_SX300.jpg",
+    "imdbId": "tt27774999"
+  }
+]
