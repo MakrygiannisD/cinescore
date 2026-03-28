@@ -135,7 +135,6 @@ export default function App() {
           <RevealScreen
             movie={movies[currentRound]}
             imdbGuess={guesses[currentRound].imdb}
-            rtGuess={guesses[currentRound].rt}
             score={scores[currentRound]}
             round={currentRound}
             totalRounds={ROUNDS}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import RoundDots from '../components/RoundDots'
 
 function diffPill(diff, great, ok) {
@@ -66,7 +66,19 @@ function RatingReveal({ label, isImdb, actual, guess, score }) {
   )
 }
 
-export default function RevealScreen({ movie, imdbGuess, rtGuess, score, round, totalRounds, isLastRound, onNext }) {
+export default function RevealScreen({ movie, imdbGuess, score, round, totalRounds, isLastRound, onNext }) {
+  const isPerfect = score.imdbPts === 50
+  const [showPerfect, setShowPerfect] = useState(false)
+  const shown = useRef(false)
+
+  useEffect(() => {
+    if (isPerfect && !shown.current) {
+      shown.current = true
+      const t = setTimeout(() => setShowPerfect(true), 400)
+      return () => clearTimeout(t)
+    }
+  }, [isPerfect])
+
   return (
     <div className="flex flex-col gap-4 animate-fadeUp">
       {/* Header */}
@@ -76,7 +88,7 @@ export default function RevealScreen({ movie, imdbGuess, rtGuess, score, round, 
       </div>
 
       {/* Reveal card */}
-      <div className="bg-surface border border-border rounded-2xl p-5 flex flex-col gap-5">
+      <div className="relative bg-surface border border-border rounded-2xl p-5 flex flex-col gap-5 overflow-hidden">
         <p className="text-muted text-xs font-bold uppercase tracking-widest">How close were you?</p>
 
         <RatingReveal
@@ -87,26 +99,22 @@ export default function RevealScreen({ movie, imdbGuess, rtGuess, score, round, 
           score={score.imdbPts}
         />
 
-        <div className="h-px bg-border" />
-
-        <RatingReveal
-          label="RT"
-          isImdb={false}
-          actual={movie.rt_rating}
-          guess={rtGuess}
-          score={score.rtPts}
-        />
+        {/* PERFECT overlay */}
+        {showPerfect && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none animate-perfectPop">
+            <span className="text-4xl font-black tracking-widest text-green-400 drop-shadow-[0_0_20px_rgba(74,222,128,0.8)]">
+              PERFECT!
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Round score */}
       <div className="bg-surface border border-border rounded-2xl py-5 text-center">
         <div className="text-muted text-xs uppercase tracking-widest mb-1">Round Score</div>
         <div className="text-5xl font-black">
-          {score.total}
-          <span className="text-muted text-lg font-normal">/100</span>
-        </div>
-        <div className="text-muted text-xs mt-2">
-          IMDb {score.imdbPts}pts &nbsp;·&nbsp; RT {score.rtPts}pts
+          {score.imdbPts}
+          <span className="text-muted text-lg font-normal">/50</span>
         </div>
       </div>
 
