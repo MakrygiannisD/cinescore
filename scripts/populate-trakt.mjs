@@ -8,13 +8,17 @@ const SUPABASE_KEY    = process.env.SUPABASE_SERVICE_KEY
 const TRAKT_CLIENT_ID = process.env.TRAKT_CLIENT_ID
 const OMDB_KEY        = process.env.OMDB_KEY
 
-// ── Trakt list to fetch ───────────────────────────────────
-// Change these two lines to import a different list
-const TRAKT_USER      = 'justin'
-const TRAKT_LIST_SLUG = 'imdb-top-rated-movies'
+// ── Trakt lists to fetch ──────────────────────────────────
+// Duplicates handled automatically (upsert on imdb_id).
+const TRAKT_LISTS = [
+  { user: 'justin',   slug: 'imdb-top-rated-movies' },
+  { user: 'justin',   slug: 'imdb-popular-movies' },
+  { user: 'xilfneps', slug: 'all-of-these-films-are-worth-seeing-1400-titles' },
+  { user: 'sp1ti',    slug: '1001-movies-you-must-see-before-you-die' },
+  { user: 'giladg',   slug: 'the-best-movie-you-never-saw' },
+]
 
 // ── Category rules — purely data-driven ──────────────────
-// Each movie is tested against ALL rules and linked to every list it matches.
 const genre   = o => o.Genre?.toLowerCase()    ?? ''
 const plot    = o => o.Plot?.toLowerCase()     ?? ''
 const title   = o => o.Title?.toLowerCase()    ?? ''
@@ -28,70 +32,62 @@ const meta    = o => parseInt(o.Metascore)     || 0
 const runtime = o => parseInt(String(o.Runtime ?? '').match(/(\d+)/)?.[1] ?? '0') || 0
 
 const CATEGORY_RULES = [
-  // ── Ratings-based ──────────────────────────────────────
-  { slug: 'top-rated',           test: o => rating(o) >= 8.0 },
-  { slug: 'popular',             test: o => votes(o) >= 200000 },
-  { slug: 'critically-acclaimed',test: o => meta(o) >= 80 || rt(o) >= 90 },
-
-  // ── Decades ────────────────────────────────────────────
-  { slug: '50s-classics',  test: o => year(o) >= 1950 && year(o) <= 1959 },
-  { slug: '60s-classics',  test: o => year(o) >= 1960 && year(o) <= 1969 },
-  { slug: '70s-classics',  test: o => year(o) >= 1970 && year(o) <= 1979 },
-  { slug: '80s-classics',  test: o => year(o) >= 1980 && year(o) <= 1989 },
-  { slug: '90s-classics',  test: o => year(o) >= 1990 && year(o) <= 1999 },
-  { slug: '2000s-hits',    test: o => year(o) >= 2000 && year(o) <= 2009 },
-  { slug: '2010s-hits',    test: o => year(o) >= 2010 && year(o) <= 2019 },
-  { slug: '2020s-hits',    test: o => year(o) >= 2020 },
-
-  // ── Genres ─────────────────────────────────────────────
-  { slug: 'action',       test: o => genre(o).includes('action') },
-  { slug: 'comedy',       test: o => genre(o).includes('comedy') },
-  { slug: 'drama',        test: o => genre(o).includes('drama') },
-  { slug: 'thriller',     test: o => genre(o).includes('thriller') },
-  { slug: 'crime',        test: o => genre(o).includes('crime') },
-  { slug: 'horror',       test: o => genre(o).includes('horror') },
-  { slug: 'sci-fi',       test: o => genre(o).includes('sci-fi') },
-  { slug: 'animation',    test: o => genre(o).includes('animation') },
-  { slug: 'romance',      test: o => genre(o).includes('romance') },
-  { slug: 'war',          test: o => genre(o).includes('war') },
-  { slug: 'western',      test: o => genre(o).includes('western') },
-  { slug: 'mystery',      test: o => genre(o).includes('mystery') },
-  { slug: 'documentary',  test: o => genre(o).includes('documentary') },
-  { slug: 'biography',    test: o => genre(o).includes('biography') || genre(o).includes('biogr') },
-  { slug: 'musical',      test: o => genre(o).includes('musical') || genre(o).includes('music') },
-  { slug: 'fantasy',      test: o => genre(o).includes('fantasy') },
-  { slug: 'adventure',    test: o => genre(o).includes('adventure') },
-  { slug: 'family',       test: o => genre(o).includes('family') },
-  { slug: 'sport',        test: o => genre(o).includes('sport') },
-
-  // ── Language / origin ──────────────────────────────────
+  // Ratings-based
+  { slug: 'top-rated',            test: o => rating(o) >= 8.0 },
+  { slug: 'popular',              test: o => votes(o) >= 200000 },
+  { slug: 'critically-acclaimed', test: o => meta(o) >= 80 || rt(o) >= 90 },
+  // Decades
+  { slug: '50s-classics', test: o => year(o) >= 1950 && year(o) <= 1959 },
+  { slug: '60s-classics', test: o => year(o) >= 1960 && year(o) <= 1969 },
+  { slug: '70s-classics', test: o => year(o) >= 1970 && year(o) <= 1979 },
+  { slug: '80s-classics', test: o => year(o) >= 1980 && year(o) <= 1989 },
+  { slug: '90s-classics', test: o => year(o) >= 1990 && year(o) <= 1999 },
+  { slug: '2000s-hits',   test: o => year(o) >= 2000 && year(o) <= 2009 },
+  { slug: '2010s-hits',   test: o => year(o) >= 2010 && year(o) <= 2019 },
+  { slug: '2020s-hits',   test: o => year(o) >= 2020 },
+  // Genres
+  { slug: 'action',      test: o => genre(o).includes('action') },
+  { slug: 'comedy',      test: o => genre(o).includes('comedy') },
+  { slug: 'drama',       test: o => genre(o).includes('drama') },
+  { slug: 'thriller',    test: o => genre(o).includes('thriller') },
+  { slug: 'crime',       test: o => genre(o).includes('crime') },
+  { slug: 'horror',      test: o => genre(o).includes('horror') },
+  { slug: 'sci-fi',      test: o => genre(o).includes('sci-fi') },
+  { slug: 'animation',   test: o => genre(o).includes('animation') },
+  { slug: 'romance',     test: o => genre(o).includes('romance') },
+  { slug: 'war',         test: o => genre(o).includes('war') },
+  { slug: 'western',     test: o => genre(o).includes('western') },
+  { slug: 'mystery',     test: o => genre(o).includes('mystery') },
+  { slug: 'documentary', test: o => genre(o).includes('documentary') },
+  { slug: 'biography',   test: o => genre(o).includes('biography') || genre(o).includes('biogr') },
+  { slug: 'musical',     test: o => genre(o).includes('musical') || genre(o).includes('music') },
+  { slug: 'fantasy',     test: o => genre(o).includes('fantasy') },
+  { slug: 'adventure',   test: o => genre(o).includes('adventure') },
+  { slug: 'family',      test: o => genre(o).includes('family') },
+  { slug: 'sport',       test: o => genre(o).includes('sport') },
+  // Language
   { slug: 'korean-cinema',    test: o => lang(o).includes('korean') },
-  { slug: 'foreign-language', test: o => !lang(o).startsWith('english') || (lang(o).includes(',') && !lang(o).startsWith('english')) },
-
-  // ── Awards ─────────────────────────────────────────────
-  { slug: 'oscar-winners',    test: o => /won \d+ oscar/i.test(awards(o)) },
-
-  // ── Special ────────────────────────────────────────────
+  { slug: 'foreign-language', test: o => !lang(o).startsWith('english') },
+  // Awards
+  { slug: 'oscar-winners', test: o => /won \d+ oscar/i.test(awards(o)) },
+  // Special
   {
     slug: 'superhero',
     test: o => genre(o).includes('action') && (
-      plot(o).includes('superhero')    ||
-      plot(o).includes('marvel')       ||
-      title(o).includes('batman')      ||
-      title(o).includes('superman')    ||
-      title(o).includes('spider-man')  ||
-      title(o).includes('avenger')     ||
-      title(o).includes('iron man')    ||
-      title(o).includes('thor')        ||
+      plot(o).includes('superhero')        ||
+      plot(o).includes('marvel')           ||
+      title(o).includes('batman')          ||
+      title(o).includes('superman')        ||
+      title(o).includes('spider-man')      ||
+      title(o).includes('avenger')         ||
+      title(o).includes('iron man')        ||
+      title(o).includes('thor')            ||
       title(o).includes('captain america') ||
       title(o).includes('black panther')   ||
       title(o).includes('wonder woman')
     ),
   },
-  {
-    slug: 'cult-classics',
-    test: o => rating(o) >= 7.5 && votes(o) >= 100000 && year(o) <= 2000,
-  },
+  { slug: 'cult-classics', test: o => rating(o) >= 7.5 && votes(o) >= 100000 && year(o) <= 2000 },
   { slug: 'short-films',   test: o => runtime(o) > 0 && runtime(o) < 60 },
   {
     slug: 'based-on-book',
@@ -108,8 +104,8 @@ const CATEGORY_RULES = [
     slug: 'true-story',
     test: o => {
       const p = plot(o)
-      return p.includes('based on a true story') ||
-             p.includes('based on true events')  ||
+      return p.includes('based on a true story')   ||
+             p.includes('based on true events')    ||
              p.includes('based on the true story') ||
              p.includes('inspired by true events') ||
              genre(o).includes('biography')
@@ -134,47 +130,62 @@ function parseRtRating(ratings) {
   return rt ? parseInt(rt.Value) : null
 }
 
-// ── Step 1: Fetch all Trakt pages ─────────────────────────
-console.log(`\nFetching Trakt list: ${TRAKT_USER}/${TRAKT_LIST_SLUG}`)
-
-async function fetchTraktPage(page) {
-  const url = `https://api.trakt.tv/users/${TRAKT_USER}/lists/${TRAKT_LIST_SLUG}/items/movies?page=${page}&limit=100`
-  const res = await fetch(url, {
-    headers: {
-      'Content-Type':      'application/json',
-      'trakt-api-version': '2',
-      'trakt-api-key':     TRAKT_CLIENT_ID,
-      'User-Agent':        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-    },
-  })
-  if (!res.ok) throw new Error(`Trakt ${res.status}: ${await res.text()}`)
-  const totalPages = parseInt(res.headers.get('x-pagination-page-count') || '1')
-  return { data: await res.json(), totalPages }
+async function fetchTraktList(user, slug) {
+  const allItems = []
+  let page = 1
+  while (true) {
+    const url = `https://api.trakt.tv/users/${user}/lists/${slug}/items/movies?page=${page}&limit=100`
+    const res = await fetch(url, {
+      headers: {
+        'Content-Type':      'application/json',
+        'trakt-api-version': '2',
+        'trakt-api-key':     TRAKT_CLIENT_ID,
+        'User-Agent':        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      },
+    })
+    if (!res.ok) throw new Error(`Trakt ${res.status}: ${await res.text()}`)
+    const totalPages = parseInt(res.headers.get('x-pagination-page-count') || '1')
+    const data = await res.json()
+    allItems.push(...data)
+    if (page >= totalPages) break
+    console.log(`  page ${page + 1}/${totalPages}...`)
+    page++
+    await sleep(300)
+  }
+  return allItems
 }
 
-const allItems = []
-const { data: firstPage, totalPages } = await fetchTraktPage(1)
-allItems.push(...firstPage)
+// ── Step 1: Fetch all Trakt lists, dedupe by imdb_id ─────
+console.log('\n── Fetching Trakt lists ─────────────────────────────')
 
-for (let page = 2; page <= totalPages; page++) {
-  console.log(`  page ${page}/${totalPages}...`)
-  const { data } = await fetchTraktPage(page)
-  allItems.push(...data)
-  await sleep(300)
+const seenImdbIds = new Set()
+const allItems    = []   // { movie, originSlug }
+
+for (const traktList of TRAKT_LISTS) {
+  console.log(`\n→ ${traktList.user}/${traktList.slug}`)
+  const items = await fetchTraktList(traktList.user, traktList.slug)
+  let added = 0
+  for (const item of items) {
+    const imdbId = item.movie?.ids?.imdb
+    if (!imdbId || seenImdbIds.has(imdbId)) continue
+    seenImdbIds.add(imdbId)
+    allItems.push({ movie: item.movie, originSlug: traktList.slug })
+    added++
+  }
+  console.log(`  ${items.length} items fetched, ${added} new (${items.length - added} duplicates skipped)`)
 }
-console.log(`Found ${allItems.length} movies on Trakt\n`)
+
+console.log(`\nTotal unique movies to process: ${allItems.length}\n`)
 
 // ── Step 2: Fetch full OMDB data ──────────────────────────
-console.log('Fetching data from OMDB...')
+console.log('── Fetching OMDB data ───────────────────────────────')
 
 const rows  = []
 let skipped = 0
 
 for (let i = 0; i < allItems.length; i++) {
-  const movie  = allItems[i].movie
+  const { movie, originSlug } = allItems[i]
   const imdbId = movie.ids?.imdb
-
-  if (!imdbId) { skipped++; continue }
 
   process.stdout.write(`  [${i + 1}/${allItems.length}] ${movie.title} (${movie.year})... `)
 
@@ -204,8 +215,8 @@ for (let i = 0; i < allItems.length; i++) {
     omdb: o,
     dbRow: {
       imdb_id:     o.imdbID,
-      title:       str(o.Title)      ?? movie.title,
-      year:        int(o.Year)       ?? movie.year ?? null,
+      title:       str(o.Title)   ?? movie.title,
+      year:        int(o.Year)    ?? movie.year ?? null,
       genre:       str(o.Genre),
       imdb_rating: imdbRating,
       rt_rating:   parseRtRating(o.Ratings),
@@ -224,7 +235,7 @@ for (let i = 0; i < allItems.length; i++) {
       imdb_votes:  int(o.imdbVotes),
       box_office:  str(o.BoxOffice),
       production:  str(o.Production),
-      origin_list: TRAKT_LIST_SLUG,
+      origin_list: originSlug,
       omdb_raw:    o,
     }
   })
@@ -242,20 +253,29 @@ const { data: listRows, error: listErr } = await supabase
 if (listErr) { console.error('Error fetching lists:', listErr.message); process.exit(1) }
 
 const listMap = Object.fromEntries(listRows.map(l => [l.slug, l.id]))
-console.log('Lists in DB:', Object.keys(listMap).join(', '), '\n')
+console.log(`Lists in DB: ${Object.keys(listMap).length} found\n`)
 
-// ── Step 4: Upsert movies ─────────────────────────────────
-const { data: inserted, error: moviesErr } = await supabase
-  .from('movies')
-  .upsert(rows.map(r => r.dbRow), { onConflict: 'imdb_id' })
-  .select('id, imdb_id')
+// ── Step 4: Upsert movies in batches of 500 ──────────────
+console.log('── Upserting movies ─────────────────────────────────')
 
-if (moviesErr) { console.error('Error inserting movies:', moviesErr.message); process.exit(1) }
-console.log(`Upserted ${inserted.length} movies into DB`)
+const BATCH = 500
+const idMap = {}
 
-const idMap = Object.fromEntries(inserted.map(m => [m.imdb_id, m.id]))
+for (let i = 0; i < rows.length; i += BATCH) {
+  const batch = rows.slice(i, i + BATCH)
+  const { data: inserted, error: moviesErr } = await supabase
+    .from('movies')
+    .upsert(batch.map(r => r.dbRow), { onConflict: 'imdb_id' })
+    .select('id, imdb_id')
 
-// ── Step 5: Auto-assign to lists based on movie data ─────
+  if (moviesErr) { console.error('Error inserting movies:', moviesErr.message); process.exit(1) }
+  for (const m of inserted) idMap[m.imdb_id] = m.id
+  console.log(`  Upserted ${i + batch.length}/${rows.length}`)
+}
+
+// ── Step 5: Auto-assign to lists ─────────────────────────
+console.log('\n── Assigning to categories ──────────────────────────')
+
 const links  = []
 const counts = {}
 
@@ -264,7 +284,7 @@ for (const { omdb, dbRow } of rows) {
   if (!movieId) continue
 
   for (const rule of CATEGORY_RULES) {
-    if (!listMap[rule.slug]) continue   // list not in DB, skip
+    if (!listMap[rule.slug]) continue
     if (rule.test(omdb)) {
       links.push({ list_id: listMap[rule.slug], movie_id: movieId })
       counts[rule.slug] = (counts[rule.slug] ?? 0) + 1
@@ -272,15 +292,19 @@ for (const { omdb, dbRow } of rows) {
   }
 }
 
-const { error: linkErr } = await supabase
-  .from('list_movies')
-  .upsert(links, { onConflict: 'list_id,movie_id' })
-
-if (linkErr) { console.error('Error linking movies:', linkErr.message); process.exit(1) }
+// Upsert links in batches
+for (let i = 0; i < links.length; i += BATCH) {
+  const { error: linkErr } = await supabase
+    .from('list_movies')
+    .upsert(links.slice(i, i + BATCH), { onConflict: 'list_id,movie_id' })
+  if (linkErr) { console.error('Error linking movies:', linkErr.message); process.exit(1) }
+}
 
 // ── Summary ───────────────────────────────────────────────
-console.log('\nDone! Movies assigned per category:')
+console.log('\nDone! Movies per category:')
 for (const rule of CATEGORY_RULES) {
-  console.log(`  ${rule.slug}: ${counts[rule.slug] ?? 0}`)
+  const c = counts[rule.slug] ?? 0
+  if (c > 0) console.log(`  ${rule.slug}: ${c}`)
 }
-console.log(`\n  Total links created: ${links.length}`)
+console.log(`\n  Total movies: ${rows.length}`)
+console.log(`  Total list links: ${links.length}`)

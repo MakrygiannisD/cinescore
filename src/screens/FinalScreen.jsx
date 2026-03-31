@@ -1,12 +1,29 @@
+import { useEffect, useRef } from 'react'
 import { getGrade, gradeColor } from '../lib/scoring'
 
-export default function FinalScreen({ movies, scores, listName, onPlayAgain, onChangeList }) {
-  const total = scores.reduce((sum, s) => sum + s.total, 0)
-  const { label, sub } = getGrade(total)
-  const color = gradeColor(total)
+export default function FinalScreen({ movies, scores, listName, isDaily, user, onDailyComplete, onPlayAgain, onChangeList, onShowLeaderboard }) {
+  const total            = scores.reduce((sum, s) => sum + s.total, 0)
+  const { label, sub }   = getGrade(total)
+  const color            = gradeColor(total)
+  const submittedRef     = useRef(false)
+
+  // Submit daily score once on mount
+  useEffect(() => {
+    if (isDaily && !submittedRef.current) {
+      submittedRef.current = true
+      onDailyComplete(total, scores)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex flex-col gap-4 animate-fadeUp">
+
+      {isDaily && (
+        <div className="text-center text-xs text-accent font-bold uppercase tracking-widest">
+          Daily Quiz
+        </div>
+      )}
+
       {/* Score hero */}
       <div className="bg-surface border border-border rounded-2xl p-8 text-center flex flex-col items-center gap-3">
         <div
@@ -14,7 +31,7 @@ export default function FinalScreen({ movies, scores, listName, onPlayAgain, onC
           style={{ borderColor: color }}
         >
           <span className="text-5xl font-black leading-none" style={{ color }}>{total}</span>
-          <span className="text-muted text-xs mt-1">/ 500</span>
+          <span className="text-muted text-xs mt-1">/ 250</span>
         </div>
         <div className="text-xl font-bold mt-1">{label}</div>
         <div className="text-muted text-sm">{sub}</div>
@@ -40,13 +57,11 @@ export default function FinalScreen({ movies, scores, listName, onPlayAgain, onC
               </div>
               <div className="text-muted text-xs mt-0.5">
                 IMDb <strong className="text-white/70">{Number(movie.imdb_rating).toFixed(1)}</strong>
-                &nbsp;·&nbsp;
-                RT <strong className="text-white/70">{movie.rt_rating}%</strong>
               </div>
             </div>
             <div className="text-right">
               <span className="font-black text-lg">{scores[i].total}</span>
-              <span className="text-muted text-xs">/100</span>
+              <span className="text-muted text-xs">/50</span>
             </div>
           </div>
         ))}
@@ -54,17 +69,31 @@ export default function FinalScreen({ movies, scores, listName, onPlayAgain, onC
 
       {/* Actions */}
       <div className="flex flex-col gap-2">
-        <button
-          onClick={onPlayAgain}
-          className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
-        >
-          Play Again
-        </button>
+        {isDaily ? (
+          <>
+            <button
+              onClick={onShowLeaderboard}
+              className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
+            >
+              View Leaderboard →
+            </button>
+            {!user && (
+              <p className="text-muted text-xs text-center">Sign in to save your score</p>
+            )}
+          </>
+        ) : (
+          <button
+            onClick={onPlayAgain}
+            className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
+          >
+            Play Again
+          </button>
+        )}
         <button
           onClick={onChangeList}
           className="w-full py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all active:scale-95"
         >
-          Change Category
+          {isDaily ? 'Back to Home' : 'Change Category'}
         </button>
       </div>
     </div>

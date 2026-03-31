@@ -1,20 +1,23 @@
 import { useReducer, useState } from 'react'
-import { supabase }   from './lib/supabase'
-import { scoreRound } from './lib/scoring'
-import HomeScreen   from './screens/HomeScreen'
-import GameScreen   from './screens/GameScreen'
-import RevealScreen from './screens/RevealScreen'
-import FinalScreen  from './screens/FinalScreen'
+import { supabase }        from './lib/supabase'
+import { scoreRound }      from './lib/scoring'
+import { useAuth }         from './hooks/useAuth'
+import HomeScreen          from './screens/HomeScreen'
+import GameScreen          from './screens/GameScreen'
+import RevealScreen        from './screens/RevealScreen'
+import FinalScreen         from './screens/FinalScreen'
+import LeaderboardScreen   from './screens/LeaderboardScreen'
 
 const ROUNDS = 5
 
 const initialState = {
-  screen:       'home',     // 'home' | 'game' | 'reveal' | 'final'
+  screen:       'home',
+  mode:         null,       // 'base' | 'daily' | 'top-rated' | 'popular' | 'classics'
   selectedList: null,
   movies:       [],
   currentRound: 0,
-  guesses:      [],         // [{ imdb, rt }, ...]
-  scores:       [],         // [{ imdbPts, rtPts, total }, ...]
+  guesses:      [],
+  scores:       [],
 }
 
 function reducer(state, action) {
@@ -24,13 +27,14 @@ function reducer(state, action) {
       return {
         ...initialState,
         screen:       'game',
+        mode:         action.mode,
         selectedList: action.list,
         movies:       action.movies,
       }
 
     case 'SUBMIT_GUESS': {
-      const movie  = state.movies[state.currentRound]
-      const score  = scoreRound(action.imdb, action.rt, movie.imdb_rating, movie.rt_rating)
+      const movie = state.movies[state.currentRound]
+      const score = scoreRound(action.imdb, action.rt, movie.imdb_rating, movie.rt_rating)
       return {
         ...state,
         screen:  'reveal',
@@ -59,23 +63,61 @@ function reducer(state, action) {
     case 'CHANGE_LIST':
       return { ...initialState }
 
+    case 'SHOW_LEADERBOARD':
+      return { ...initialState, screen: 'leaderboard' }
+
     default:
       return state
   }
 }
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch]     = useReducer(reducer, initialState)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [dailyTotal, setDailyTotal]   = useState(null)
+  const { user, profile, signInWithGoogle, signOut } = useAuth()
 
-  const { screen, selectedList, movies, currentRound, guesses, scores } = state
+  const { screen, mode, selectedList, movies, currentRound, guesses, scores } = state
   const runningScore = scores.reduce((sum, s) => sum + s.total, 0)
+
+  async function handleStartDaily() {
+    const { data, error } = await supabase.rpc('get_daily_movies')
+    if (error || !data || data.length < 5) return
+    dispatch({ type: 'START_GAME', mode: 'daily', list: { id: null, slug: 'daily', name: 'Daily Quiz' }, movies: data })
+  }
+
+  async function handlePlayAgain() {
+    let data
+    if (mode === 'daily') {
+      ;({ data } = await supabase.rpc('get_daily_movies'))
+    } else if (mode === 'base') {
+      ;({ data } = await supabase.rpc('get_base_game_movies'))
+    } else if (mode === 'classics') {
+      ;({ data } = await supabase.rpc('get_classics_movies', { p_count: ROUNDS }))
+    } else {
+      ;({ data } = await supabase.rpc('get_random_movies', { p_list_id: selectedList.id, p_count: ROUNDS }))
+    }
+    dispatch({ type: 'PLAY_AGAIN', movies: data ?? [] })
+  }
+
+  // Called from FinalScreen after a daily game
+  async function submitDailyScore(total, scoreBreakdown) {
+    if (!user) return
+    const today = new Date().toISOString().slice(0, 10)
+    await supabase.from('daily_scores').upsert({
+      user_id: user.id,
+      date:    today,
+      scores:  scoreBreakdown,
+      total,
+    }, { onConflict: 'user_id,date' })
+    setDailyTotal(total)
+  }
 
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center justify-center p-4">
 
       {/* Back to home button */}
-      {screen !== 'home' && (
+      {screen !== 'home' && screen !== 'leaderboard' && (
         <button
           onClick={() => setShowConfirm(true)}
           className="fixed top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface border border-border text-muted text-sm font-medium hover:text-white hover:border-accent/40 transition-all active:scale-95"
@@ -114,9 +156,23 @@ export default function App() {
 
         {screen === 'home' && (
           <HomeScreen
+            user={user}
+            profile={profile}
             onStartGame={(list, movies) =>
-              dispatch({ type: 'START_GAME', list, movies })
+              dispatch({ type: 'START_GAME', mode: list.slug, list, movies })
             }
+            onStartDaily={handleStartDaily}
+            onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
+            onSignIn={signInWithGoogle}
+            onSignOut={signOut}
+          />
+        )}
+
+        {screen === 'leaderboard' && (
+          <LeaderboardScreen
+            user={user}
+            userTotal={dailyTotal}
+            onClose={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}
 
@@ -148,21 +204,12 @@ export default function App() {
             movies={movies}
             scores={scores}
             listName={selectedList?.name}
-            onPlayAgain={async () => {
-              let data
-              if (selectedList?.slug === 'base') {
-                ;({ data } = await supabase.rpc('get_base_game_movies'))
-              } else if (selectedList?.slug === 'classics') {
-                ;({ data } = await supabase.rpc('get_classics_movies', { p_count: ROUNDS }))
-              } else {
-                ;({ data } = await supabase.rpc('get_random_movies', {
-                  p_list_id: selectedList.id,
-                  p_count:   ROUNDS,
-                }))
-              }
-              dispatch({ type: 'PLAY_AGAIN', movies: data ?? [] })
-            }}
+            isDaily={mode === 'daily'}
+            user={user}
+            onDailyComplete={submitDailyScore}
+            onPlayAgain={handlePlayAgain}
             onChangeList={() => dispatch({ type: 'CHANGE_LIST' })}
+            onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
           />
         )}
 
