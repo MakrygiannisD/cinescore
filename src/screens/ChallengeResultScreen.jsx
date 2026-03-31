@@ -5,30 +5,58 @@ import { getGrade, gradeColor } from '../lib/scoring'
 export default function ChallengeResultScreen({ challengeId, myName, myTotal, movies, onPlayAgain, onHome }) {
   const [rivals, setRivals]   = useState([])
   const [loading, setLoading] = useState(true)
+  const [newEntry, setNewEntry] = useState(null)  // name of latest joiner for flash
 
-  useEffect(() => {
-    supabase
+  async function fetchScores() {
+    const { data } = await supabase
       .from('challenge_scores')
       .select('display_name, total, completed_at')
       .eq('challenge_id', challengeId)
       .order('total', { ascending: false })
-      .then(({ data }) => setRivals(data ?? []))
-      .finally(() => setLoading(false))
-  }, [challengeId])
+    setRivals(data ?? [])
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    fetchScores()
+
+    // Real-time: re-fetch whenever a new score is inserted for this challenge
+    const channel = supabase
+      .channel(`challenge-${challengeId}`)
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'challenge_scores', filter: `challenge_id=eq.${challengeId}` },
+        (payload) => {
+          setNewEntry(payload.new.display_name)
+          setTimeout(() => setNewEntry(null), 3000)
+          fetchScores()
+        }
+      )
+      .subscribe()
+
+    return () => { supabase.removeChannel(channel) }
+  }, [challengeId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const { label } = getGrade(myTotal)
   const color     = gradeColor(myTotal)
   const shareUrl  = `${window.location.origin}?challenge=${challengeId}`
+  const [copied, setCopied] = useState(false)
 
   function copyLink() {
     navigator.clipboard.writeText(shareUrl)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
-
-  const myRank   = rivals.findIndex(r => r.display_name === myName && r.total === myTotal) + 1
-  const opponent = rivals.find(r => r.display_name !== myName || r.total !== myTotal)
 
   return (
     <div className="flex flex-col gap-4 animate-fadeUp">
+
+      {/* New player toast */}
+      {newEntry && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-30 bg-accent text-white text-sm font-bold px-4 py-2 rounded-xl shadow-lg animate-fadeUp">
+          🎬 {newEntry} just finished!
+        </div>
+      )}
 
       <div className="text-center">
         <div className="text-xs text-accent font-bold uppercase tracking-widest mb-1">1v1 Challenge</div>
@@ -53,8 +81,12 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
         <div className="h-20 rounded-2xl bg-surface border border-border animate-pulse" />
       ) : rivals.length > 1 ? (
         <div className="bg-surface border border-border rounded-2xl overflow-hidden">
-          <div className="px-4 py-2 border-b border-border text-xs text-muted font-semibold uppercase tracking-widest">
-            Leaderboard
+          <div className="px-4 py-2 border-b border-border flex items-center justify-between">
+            <span className="text-xs text-muted font-semibold uppercase tracking-widest">Leaderboard</span>
+            <span className="flex items-center gap-1.5 text-xs text-green-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Live
+            </span>
           </div>
           {rivals.map((r, i) => {
             const isMe = r.display_name === myName && r.total === myTotal
@@ -75,8 +107,12 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
           })}
         </div>
       ) : (
-        <div className="bg-surface border border-border rounded-2xl p-4 text-center text-muted text-sm">
-          Nobody else has played yet — share the link!
+        <div className="bg-surface border border-border rounded-2xl p-4 text-center flex flex-col items-center gap-2">
+          <span className="flex items-center gap-1.5 text-xs text-green-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            Waiting for others…
+          </span>
+          <span className="text-muted text-sm">Share the link below to challenge someone!</span>
         </div>
       )}
 
@@ -101,9 +137,9 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
           </div>
           <button
             onClick={copyLink}
-            className="px-4 py-2 bg-accent text-white text-sm font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shrink-0"
+            className={`px-4 py-2 text-sm font-bold rounded-xl shrink-0 transition-all active:scale-95 ${copied ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-accent text-white hover:opacity-90'}`}
           >
-            Copy
+            {copied ? '✓ Copied' : 'Copy'}
           </button>
         </div>
       </div>
