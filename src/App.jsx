@@ -149,10 +149,17 @@ export default function App() {
             scores={scores}
             listName={selectedList?.name}
             onPlayAgain={async () => {
-              const { data } = await supabase.rpc('get_random_movies', {
-                p_list_id: selectedList.id,
-                p_count:   ROUNDS,
-              })
+              let data
+              if (selectedList?.slug === 'base') {
+                ;({ data } = await supabase.rpc('get_base_game_movies'))
+              } else if (selectedList?.slug === 'classics') {
+                ;({ data } = await supabase.rpc('get_classics_movies', { p_count: ROUNDS }))
+              } else {
+                ;({ data } = await supabase.rpc('get_random_movies', {
+                  p_list_id: selectedList.id,
+                  p_count:   ROUNDS,
+                }))
+              }
               dispatch({ type: 'PLAY_AGAIN', movies: data ?? [] })
             }}
             onChangeList={() => dispatch({ type: 'CHANGE_LIST' })}
