@@ -1,4 +1,5 @@
 import { useReducer, useState, useEffect } from 'react'
+import { Analytics }             from '@vercel/analytics/react'
 import { supabase }              from './lib/supabase'
 import { scoreRound }            from './lib/scoring'
 import { useAuth }               from './hooks/useAuth'
@@ -320,6 +321,7 @@ export default function App() {
         )}
 
       </div>
+      <Analytics />
     </div>
   )
 }
