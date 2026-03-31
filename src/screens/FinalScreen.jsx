@@ -1,18 +1,18 @@
 import { useEffect, useRef } from 'react'
 import { getGrade, gradeColor } from '../lib/scoring'
 
-export default function FinalScreen({ movies, scores, listName, isDaily, user, onDailyComplete, onPlayAgain, onChangeList, onShowLeaderboard }) {
+export default function FinalScreen({ movies, scores, listName, isDaily, isChallenge, user, onDailyComplete, onChallengeComplete, onPlayAgain, onChangeList, onShowLeaderboard }) {
   const total            = scores.reduce((sum, s) => sum + s.total, 0)
   const { label, sub }   = getGrade(total)
   const color            = gradeColor(total)
   const submittedRef     = useRef(false)
 
-  // Submit daily score once on mount
+  // Submit score once on mount
   useEffect(() => {
-    if (isDaily && !submittedRef.current) {
-      submittedRef.current = true
-      onDailyComplete(total, scores)
-    }
+    if (submittedRef.current) return
+    submittedRef.current = true
+    if (isDaily)     onDailyComplete(total, scores)
+    if (isChallenge) onChallengeComplete(total, scores)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -69,31 +69,18 @@ export default function FinalScreen({ movies, scores, listName, isDaily, user, o
 
       {/* Actions */}
       <div className="flex flex-col gap-2">
-        {isDaily ? (
-          <>
-            <button
-              onClick={onShowLeaderboard}
-              className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
-            >
-              View Leaderboard →
-            </button>
-            {!user && (
-              <p className="text-muted text-xs text-center">Sign in to save your score</p>
-            )}
-          </>
-        ) : (
-          <button
-            onClick={onPlayAgain}
-            className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
-          >
+        {isDaily && (
+          <button onClick={onShowLeaderboard} className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all">
+            View Leaderboard →
+          </button>
+        )}
+        {!isDaily && !isChallenge && (
+          <button onClick={onPlayAgain} className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all">
             Play Again
           </button>
         )}
-        <button
-          onClick={onChangeList}
-          className="w-full py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all active:scale-95"
-        >
-          {isDaily ? 'Back to Home' : 'Change Category'}
+        <button onClick={onChangeList} className="w-full py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all active:scale-95">
+          {isDaily || isChallenge ? 'Back to Home' : 'Change Category'}
         </button>
       </div>
     </div>

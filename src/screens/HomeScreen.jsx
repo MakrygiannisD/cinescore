@@ -22,7 +22,7 @@ const CATEGORIES = [
   },
 ]
 
-export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onShowLeaderboard, onSignIn, onSignOut }) {
+export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onStartChallenge, onShowLeaderboard, onSignIn, onSignOut }) {
   const [listIds, setListIds]   = useState({})
   const [counts,  setCounts]    = useState({})
   const [loading, setLoading]   = useState(true)
@@ -165,14 +165,23 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
         )}
       </div>
 
-      {/* Play Now */}
-      <button
-        onClick={() => startGame('base')}
-        disabled={!ready || !!starting}
-        className="w-full py-4 bg-surface border border-border text-white font-bold rounded-2xl hover:border-accent/40 hover:bg-surface2 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-      >
-        {starting === 'base' ? 'Loading…' : '▶ Play Now'}
-      </button>
+      {/* Play Now + Challenge row */}
+      <div className="flex gap-3">
+        <button
+          onClick={() => startGame('base')}
+          disabled={!ready || !!starting}
+          className="flex-1 py-4 bg-surface border border-border text-white font-bold rounded-2xl hover:border-accent/40 hover:bg-surface2 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {starting === 'base' ? 'Loading…' : '▶ Play Now'}
+        </button>
+        <button
+          onClick={onStartChallenge}
+          disabled={!ready || !!starting}
+          className="flex-1 py-4 bg-surface border border-border text-white font-bold rounded-2xl hover:border-accent/40 hover:bg-surface2 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          ⚔️ Challenge
+        </button>
+      </div>
 
       {/* Divider */}
       <div className="flex items-center gap-3">

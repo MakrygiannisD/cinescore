@@ -78,7 +78,7 @@ CREATE POLICY "users insert own score"
 -- Returns today's 5 movies. Picks and seeds them if not yet chosen today.
 CREATE OR REPLACE FUNCTION public.get_daily_movies()
 RETURNS SETOF public.movies
-LANGUAGE plpgsql STABLE SECURITY DEFINER AS $$
+LANGUAGE plpgsql VOLATILE SECURITY DEFINER AS $$
 DECLARE
   today     DATE := CURRENT_DATE;
   pick_ids  BIGINT[];
