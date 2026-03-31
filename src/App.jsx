@@ -8,19 +8,21 @@ import RevealScreen              from './screens/RevealScreen'
 import FinalScreen               from './screens/FinalScreen'
 import LeaderboardScreen         from './screens/LeaderboardScreen'
 import ChallengeResultScreen     from './screens/ChallengeResultScreen'
+import ChallengeLobbyScreen      from './screens/ChallengeLobbyScreen'
 import NameModal                 from './components/NameModal'
 
 const ROUNDS = 5
 
 const initialState = {
-  screen:       'home',
-  mode:         null,       // 'base' | 'daily' | 'challenge' | 'top-rated' | 'popular' | 'classics'
-  selectedList: null,
-  movies:       [],
-  currentRound: 0,
-  guesses:      [],
-  scores:       [],
-  challengeId:  null,
+  screen:        'home',
+  mode:          null,   // 'base' | 'daily' | 'challenge' | 'top-rated' | 'popular' | 'classics'
+  selectedList:  null,
+  movies:        [],
+  currentRound:  0,
+  guesses:       [],
+  scores:        [],
+  challengeId:   null,
+  isChallenger:  false,  // true = created the link, false = received it
 }
 
 function reducer(state, action) {
@@ -70,6 +72,23 @@ function reducer(state, action) {
     case 'SHOW_LEADERBOARD':
       return { ...initialState, screen: 'leaderboard' }
 
+    case 'SHOW_CHALLENGE_LOBBY':
+      return {
+        ...initialState,
+        screen:       'challenge-lobby',
+        mode:         'challenge',
+        movies:       action.movies,
+        challengeId:  action.challengeId,
+        isChallenger: action.isChallenger,
+      }
+
+    case 'START_CHALLENGE_GAME':
+      return {
+        ...state,
+        screen:      'game',
+        selectedList: { id: null, slug: 'challenge', name: '1v1 Challenge' },
+      }
+
     case 'SHOW_CHALLENGE_RESULT':
       return { ...state, screen: 'challenge-result' }
 
@@ -86,7 +105,7 @@ export default function App() {
   const [playerName, setPlayerName]       = useState(() => localStorage.getItem('cinescore_name') ?? '')
   const { user, profile, signInWithGoogle, signOut } = useAuth()
 
-  const { screen, mode, selectedList, movies, currentRound, guesses, scores, challengeId } = state
+  const { screen, mode, selectedList, movies, currentRound, guesses, scores, challengeId, isChallenger } = state
   const runningScore = scores.reduce((sum, s) => sum + s.total, 0)
   const finalTotal   = scores.reduce((sum, s) => sum + s.total, 0)
 
@@ -103,16 +122,15 @@ export default function App() {
   async function loadChallenge(cid) {
     const { data, error } = await supabase.rpc('get_challenge_movies', { p_id: cid })
     if (error || !data || data.length < 5) return
-    dispatch({ type: 'START_GAME', mode: 'challenge', list: { id: null, slug: 'challenge', name: '1v1 Challenge' }, movies: data, challengeId: cid })
+    dispatch({ type: 'SHOW_CHALLENGE_LOBBY', movies: data, challengeId: cid, isChallenger: false })
   }
 
   async function handleStartChallenge() {
-    // Create a new challenge, then start game
     const { data: cid, error } = await supabase.rpc('create_challenge')
     if (error || !cid) return
-    const { data: movies } = await supabase.rpc('get_challenge_movies', { p_id: cid })
-    if (!movies || movies.length < 5) return
-    dispatch({ type: 'START_GAME', mode: 'challenge', list: { id: null, slug: 'challenge', name: '1v1 Challenge' }, movies, challengeId: cid })
+    const { data: movieData } = await supabase.rpc('get_challenge_movies', { p_id: cid })
+    if (!movieData || movieData.length < 5) return
+    dispatch({ type: 'SHOW_CHALLENGE_LOBBY', movies: movieData, challengeId: cid, isChallenger: true })
   }
 
   async function handleStartDaily() {
@@ -171,7 +189,7 @@ export default function App() {
     }
   }
 
-  const inGame = screen !== 'home' && screen !== 'leaderboard' && screen !== 'challenge-result'
+  const inGame = screen !== 'home' && screen !== 'leaderboard' && screen !== 'challenge-result' && screen !== 'challenge-lobby'
 
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center justify-center p-4">
@@ -231,6 +249,15 @@ export default function App() {
             onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
             onSignIn={signInWithGoogle}
             onSignOut={signOut}
+          />
+        )}
+
+        {screen === 'challenge-lobby' && (
+          <ChallengeLobbyScreen
+            challengeId={challengeId}
+            isChallenger={isChallenger}
+            onStart={() => dispatch({ type: 'START_CHALLENGE_GAME' })}
+            onHome={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}
 
