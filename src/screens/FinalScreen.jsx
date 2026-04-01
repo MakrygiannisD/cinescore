@@ -31,7 +31,7 @@ export default function FinalScreen({ movies, scores, listName, isDaily, isChall
           style={{ borderColor: color }}
         >
           <span className="text-5xl font-black leading-none" style={{ color }}>{total}</span>
-          <span className="text-muted text-xs mt-1">/ 250</span>
+          <span className="text-muted text-xs mt-1">/ 500</span>
         </div>
         <div className="text-xl font-bold mt-1">{label}</div>
         <div className="text-muted text-sm">{sub}</div>
@@ -61,7 +61,7 @@ export default function FinalScreen({ movies, scores, listName, isDaily, isChall
             </div>
             <div className="text-right">
               <span className="font-black text-lg">{scores[i].total}</span>
-              <span className="text-muted text-xs">/50</span>
+              <span className="text-muted text-xs">/100</span>
             </div>
           </div>
         ))}

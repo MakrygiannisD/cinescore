@@ -70,7 +70,7 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
           style={{ borderColor: color }}
         >
           <span className="text-4xl font-black leading-none" style={{ color }}>{myTotal}</span>
-          <span className="text-muted text-xs mt-0.5">/ 250</span>
+          <span className="text-muted text-xs mt-0.5">/ 500</span>
         </div>
         <div className="font-bold">{myName}</div>
         <div className="text-muted text-sm">{label}</div>

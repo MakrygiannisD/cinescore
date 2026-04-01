@@ -113,8 +113,8 @@ export default function RevealScreen({ movie, imdbGuess, score, round, totalRoun
       <div className="bg-surface border border-border rounded-2xl py-5 text-center">
         <div className="text-muted text-xs uppercase tracking-widest mb-1">Round Score</div>
         <div className="text-5xl font-black">
-          {score.imdbPts}
-          <span className="text-muted text-lg font-normal">/50</span>
+          {score.total}
+          <span className="text-muted text-lg font-normal">/100</span>
         </div>
       </div>
 
