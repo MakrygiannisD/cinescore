@@ -148,9 +148,9 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
       <div className="flex flex-col gap-2">
         <button
           onClick={onPlayAgain}
-          className="w-full py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all active:scale-95"
+          className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
         >
-          New Challenge
+          Rematch ↺
         </button>
         <button
           onClick={onHome}
