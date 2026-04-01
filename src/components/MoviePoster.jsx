@@ -4,31 +4,30 @@ export default function MoviePoster({ movie }) {
   const [loaded, setLoaded] = useState(false)
 
   return (
-    <div className="bg-surface border border-border rounded-2xl overflow-hidden">
-      {/* Poster */}
-      <div className="relative w-full aspect-[2/3] bg-surface2">
-        {!loaded && (
-          <div
-            className="absolute inset-0 animate-shimmer rounded-t-2xl"
-            style={{
-              background: 'linear-gradient(90deg, #222228 25%, #2e2e3a 50%, #222228 75%)',
-              backgroundSize: '200% 100%',
-            }}
-          />
-        )}
-        <img
-          src={movie.poster_url}
-          alt={movie.title}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
-          onLoad={() => setLoaded(true)}
-          onError={e => { e.target.style.display = 'none' }}
+    <div className="relative w-full aspect-[2/3] rounded-2xl overflow-hidden bg-surface2 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+      {/* Shimmer skeleton */}
+      {!loaded && (
+        <div
+          className="absolute inset-0 animate-shimmer"
+          style={{
+            background: 'linear-gradient(90deg, #1a1a24 25%, #222232 50%, #1a1a24 75%)',
+            backgroundSize: '200% 100%',
+          }}
         />
-      </div>
-
-      {/* Info */}
-      <div className="px-4 py-3">
-        <h2 className="font-bold text-lg leading-tight">{movie.title}</h2>
-        <p className="text-muted text-sm mt-1">
+      )}
+      <img
+        src={movie.poster_url}
+        alt={movie.title}
+        className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        onLoad={() => setLoaded(true)}
+        onError={e => { e.target.style.display = 'none' }}
+      />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+      {/* Title */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 pb-5">
+        <h2 className="font-black text-xl leading-tight text-white">{movie.title}</h2>
+        <p className="text-white/50 text-sm mt-1 font-medium">
           {movie.year}
           {movie.genre ? ` · ${movie.genre.split(',')[0].trim()}` : ''}
         </p>

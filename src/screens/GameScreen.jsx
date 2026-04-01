@@ -10,11 +10,15 @@ export default function GameScreen({ movie, round, totalRounds, runningScore, on
     <div className="flex flex-col gap-4 animate-fadeUp">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <span className="text-muted text-sm font-medium">Round {round + 1} of {totalRounds}</span>
-        <div className="flex flex-col items-end gap-1.5">
-          <span className="font-bold text-sm">
-            {runningScore} <span className="text-muted font-normal">pts</span>
-          </span>
+        <span className="text-muted text-sm font-medium">
+          Round <span className="text-white font-bold">{round + 1}</span>
+          <span className="text-muted/60"> / {totalRounds}</span>
+        </span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-white/[0.06] text-sm">
+            <span className="font-black text-white">{runningScore}</span>
+            <span className="text-muted/60 text-xs">pts</span>
+          </div>
           <RoundDots total={totalRounds} current={round} />
         </div>
       </div>
@@ -22,14 +26,14 @@ export default function GameScreen({ movie, round, totalRounds, runningScore, on
       {/* Movie */}
       <MoviePoster movie={movie} />
 
-      {/* Sliders */}
-      <div className="bg-surface border border-border rounded-2xl p-5">
+      {/* Slider */}
+      <div className="bg-surface border border-white/[0.05] rounded-2xl p-5">
         <RatingSlider type="imdb" value={imdbGuess} onChange={setImdbGuess} />
       </div>
 
       <button
         onClick={() => onSubmit(imdbGuess, movie.rt_rating)}
-        className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
+        className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-[0_4px_24px_rgba(99,102,241,0.25)] hover:shadow-[0_4px_32px_rgba(99,102,241,0.4)]"
       >
         Submit Guess
       </button>
