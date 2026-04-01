@@ -141,6 +141,12 @@ export default function App() {
     dispatch({ type: 'START_GAME', mode: 'daily', list: { id: null, slug: 'daily', name: 'Daily Quiz' }, movies: data })
   }
 
+  async function handleRematch(newChallengeId, isChallenger) {
+    const { data: movieData } = await supabase.rpc('get_challenge_movies', { p_id: newChallengeId })
+    if (!movieData || movieData.length < 5) return
+    dispatch({ type: 'SHOW_CHALLENGE_LOBBY', movies: movieData, challengeId: newChallengeId, isChallenger })
+  }
+
   async function handlePlayAgain() {
     let data
     if (mode === 'daily') {
@@ -276,7 +282,7 @@ export default function App() {
             myName={playerName}
             myTotal={finalTotal}
             movies={movies}
-            onPlayAgain={handleStartChallenge}
+            onRematch={handleRematch}
             onHome={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}

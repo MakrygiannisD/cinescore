@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { getGrade, gradeColor } from '../lib/scoring'
 
-export default function ChallengeResultScreen({ challengeId, myName, myTotal, movies, onPlayAgain, onHome }) {
-  const [rivals, setRivals]   = useState([])
-  const [loading, setLoading] = useState(true)
-  const [newEntry, setNewEntry] = useState(null)  // name of latest joiner for flash
+export default function ChallengeResultScreen({ challengeId, myName, myTotal, movies, onRematch, onHome }) {
+  const [rivals, setRivals]     = useState([])
+  const [loading, setLoading]   = useState(true)
+  const [newEntry, setNewEntry] = useState(null)
+  // 'idle' | 'loading' | 'incoming'
+  const [rematchState, setRematchState] = useState('idle')
+  const redirected = useRef(false)
 
   async function fetchScores() {
     const { data } = await supabase
@@ -20,9 +23,9 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
   useEffect(() => {
     fetchScores()
 
-    // Real-time: re-fetch whenever a new score is inserted for this challenge
     const channel = supabase
       .channel(`challenge-${challengeId}`)
+      // New score posted
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'challenge_scores', filter: `challenge_id=eq.${challengeId}` },
@@ -32,10 +35,33 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
           fetchScores()
         }
       )
+      // Rematch created by any player
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'challenges', filter: `id=eq.${challengeId}` },
+        (payload) => {
+          const rid = payload.new?.rematch_id
+          if (rid && !redirected.current) {
+            redirected.current = true
+            setRematchState('incoming')
+            // Short delay so the toast is visible before screen changes
+            setTimeout(() => onRematch(rid, false), 1200)
+          }
+        }
+      )
       .subscribe()
 
     return () => { supabase.removeChannel(channel) }
   }, [challengeId]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function handleRematch() {
+    if (rematchState !== 'idle' || redirected.current) return
+    setRematchState('loading')
+    const { data: newId, error } = await supabase.rpc('create_or_get_rematch', { p_challenge_id: challengeId })
+    if (error || !newId) { setRematchState('idle'); return }
+    redirected.current = true
+    onRematch(newId, true)
+  }
 
   const { label } = getGrade(myTotal)
   const color     = gradeColor(myTotal)
@@ -55,6 +81,13 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
       {newEntry && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-30 bg-accent text-white text-sm font-bold px-4 py-2 rounded-xl shadow-lg animate-fadeUp">
           🎬 {newEntry} just finished!
+        </div>
+      )}
+
+      {/* Rematch incoming toast */}
+      {rematchState === 'incoming' && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-30 bg-green-500 text-white text-sm font-bold px-4 py-2 rounded-xl shadow-lg animate-fadeUp">
+          ↺ Rematch starting…
         </div>
       )}
 
@@ -147,10 +180,13 @@ export default function ChallengeResultScreen({ challengeId, myName, myTotal, mo
       {/* Actions */}
       <div className="flex flex-col gap-2">
         <button
-          onClick={onPlayAgain}
-          className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all"
+          onClick={handleRematch}
+          disabled={rematchState !== 'idle'}
+          className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all disabled:opacity-50"
         >
-          Rematch ↺
+          {rematchState === 'loading'   ? 'Creating rematch…'  :
+           rematchState === 'incoming'  ? '↺ Joining rematch…' :
+           'Rematch ↺'}
         </button>
         <button
           onClick={onHome}
