@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect } from 'react'
+import { useReducer, useState, useEffect, useRef, useCallback } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { supabase }              from './lib/supabase'
 import { scoreRound }            from './lib/scoring'
@@ -18,43 +18,32 @@ import NameModal                 from './components/NameModal'
 const ROUNDS = 5
 
 const initialState = {
-  screen:       'home',
-  mode:         null,   // 'base' | 'daily' | 'top-rated' | 'popular' | 'classics' | 'session'
-  selectedList: null,
-  movies:       [],
-  currentRound: 0,
-  guesses:      [],
-  scores:       [],
-  // Session-specific
-  sessionId:    null,
-  session:      null,   // full session row (status, current_round, round_deadline, etc.)
+  screen:         'home',
+  mode:           null,
+  selectedList:   null,
+  movies:         [],
+  currentRound:   0,
+  guesses:        [],
+  scores:         [],
+  sessionId:      null,
+  session:        null,
   sessionPlayers: [],
-  isHost:       false,
-  myGuess:      null,   // guess for current session round (for reveal screen)
-  myScore:      null,
+  isHost:         false,
+  myGuess:        null,
+  myScore:        null,
+  submittedCount: 0,
 }
 
 function reducer(state, action) {
   switch (action.type) {
 
     case 'START_GAME':
-      return {
-        ...initialState,
-        screen:       'game',
-        mode:         action.mode,
-        selectedList: action.list,
-        movies:       action.movies,
-      }
+      return { ...initialState, screen: 'game', mode: action.mode, selectedList: action.list, movies: action.movies }
 
     case 'SUBMIT_GUESS': {
       const movie = state.movies[state.currentRound]
       const score = scoreRound(action.imdb, action.rt, movie.imdb_rating, movie.rt_rating)
-      return {
-        ...state,
-        screen:  'reveal',
-        guesses: [...state.guesses, { imdb: action.imdb, rt: action.rt }],
-        scores:  [...state.scores, score],
-      }
+      return { ...state, screen: 'reveal', guesses: [...state.guesses, { imdb: action.imdb, rt: action.rt }], scores: [...state.scores, score] }
     }
 
     case 'NEXT_ROUND': {
@@ -65,22 +54,13 @@ function reducer(state, action) {
     }
 
     case 'PLAY_AGAIN':
-      return {
-        ...state,
-        screen:       'game',
-        movies:       action.movies,
-        currentRound: 0,
-        guesses:      [],
-        scores:       [],
-      }
+      return { ...state, screen: 'game', movies: action.movies, currentRound: 0, guesses: [], scores: [] }
 
     case 'CHANGE_LIST':
       return { ...initialState }
 
     case 'SHOW_LEADERBOARD':
       return { ...initialState, screen: 'leaderboard' }
-
-    // ── Session actions ───────────────────────────────────
 
     case 'SHOW_SESSION_LOBBY':
       return {
@@ -93,23 +73,21 @@ function reducer(state, action) {
         isHost:         action.isHost,
       }
 
-    case 'SESSION_UPDATE':
-      return {
-        ...state,
-        session: { ...state.session, ...action.session },
-      }
-
     case 'SESSION_UPDATE_PLAYERS':
       return { ...state, sessionPlayers: action.players }
+
+    case 'SESSION_SUBMITTED_COUNT':
+      return { ...state, submittedCount: action.count }
 
     case 'START_SESSION_GAME':
       return {
         ...state,
-        screen:  'session-game',
-        movies:  action.movies,
-        session: action.session,
-        myGuess: null,
-        myScore: null,
+        screen:         'session-game',
+        movies:         action.movies,
+        session:        action.session,
+        myGuess:        null,
+        myScore:        null,
+        submittedCount: 0,
       }
 
     case 'SESSION_SHOW_REVEAL':
@@ -118,24 +96,24 @@ function reducer(state, action) {
         screen:  'session-reveal',
         myGuess: action.myGuess,
         myScore: action.myScore,
-        session: { ...state.session, status: 'reveal' },
+        session: { ...state.session, status: 'reveal', round_deadline: null },
       }
 
     case 'SESSION_NEXT_ROUND':
       return {
         ...state,
-        screen:  'session-game',
-        session: action.session,
-        myGuess: null,
-        myScore: null,
+        screen:         'session-game',
+        session:        action.session,
+        myGuess:        null,
+        myScore:        null,
+        submittedCount: 0,
       }
 
     case 'SESSION_SHOW_RESULTS':
-      return {
-        ...state,
-        screen:  'session-results',
-        session: { ...state.session, status: 'results' },
-      }
+      return { ...state, screen: 'session-results', session: { ...state.session, status: 'results' } }
+
+    case 'SESSION_UPDATE':
+      return { ...state, session: { ...state.session, ...action.session } }
 
     default:
       return state
@@ -146,21 +124,193 @@ export default function App() {
   const [state, dispatch]             = useReducer(reducer, initialState)
   const [showConfirm, setShowConfirm] = useState(false)
   const [dailyTotal, setDailyTotal]   = useState(null)
-  const [showNameModal, setShowNameModal] = useState(false)
-  const [pendingSession, setPendingSession] = useState(null) // {id} waiting for name
+  const [showNameModal, setShowNameModal]   = useState(false)
+  const [pendingSession, setPendingSession] = useState(null)
+  const [chatMessages, setChatMessages]     = useState([])
   const { user, profile, signInWithGoogle, signOut } = useAuth()
 
-  const playerId    = getOrCreatePlayerId()
-  const playerName  = getPlayerName()
+  const playerId   = getOrCreatePlayerId()
+  const playerName = getPlayerName()
 
   const {
     screen, mode, selectedList, movies, currentRound, guesses, scores,
-    sessionId, session, sessionPlayers, isHost, myGuess,
+    sessionId, session, sessionPlayers, isHost, myGuess, submittedCount,
   } = state
 
   const runningScore = scores.reduce((sum, s) => sum + s.total, 0)
 
-  // Handle incoming session links (?session=abc123)
+  // ── Refs so the persistent channel can always call the latest handlers ──
+  const stateRef    = useRef(state)
+  const isHostRef   = useRef(isHost)
+  const channelRef  = useRef(null)
+  const playerIdRef = useRef(playerId)
+  const sessionIdRef = useRef(sessionId)
+
+  useEffect(() => { stateRef.current   = state   })
+  useEffect(() => { isHostRef.current  = isHost  })
+  useEffect(() => { playerIdRef.current = playerId })
+  useEffect(() => { sessionIdRef.current = sessionId })
+
+  // Stable refs for guess tracking (avoids closure issues)
+  const myGuessRef = useRef(5.0)   // current slider value in game screen
+  const myScoreRef = useRef(null)  // score returned by submit RPC
+
+  // ── Single persistent Realtime channel for the whole session ──
+  useEffect(() => {
+    if (!sessionId) return
+
+    // Clear chat when entering a new session
+    setChatMessages([])
+
+    // Initial player fetch
+    supabase
+      .from('session_players')
+      .select('*')
+      .eq('session_id', sessionId)
+      .order('joined_at')
+      .then(({ data }) => { if (data) dispatch({ type: 'SESSION_UPDATE_PLAYERS', players: data }) })
+
+    const channel = supabase.channel(`session:${sessionId}`)
+
+    // sessions UPDATE — drives all screen transitions
+    channel.on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'sessions', filter: `id=eq.${sessionId}` },
+      (payload) => {
+        const sess = payload.new
+        const cur  = stateRef.current
+
+        if (sess.status === 'playing' && cur.screen === 'session-lobby') {
+          loadMoviesAndStart(sess)
+        } else if (sess.status === 'playing' && cur.screen === 'session-reveal') {
+          dispatch({ type: 'SESSION_NEXT_ROUND', session: sess })
+        } else if (sess.status === 'playing' && cur.screen === 'session-results') {
+          loadMoviesAndStart(sess)
+        } else if (sess.status === 'reveal' && cur.screen === 'session-game') {
+          dispatch({
+            type:    'SESSION_SHOW_REVEAL',
+            myGuess: myGuessRef.current,
+            myScore: myScoreRef.current,
+          })
+        } else if (sess.status === 'results') {
+          dispatch({ type: 'SESSION_SHOW_RESULTS' })
+        } else {
+          dispatch({ type: 'SESSION_UPDATE', session: sess })
+        }
+      }
+    )
+
+    // session_players changes — keep player list live
+    channel.on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'session_players', filter: `session_id=eq.${sessionId}` },
+      () => {
+        supabase
+          .from('session_players')
+          .select('*')
+          .eq('session_id', sessionId)
+          .order('joined_at')
+          .then(({ data }) => { if (data) dispatch({ type: 'SESSION_UPDATE_PLAYERS', players: data }) })
+      }
+    )
+
+    // session_guesses INSERT — update submitted count, host triggers reveal
+    channel.on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'session_guesses', filter: `session_id=eq.${sessionId}` },
+      () => {
+        const cur = stateRef.current
+        if (cur.screen !== 'session-game' || !cur.session) return
+
+        supabase
+          .from('session_guesses')
+          .select('id', { count: 'exact', head: true })
+          .eq('session_id', sessionId)
+          .eq('game_number', cur.session.game_number)
+          .eq('round', cur.session.current_round)
+          .then(({ count }) => {
+            dispatch({ type: 'SESSION_SUBMITTED_COUNT', count: count ?? 0 })
+            // Host: when everyone submitted, trigger reveal
+            if (isHostRef.current && count >= cur.sessionPlayers.length) {
+              triggerReveal(sessionId, playerIdRef.current)
+            }
+          })
+      }
+    )
+
+    // Broadcast: chat — instant delivery
+    channel.on('broadcast', { event: 'chat' }, ({ payload }) => {
+      setChatMessages((prev) => [...prev, payload])
+    })
+
+    channel.subscribe()
+    channelRef.current = channel
+
+    return () => {
+      supabase.removeChannel(channel)
+      channelRef.current = null
+    }
+  }, [sessionId]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Host: trigger reveal after timer grace (called from SessionGameScreen)
+  const triggerRevealRef = useRef(false)
+  async function triggerReveal(sid, pid) {
+    if (triggerRevealRef.current) return
+    triggerRevealRef.current = true
+    // Grace: wait 1.5s for late submits to land
+    await new Promise((r) => setTimeout(r, 1500))
+    await supabase.rpc('show_session_reveal', { p_session_id: sid, p_player_id: pid })
+    triggerRevealRef.current = false
+  }
+
+  // Reset trigger ref when round changes
+  useEffect(() => {
+    triggerRevealRef.current = false
+  }, [session?.current_round])
+
+  // Fetch movies for a session and transition to game screen
+  async function loadMoviesAndStart(sess) {
+    const { data: moviesData } = await supabase
+      .from('movies')
+      .select('*')
+      .in('id', sess.movie_ids)
+    const sorted = sess.movie_ids.map((id) => moviesData?.find((m) => m.id === id)).filter(Boolean)
+    dispatch({ type: 'START_SESSION_GAME', movies: sorted, session: sess })
+  }
+
+  // Chat: send and immediately show own message
+  const sendChatMessage = useCallback(async (body) => {
+    const msg = {
+      player_id:    playerId,
+      display_name: playerName,
+      body,
+      created_at:   new Date().toISOString(),
+    }
+    // Optimistic: add to own list immediately
+    setChatMessages((prev) => [...prev, msg])
+    // Broadcast to others
+    channelRef.current?.send({ type: 'broadcast', event: 'chat', payload: msg })
+    // Persist to DB
+    await supabase.rpc('send_session_message', {
+      p_session_id:   sessionId,
+      p_player_id:    playerId,
+      p_display_name: playerName,
+      p_body:         body,
+    })
+  }, [sessionId, playerId, playerName])
+
+  // Called by SessionGameScreen when player submits a guess
+  function onGuessSubmitted(guess, score) {
+    myGuessRef.current = guess
+    myScoreRef.current = score
+  }
+
+  // Called by SessionGameScreen when timer expires (host drives reveal)
+  function onTimerExpired() {
+    if (isHost) triggerReveal(sessionId, playerId)
+  }
+
+  // URL param: join via link
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const sid    = params.get('session')
@@ -170,79 +320,37 @@ export default function App() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function joinSession(sid, name = playerName) {
-    if (!name) {
-      // Need a name first
-      setPendingSession({ id: sid })
-      setShowNameModal(true)
-      return
-    }
+    if (!name) { setPendingSession({ id: sid }); setShowNameModal(true); return }
     const { data, error } = await supabase.rpc('join_session', {
-      p_session_id:   sid,
-      p_display_name: name,
-      p_player_id:    playerId,
+      p_session_id: sid, p_display_name: name, p_player_id: playerId,
     })
     if (error) throw new Error(error.message)
-    const sess    = data.session
-    const players = data.players || []
     dispatch({
       type: 'SHOW_SESSION_LOBBY',
       sessionId: sid,
-      session:   sess,
-      players,
-      isHost:    sess.host_player_id === playerId,
+      session:   data.session,
+      players:   data.players || [],
+      isHost:    data.session.host_player_id === playerId,
     })
   }
 
   async function handleCreateSession() {
     const name = playerName
-    if (!name) {
-      setPendingSession({ create: true })
-      setShowNameModal(true)
-      return
-    }
+    if (!name) { setPendingSession({ create: true }); setShowNameModal(true); return }
     const { data: sid, error } = await supabase.rpc('create_session', {
-      p_display_name:  name,
-      p_player_id:     playerId,
-      p_round_seconds: 30,
+      p_display_name: name, p_player_id: playerId, p_round_seconds: 30,
     })
     if (error || !sid) { console.error(error?.message); return }
     const { data } = await supabase.rpc('join_session', {
-      p_session_id:   sid,
-      p_display_name: name,
-      p_player_id:    playerId,
+      p_session_id: sid, p_display_name: name, p_player_id: playerId,
     })
     dispatch({
-      type:      'SHOW_SESSION_LOBBY',
+      type: 'SHOW_SESSION_LOBBY',
       sessionId: sid,
       session:   data.session,
       players:   data.players || [],
       isHost:    true,
     })
-  }
-
-  // Called when Realtime says status='playing' (from lobby or results)
-  async function handleSessionStart(sess) {
-    const { data: moviesData } = await supabase
-      .from('movies')
-      .select('*')
-      .in('id', sess.movie_ids)
-      .order('id')   // we'll re-sort below
-
-    // Sort to match movie_ids order
-    const sorted = sess.movie_ids.map((id) => moviesData?.find((m) => m.id === id)).filter(Boolean)
-
-    dispatch({ type: 'START_SESSION_GAME', movies: sorted, session: sess })
-  }
-
-  // Called when reveal Realtime gets next session update
-  function handleSessionUpdate(sess) {
-    if (sess.status === 'playing') {
-      dispatch({ type: 'SESSION_NEXT_ROUND', session: sess })
-    } else if (sess.status === 'results') {
-      dispatch({ type: 'SESSION_SHOW_RESULTS' })
-    } else {
-      dispatch({ type: 'SESSION_UPDATE', session: sess })
-    }
   }
 
   async function handleStartDaily() {
@@ -253,15 +361,10 @@ export default function App() {
 
   async function handlePlayAgain() {
     let data
-    if (mode === 'daily') {
-      ;({ data } = await supabase.rpc('get_daily_movies'))
-    } else if (mode === 'base') {
-      ;({ data } = await supabase.rpc('get_base_game_movies'))
-    } else if (mode === 'classics') {
-      ;({ data } = await supabase.rpc('get_classics_movies', { p_count: ROUNDS }))
-    } else {
-      ;({ data } = await supabase.rpc('get_random_movies', { p_list_id: selectedList.id, p_count: ROUNDS }))
-    }
+    if (mode === 'daily')        ({ data } = await supabase.rpc('get_daily_movies'))
+    else if (mode === 'base')    ({ data } = await supabase.rpc('get_base_game_movies'))
+    else if (mode === 'classics')({ data } = await supabase.rpc('get_classics_movies', { p_count: ROUNDS }))
+    else                         ({ data } = await supabase.rpc('get_random_movies', { p_list_id: selectedList.id, p_count: ROUNDS }))
     dispatch({ type: 'PLAY_AGAIN', movies: data ?? [] })
   }
 
@@ -281,7 +384,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center justify-center p-4">
 
-      {/* Back button (solo game only) */}
       {inGame && (
         <button
           onClick={() => setShowConfirm(true)}
@@ -291,7 +393,6 @@ export default function App() {
         </button>
       )}
 
-      {/* Quit modal */}
       {showConfirm && (
         <div className="fixed inset-0 z-20 bg-black/70 flex items-center justify-center p-4">
           <div className="bg-surface border border-border rounded-2xl p-6 w-full max-w-sm flex flex-col gap-4 animate-fadeUp">
@@ -300,24 +401,13 @@ export default function App() {
               <div className="text-muted text-sm">Your progress will be lost.</div>
             </div>
             <div className="flex gap-2">
-              <button
-                onClick={() => setShowConfirm(false)}
-                className="flex-1 py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all"
-              >
-                Keep playing
-              </button>
-              <button
-                onClick={() => { setShowConfirm(false); dispatch({ type: 'CHANGE_LIST' }) }}
-                className="flex-1 py-3 bg-accent text-white font-bold rounded-xl hover:opacity-90 transition-all"
-              >
-                Quit
-              </button>
+              <button onClick={() => setShowConfirm(false)} className="flex-1 py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all">Keep playing</button>
+              <button onClick={() => { setShowConfirm(false); dispatch({ type: 'CHANGE_LIST' }) }} className="flex-1 py-3 bg-accent text-white font-bold rounded-xl hover:opacity-90 transition-all">Quit</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Name modal — for session join/create */}
       {showNameModal && (
         <NameModal
           title="What's your name?"
@@ -325,11 +415,8 @@ export default function App() {
           onConfirm={(name) => {
             setShowNameModal(false)
             savePlayerName(name)
-            if (pendingSession?.create) {
-              handleCreateSession()
-            } else if (pendingSession?.id) {
-              joinSession(pendingSession.id, name)
-            }
+            if (pendingSession?.create)    handleCreateSession()
+            else if (pendingSession?.id)   joinSession(pendingSession.id, name)
             setPendingSession(null)
           }}
         />
@@ -339,11 +426,8 @@ export default function App() {
 
         {screen === 'home' && (
           <HomeScreen
-            user={user}
-            profile={profile}
-            onStartGame={(list, movs) =>
-              dispatch({ type: 'START_GAME', mode: list.slug, list, movies: movs })
-            }
+            user={user} profile={profile}
+            onStartGame={(list, movs) => dispatch({ type: 'START_GAME', mode: list.slug, list, movies: movs })}
             onStartDaily={handleStartDaily}
             onStartMultiplayer={handleCreateSession}
             onJoinSession={joinSession}
@@ -354,11 +438,7 @@ export default function App() {
         )}
 
         {screen === 'leaderboard' && (
-          <LeaderboardScreen
-            user={user}
-            userTotal={dailyTotal}
-            onClose={() => dispatch({ type: 'CHANGE_LIST' })}
-          />
+          <LeaderboardScreen user={user} userTotal={dailyTotal} onClose={() => dispatch({ type: 'CHANGE_LIST' })} />
         )}
 
         {screen === 'game' && (
@@ -386,21 +466,14 @@ export default function App() {
 
         {screen === 'final' && (
           <FinalScreen
-            movies={movies}
-            scores={scores}
-            listName={selectedList?.name}
-            isDaily={mode === 'daily'}
-            isChallenge={false}
-            user={user}
-            onDailyComplete={submitDailyScore}
-            onChallengeComplete={() => {}}
+            movies={movies} scores={scores} listName={selectedList?.name}
+            isDaily={mode === 'daily'} isChallenge={false} user={user}
+            onDailyComplete={submitDailyScore} onChallengeComplete={() => {}}
             onPlayAgain={handlePlayAgain}
             onChangeList={() => dispatch({ type: 'CHANGE_LIST' })}
             onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
           />
         )}
-
-        {/* ── Session screens ─────────────────────────────── */}
 
         {screen === 'session-lobby' && (
           <SessionLobbyScreen
@@ -409,24 +482,27 @@ export default function App() {
             displayName={playerName}
             isHost={isHost}
             hostPlayerId={session?.host_player_id}
-            initialPlayers={sessionPlayers}
-            onStartGame={handleSessionStart}
+            players={sessionPlayers}
+            chatMessages={chatMessages}
+            sendChatMessage={sendChatMessage}
             onHome={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}
 
         {screen === 'session-game' && (
           <SessionGameScreen
+            key={`${session?.game_number}-${session?.current_round}`}
             session={session}
             movies={movies}
             players={sessionPlayers}
             playerId={playerId}
             displayName={playerName}
             isHost={isHost}
-            onReveal={({ score, myGuess: guess }) =>
-              dispatch({ type: 'SESSION_SHOW_REVEAL', myGuess: guess, myScore: score })
-            }
-            onGuessInsert={() => {}}
+            submittedCount={submittedCount}
+            chatMessages={chatMessages}
+            sendChatMessage={sendChatMessage}
+            onGuessSubmitted={onGuessSubmitted}
+            onTimerExpired={onTimerExpired}
           />
         )}
 
@@ -439,7 +515,8 @@ export default function App() {
             displayName={playerName}
             isHost={isHost}
             myGuess={myGuess}
-            onSessionUpdate={handleSessionUpdate}
+            chatMessages={chatMessages}
+            sendChatMessage={sendChatMessage}
           />
         )}
 
@@ -451,9 +528,9 @@ export default function App() {
             playerId={playerId}
             displayName={playerName}
             isHost={isHost}
-            onNewGame={handleSessionStart}
+            chatMessages={chatMessages}
+            sendChatMessage={sendChatMessage}
             onHome={() => dispatch({ type: 'CHANGE_LIST' })}
-            onSessionUpdate={handleSessionUpdate}
           />
         )}
 
