@@ -17,30 +17,38 @@ export default function SessionGameScreen({
   playerId,
   displayName,
   isHost,
-  onReveal,          // called with { score, myGuess } when transitioning to reveal
-  onGuessInsert,
-  onChat,
+  onReveal,
 }) {
-  const [imdbGuess, setImdbGuess]     = useState(5.0)
-  const [submitted, setSubmitted]     = useState(false)
+  const [imdbGuess, setImdbGuess]           = useState(5.0)
+  const [submitted, setSubmitted]           = useState(false)
   const [submittedCount, setSubmittedCount] = useState(0)
-  const [myScore, setMyScore]         = useState(null)
-  const [messages, setMessages]       = useState([])
-  const autoSubmittedRef              = useRef(false)
-  const revealCalledRef               = useRef(false)
+  const [myScore, setMyScore]               = useState(null)
+  const [messages, setMessages]             = useState([])
+
+  // These refs prevent double-firing without blocking the Realtime transition
+  const triggeringRef  = useRef(false)  // prevents calling show_session_reveal twice
+  const transitionedRef = useRef(false) // prevents calling onReveal twice
+  const imdbGuessRef   = useRef(imdbGuess)
+  const myScoreRef     = useRef(null)
 
   const round    = session.current_round
   const movie    = movies[round]
   const deadline = session.round_deadline
 
-  // Reset state when round changes
+  // Keep refs in sync with state for use in async callbacks
+  useEffect(() => { imdbGuessRef.current = imdbGuess }, [imdbGuess])
+  useEffect(() => { myScoreRef.current   = myScore   }, [myScore])
+
+  // Reset everything when the round number changes
   useEffect(() => {
     setImdbGuess(5.0)
     setSubmitted(false)
     setSubmittedCount(0)
     setMyScore(null)
-    autoSubmittedRef.current  = false
-    revealCalledRef.current   = false
+    triggeringRef.current   = false
+    transitionedRef.current = false
+    imdbGuessRef.current    = 5.0
+    myScoreRef.current      = null
   }, [round])
 
   async function submitGuess(guess) {
@@ -52,45 +60,41 @@ export default function SessionGameScreen({
       p_player_id:  playerId,
       p_imdb_guess: guess,
     })
-
     if (!error && data) {
+      myScoreRef.current = data.score
       setMyScore(data.score)
     }
   }
 
-  // Auto-submit when timer expires
-  const handleExpire = useRef(() => {
-    if (!autoSubmittedRef.current) {
-      autoSubmittedRef.current = true
-      submitGuess(imdbGuess)
-    }
-  })
-  useEffect(() => {
-    handleExpire.current = () => {
-      if (!autoSubmittedRef.current) {
-        autoSubmittedRef.current = true
-        submitGuess(imdbGuess)
-      }
-    }
-  })
+  // Host: transition everyone to reveal (called after all submit OR timer grace)
+  async function triggerReveal() {
+    if (!isHost || triggeringRef.current) return
+    triggeringRef.current = true
+    // Grace period so late auto-submits can land
+    await new Promise((r) => setTimeout(r, 1500))
+    await supabase.rpc('show_session_reveal', {
+      p_session_id: session.id,
+      p_player_id:  playerId,
+    })
+    // Realtime UPDATE will fire onSessionUpdate → onReveal for ALL clients including host
+  }
 
-  const secondsLeft = useSessionTimer(deadline, () => handleExpire.current())
-
-  // Realtime: count guesses, host triggers reveal
+  // Realtime subscriptions
   const { sendChatMessage } = useSession({
     sessionId: session.id,
     playerId,
     displayName,
+    // When DB status becomes 'reveal', ALL clients (including host) move to reveal screen
     onSessionUpdate: (sess) => {
-      if (sess.status === 'reveal' && !revealCalledRef.current) {
-        revealCalledRef.current = true
-        onReveal({ score: myScore, myGuess: imdbGuess })
+      if (sess.status === 'reveal' && !transitionedRef.current) {
+        transitionedRef.current = true
+        onReveal({ score: myScoreRef.current, myGuess: imdbGuessRef.current })
       }
     },
     onPlayersUpdate: () => {},
     onGuessInsert: (guess) => {
       setSubmittedCount((c) => c + 1)
-      // Host: if all submitted, transition to reveal
+      // Host: check if all players have submitted
       if (isHost) {
         supabase
           .from('session_guesses')
@@ -99,48 +103,33 @@ export default function SessionGameScreen({
           .eq('game_number', session.game_number)
           .eq('round', round)
           .then(({ count }) => {
-            if (count >= players.length && !revealCalledRef.current) {
-              triggerReveal()
-            }
+            if (count >= players.length) triggerReveal()
           })
       }
     },
-    onChatMessage: (msg) => {
-      setMessages((prev) => [...prev, msg])
-      onChat?.(msg)
-    },
+    onChatMessage: (msg) => setMessages((prev) => [...prev, msg]),
   })
 
-  async function triggerReveal() {
-    if (revealCalledRef.current) return
-    revealCalledRef.current = true
-    // Small grace window for late submits
-    await new Promise((r) => setTimeout(r, 1500))
-    await supabase.rpc('show_session_reveal', {
-      p_session_id: session.id,
-      p_player_id:  playerId,
-    })
-  }
+  // Auto-submit current slider value when timer expires
+  const secondsLeft = useSessionTimer(deadline, () => {
+    submitGuess(imdbGuessRef.current)
+  })
 
-  // Host: trigger reveal when timer + grace expires
+  // Host: trigger reveal 2s after timer hits 0 (catches players who don't submit)
   useEffect(() => {
     if (!isHost || secondsLeft !== 0) return
-    const t = setTimeout(() => {
-      if (!revealCalledRef.current) triggerReveal()
-    }, 2000)
+    const t = setTimeout(() => triggerReveal(), 2000)
     return () => clearTimeout(t)
-  }, [secondsLeft, isHost])
+  }, [secondsLeft, isHost]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!movie) return null
 
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center justify-center p-4 animate-fadeUp">
 
-      {/* Header row */}
+      {/* Header */}
       <div className="w-full max-w-md flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <RoundDots total={ROUNDS} current={round} />
-        </div>
+        <RoundDots total={ROUNDS} current={round} />
         <CountdownTimer secondsLeft={secondsLeft} totalSeconds={session.round_seconds} />
         <div className="text-xs text-muted text-right">
           <div className="text-white/60 font-semibold">{submittedCount}/{players.length}</div>
@@ -153,40 +142,31 @@ export default function SessionGameScreen({
         <MoviePoster movie={movie} />
       </div>
 
-      {/* Guess or waiting */}
+      {/* Guess area */}
       {submitted ? (
         <div className="w-full max-w-md bg-surface border border-white/[0.05] rounded-2xl p-6 text-center">
-          {myScore !== null && (
-            <div className="text-4xl font-black text-accent mb-1">{myScore}</div>
-          )}
+          {myScore !== null
+            ? <div className="text-4xl font-black text-accent mb-1">{myScore} pts</div>
+            : null}
           <div className="text-muted text-sm">
-            {myScore !== null ? 'pts — waiting for others…' : 'Guess submitted — waiting…'}
+            {myScore !== null ? 'Waiting for others…' : 'Guess submitted — waiting…'}
           </div>
         </div>
       ) : (
         <div className="w-full max-w-md space-y-4">
-          <RatingSlider
-            type="imdb"
-            value={imdbGuess}
-            onChange={setImdbGuess}
-          />
+          <RatingSlider type="imdb" value={imdbGuess} onChange={setImdbGuess} />
           <button
             onClick={() => submitGuess(imdbGuess)}
             className="w-full py-4 rounded-2xl font-bold text-lg bg-accent text-white
               shadow-[0_4px_24px_rgba(99,102,241,0.35)]
-              hover:shadow-[0_4px_32px_rgba(99,102,241,0.5)] hover:brightness-110
-              transition-all duration-200"
+              hover:brightness-110 transition-all"
           >
             Submit Guess
           </button>
         </div>
       )}
 
-      <ChatPanel
-        messages={messages}
-        onSend={sendChatMessage}
-        displayName={displayName}
-      />
+      <ChatPanel messages={messages} onSend={sendChatMessage} displayName={displayName} />
     </div>
   )
 }
