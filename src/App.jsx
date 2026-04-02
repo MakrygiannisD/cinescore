@@ -115,6 +115,9 @@ function reducer(state, action) {
     case 'SESSION_UPDATE':
       return { ...state, session: { ...state.session, ...action.session } }
 
+    case 'SESSION_GUESS_INSERTED':
+      return { ...state, submittedCount: state.submittedCount + 1 }
+
     default:
       return state
   }
@@ -139,27 +142,17 @@ export default function App() {
 
   const runningScore = scores.reduce((sum, s) => sum + s.total, 0)
 
-  // ── Refs so the persistent channel can always call the latest handlers ──
-  const stateRef    = useRef(state)
-  const isHostRef   = useRef(isHost)
   const channelRef  = useRef(null)
-  const playerIdRef = useRef(playerId)
-  const sessionIdRef = useRef(sessionId)
+  // Stable refs for guess tracking — updated by SessionGameScreen callbacks
+  const myGuessRef  = useRef(5.0)
+  const myScoreRef  = useRef(null)
+  const isHostRef   = useRef(isHost)
+  useEffect(() => { isHostRef.current = isHost }, [isHost])
 
-  useEffect(() => { stateRef.current   = state   })
-  useEffect(() => { isHostRef.current  = isHost  })
-  useEffect(() => { playerIdRef.current = playerId })
-  useEffect(() => { sessionIdRef.current = sessionId })
-
-  // Stable refs for guess tracking (avoids closure issues)
-  const myGuessRef = useRef(5.0)   // current slider value in game screen
-  const myScoreRef = useRef(null)  // score returned by submit RPC
-
-  // ── Single persistent Realtime channel for the whole session ──
+  // ── Single persistent Realtime channel — only syncs raw data into state ──
   useEffect(() => {
     if (!sessionId) return
 
-    // Clear chat when entering a new session
     setChatMessages([])
 
     // Initial player fetch
@@ -172,73 +165,30 @@ export default function App() {
 
     const channel = supabase.channel(`session:${sessionId}`)
 
-    // sessions UPDATE — drives all screen transitions
+    // sessions UPDATE — just store the new row; a separate useEffect drives transitions
     channel.on(
       'postgres_changes',
       { event: 'UPDATE', schema: 'public', table: 'sessions', filter: `id=eq.${sessionId}` },
-      (payload) => {
-        const sess = payload.new
-        const cur  = stateRef.current
-
-        if (sess.status === 'playing' && cur.screen === 'session-lobby') {
-          loadMoviesAndStart(sess)
-        } else if (sess.status === 'playing' && cur.screen === 'session-reveal') {
-          dispatch({ type: 'SESSION_NEXT_ROUND', session: sess })
-        } else if (sess.status === 'playing' && cur.screen === 'session-results') {
-          loadMoviesAndStart(sess)
-        } else if (sess.status === 'reveal' && cur.screen === 'session-game') {
-          dispatch({
-            type:    'SESSION_SHOW_REVEAL',
-            myGuess: myGuessRef.current,
-            myScore: myScoreRef.current,
-          })
-        } else if (sess.status === 'results') {
-          dispatch({ type: 'SESSION_SHOW_RESULTS' })
-        } else {
-          dispatch({ type: 'SESSION_UPDATE', session: sess })
-        }
-      }
+      (payload) => dispatch({ type: 'SESSION_UPDATE', session: payload.new })
     )
 
-    // session_players changes — keep player list live
+    // session_players — refetch full list on any change
     channel.on(
       'postgres_changes',
       { event: '*', schema: 'public', table: 'session_players', filter: `session_id=eq.${sessionId}` },
-      () => {
-        supabase
-          .from('session_players')
-          .select('*')
-          .eq('session_id', sessionId)
-          .order('joined_at')
-          .then(({ data }) => { if (data) dispatch({ type: 'SESSION_UPDATE_PLAYERS', players: data }) })
-      }
+      () => supabase
+        .from('session_players').select('*').eq('session_id', sessionId).order('joined_at')
+        .then(({ data }) => { if (data) dispatch({ type: 'SESSION_UPDATE_PLAYERS', players: data }) })
     )
 
-    // session_guesses INSERT — update submitted count, host triggers reveal
+    // session_guesses INSERT — update submitted count
     channel.on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'session_guesses', filter: `session_id=eq.${sessionId}` },
-      () => {
-        const cur = stateRef.current
-        if (cur.screen !== 'session-game' || !cur.session) return
-
-        supabase
-          .from('session_guesses')
-          .select('id', { count: 'exact', head: true })
-          .eq('session_id', sessionId)
-          .eq('game_number', cur.session.game_number)
-          .eq('round', cur.session.current_round)
-          .then(({ count }) => {
-            dispatch({ type: 'SESSION_SUBMITTED_COUNT', count: count ?? 0 })
-            // Host: when everyone submitted, trigger reveal
-            if (isHostRef.current && count >= cur.sessionPlayers.length) {
-              triggerReveal(sessionId, playerIdRef.current)
-            }
-          })
-      }
+      () => dispatch({ type: 'SESSION_GUESS_INSERTED' })  // handled below
     )
 
-    // Broadcast: chat — instant delivery
+    // Broadcast: chat
     channel.on('broadcast', { event: 'chat' }, ({ payload }) => {
       setChatMessages((prev) => [...prev, payload])
     })
@@ -252,31 +202,59 @@ export default function App() {
     }
   }, [sessionId]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Host: trigger reveal after timer grace (called from SessionGameScreen)
-  const triggerRevealRef = useRef(false)
-  async function triggerReveal(sid, pid) {
-    if (triggerRevealRef.current) return
-    triggerRevealRef.current = true
-    // Grace: wait 1.5s for late submits to land
-    await new Promise((r) => setTimeout(r, 1500))
-    await supabase.rpc('show_session_reveal', { p_session_id: sid, p_player_id: pid })
-    triggerRevealRef.current = false
-  }
+  // ── Transition useEffect: reacts to session.status changes from DB ──
+  // Runs with fresh `screen` value — no stale-closure problem
+  useEffect(() => {
+    if (!session || !screen.startsWith('session-')) return
 
-  // Reset trigger ref when round changes
+    const { status } = session
+
+    if (status === 'playing') {
+      if (screen === 'session-lobby' || screen === 'session-results') {
+        // New game starting — fetch movies then go to game
+        supabase
+          .from('movies').select('*').in('id', session.movie_ids)
+          .then(({ data }) => {
+            const sorted = session.movie_ids
+              .map((id) => data?.find((m) => m.id === id))
+              .filter(Boolean)
+            dispatch({ type: 'START_SESSION_GAME', movies: sorted, session })
+          })
+      } else if (screen === 'session-reveal') {
+        // Next round — movies already loaded
+        dispatch({ type: 'SESSION_NEXT_ROUND', session })
+      }
+      // screen === 'session-game': already in game, ignore
+    } else if (status === 'reveal' && screen === 'session-game') {
+      dispatch({
+        type:    'SESSION_SHOW_REVEAL',
+        myGuess: myGuessRef.current,
+        myScore: myScoreRef.current,
+      })
+    } else if (status === 'results' && screen !== 'session-results') {
+      dispatch({ type: 'SESSION_SHOW_RESULTS' })
+    }
+  }, [session?.status, session?.current_round, session?.game_number]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Host: trigger reveal when all players submitted ──
+  const triggerRevealRef = useRef(false)
+  useEffect(() => {
+    if (!isHost || screen !== 'session-game') return
+    if (submittedCount > 0 && submittedCount >= sessionPlayers.length) {
+      if (!triggerRevealRef.current) {
+        triggerRevealRef.current = true
+        setTimeout(async () => {
+          await supabase.rpc('show_session_reveal', { p_session_id: sessionId, p_player_id: playerId })
+          triggerRevealRef.current = false
+        }, 1500) // grace for late submits
+      }
+    }
+  }, [submittedCount]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Reset reveal guard when round changes
   useEffect(() => {
     triggerRevealRef.current = false
   }, [session?.current_round])
-
-  // Fetch movies for a session and transition to game screen
-  async function loadMoviesAndStart(sess) {
-    const { data: moviesData } = await supabase
-      .from('movies')
-      .select('*')
-      .in('id', sess.movie_ids)
-    const sorted = sess.movie_ids.map((id) => moviesData?.find((m) => m.id === id)).filter(Boolean)
-    dispatch({ type: 'START_SESSION_GAME', movies: sorted, session: sess })
-  }
 
   // Chat: send and immediately show own message
   const sendChatMessage = useCallback(async (body) => {
@@ -307,7 +285,12 @@ export default function App() {
 
   // Called by SessionGameScreen when timer expires (host drives reveal)
   function onTimerExpired() {
-    if (isHost) triggerReveal(sessionId, playerId)
+    if (!isHost || triggerRevealRef.current) return
+    triggerRevealRef.current = true
+    setTimeout(async () => {
+      await supabase.rpc('show_session_reveal', { p_session_id: sessionId, p_player_id: playerId })
+      triggerRevealRef.current = false
+    }, 1500)
   }
 
   // URL param: join via link
