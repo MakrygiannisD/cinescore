@@ -22,7 +22,7 @@ const CATEGORIES = [
   },
 ]
 
-export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onStartChallenge, onShowLeaderboard, onSignIn, onSignOut }) {
+export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onStartMultiplayer, onShowLeaderboard, onSignIn, onSignOut }) {
   const [listIds, setListIds]   = useState({})
   const [counts,  setCounts]    = useState({})
   const [loading, setLoading]   = useState(true)
@@ -169,7 +169,7 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
         )}
       </div>
 
-      {/* Play Now + Challenge row */}
+      {/* Play Now + Multiplayer row */}
       <div className="flex gap-3">
         <button
           onClick={() => startGame('base')}
@@ -179,11 +179,11 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
           {starting === 'base' ? 'Loading…' : '▶ Play Now'}
         </button>
         <button
-          onClick={onStartChallenge}
+          onClick={onStartMultiplayer}
           disabled={!ready || !!starting}
           className="flex-1 py-4 bg-surface border border-white/[0.06] text-white font-bold rounded-2xl hover:border-accent/30 hover:bg-surface2 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          ⚔️ Challenge
+          👥 Multiplayer
         </button>
       </div>
 

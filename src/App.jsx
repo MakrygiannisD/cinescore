@@ -2,28 +2,36 @@ import { useReducer, useState, useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { supabase }              from './lib/supabase'
 import { scoreRound }            from './lib/scoring'
+import { getOrCreatePlayerId, getPlayerName, savePlayerName } from './lib/session'
 import { useAuth }               from './hooks/useAuth'
 import HomeScreen                from './screens/HomeScreen'
 import GameScreen                from './screens/GameScreen'
 import RevealScreen              from './screens/RevealScreen'
 import FinalScreen               from './screens/FinalScreen'
 import LeaderboardScreen         from './screens/LeaderboardScreen'
-import ChallengeResultScreen     from './screens/ChallengeResultScreen'
-import ChallengeLobbyScreen      from './screens/ChallengeLobbyScreen'
+import SessionLobbyScreen        from './screens/SessionLobbyScreen'
+import SessionGameScreen         from './screens/SessionGameScreen'
+import SessionRevealScreen       from './screens/SessionRevealScreen'
+import SessionResultsScreen      from './screens/SessionResultsScreen'
 import NameModal                 from './components/NameModal'
 
 const ROUNDS = 5
 
 const initialState = {
-  screen:        'home',
-  mode:          null,   // 'base' | 'daily' | 'challenge' | 'top-rated' | 'popular' | 'classics'
-  selectedList:  null,
-  movies:        [],
-  currentRound:  0,
-  guesses:       [],
-  scores:        [],
-  challengeId:   null,
-  isChallenger:  false,  // true = created the link, false = received it
+  screen:       'home',
+  mode:         null,   // 'base' | 'daily' | 'top-rated' | 'popular' | 'classics' | 'session'
+  selectedList: null,
+  movies:       [],
+  currentRound: 0,
+  guesses:      [],
+  scores:       [],
+  // Session-specific
+  sessionId:    null,
+  session:      null,   // full session row (status, current_round, round_deadline, etc.)
+  sessionPlayers: [],
+  isHost:       false,
+  myGuess:      null,   // guess for current session round (for reveal screen)
+  myScore:      null,
 }
 
 function reducer(state, action) {
@@ -32,11 +40,10 @@ function reducer(state, action) {
     case 'START_GAME':
       return {
         ...initialState,
-        screen:      'game',
-        mode:        action.mode,
+        screen:       'game',
+        mode:         action.mode,
         selectedList: action.list,
-        movies:      action.movies,
-        challengeId: action.challengeId ?? null,
+        movies:       action.movies,
       }
 
     case 'SUBMIT_GUESS': {
@@ -73,25 +80,62 @@ function reducer(state, action) {
     case 'SHOW_LEADERBOARD':
       return { ...initialState, screen: 'leaderboard' }
 
-    case 'SHOW_CHALLENGE_LOBBY':
+    // ── Session actions ───────────────────────────────────
+
+    case 'SHOW_SESSION_LOBBY':
       return {
         ...initialState,
-        screen:       'challenge-lobby',
-        mode:         'challenge',
-        movies:       action.movies,
-        challengeId:  action.challengeId,
-        isChallenger: action.isChallenger,
+        screen:         'session-lobby',
+        mode:           'session',
+        sessionId:      action.sessionId,
+        session:        action.session,
+        sessionPlayers: action.players || [],
+        isHost:         action.isHost,
       }
 
-    case 'START_CHALLENGE_GAME':
+    case 'SESSION_UPDATE':
       return {
         ...state,
-        screen:      'game',
-        selectedList: { id: null, slug: 'challenge', name: '1v1 Challenge' },
+        session: { ...state.session, ...action.session },
       }
 
-    case 'SHOW_CHALLENGE_RESULT':
-      return { ...state, screen: 'challenge-result' }
+    case 'SESSION_UPDATE_PLAYERS':
+      return { ...state, sessionPlayers: action.players }
+
+    case 'START_SESSION_GAME':
+      return {
+        ...state,
+        screen:  'session-game',
+        movies:  action.movies,
+        session: action.session,
+        myGuess: null,
+        myScore: null,
+      }
+
+    case 'SESSION_SHOW_REVEAL':
+      return {
+        ...state,
+        screen:  'session-reveal',
+        myGuess: action.myGuess,
+        myScore: action.myScore,
+        session: { ...state.session, status: 'reveal' },
+      }
+
+    case 'SESSION_NEXT_ROUND':
+      return {
+        ...state,
+        screen:  'session-game',
+        session: action.session,
+        myGuess: null,
+        myScore: null,
+      }
+
+    case 'SESSION_SHOW_RESULTS':
+      return {
+        ...state,
+        screen:  'session-results',
+        session: { ...state.session, status: 'results' },
+      }
 
     default:
       return state
@@ -99,52 +143,112 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [state, dispatch]           = useReducer(reducer, initialState)
-  const [showConfirm, setShowConfirm]     = useState(false)
-  const [dailyTotal, setDailyTotal]       = useState(null)
+  const [state, dispatch]             = useReducer(reducer, initialState)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [dailyTotal, setDailyTotal]   = useState(null)
   const [showNameModal, setShowNameModal] = useState(false)
-  const [playerName, setPlayerName]       = useState(() => localStorage.getItem('cinescore_name') ?? '')
+  const [pendingSession, setPendingSession] = useState(null) // {id} waiting for name
   const { user, profile, signInWithGoogle, signOut } = useAuth()
 
-  const { screen, mode, selectedList, movies, currentRound, guesses, scores, challengeId, isChallenger } = state
-  const runningScore = scores.reduce((sum, s) => sum + s.total, 0)
-  const finalTotal   = scores.reduce((sum, s) => sum + s.total, 0)
+  const playerId    = getOrCreatePlayerId()
+  const playerName  = getPlayerName()
 
-  // Handle incoming challenge links (?challenge=abc123)
+  const {
+    screen, mode, selectedList, movies, currentRound, guesses, scores,
+    sessionId, session, sessionPlayers, isHost, myGuess,
+  } = state
+
+  const runningScore = scores.reduce((sum, s) => sum + s.total, 0)
+
+  // Handle incoming session links (?session=abc123)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    const cid    = params.get('challenge')
-    if (!cid) return
-    // Clear the URL param without reload
+    const sid    = params.get('session')
+    if (!sid) return
     window.history.replaceState({}, '', window.location.pathname)
-    loadChallenge(cid)
+    joinSession(sid)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function loadChallenge(cid) {
-    const { data, error } = await supabase.rpc('get_challenge_movies', { p_id: cid })
-    if (error || !data || data.length < 5) return
-    dispatch({ type: 'SHOW_CHALLENGE_LOBBY', movies: data, challengeId: cid, isChallenger: false })
+  async function joinSession(sid, name = playerName) {
+    if (!name) {
+      // Need a name first
+      setPendingSession({ id: sid })
+      setShowNameModal(true)
+      return
+    }
+    const { data, error } = await supabase.rpc('join_session', {
+      p_session_id:   sid,
+      p_display_name: name,
+      p_player_id:    playerId,
+    })
+    if (error) { console.error(error.message); return }
+    const sess    = data.session
+    const players = data.players || []
+    dispatch({
+      type: 'SHOW_SESSION_LOBBY',
+      sessionId: sid,
+      session:   sess,
+      players,
+      isHost:    sess.host_player_id === playerId,
+    })
   }
 
-  async function handleStartChallenge() {
-    const { data: cid, error } = await supabase.rpc('create_challenge')
-    if (error || !cid) return
-    const { data: movieData } = await supabase.rpc('get_challenge_movies', { p_id: cid })
-    if (!movieData || movieData.length < 5) return
-    dispatch({ type: 'SHOW_CHALLENGE_LOBBY', movies: movieData, challengeId: cid, isChallenger: true })
+  async function handleCreateSession() {
+    const name = playerName
+    if (!name) {
+      setPendingSession({ create: true })
+      setShowNameModal(true)
+      return
+    }
+    const { data: sid, error } = await supabase.rpc('create_session', {
+      p_display_name:  name,
+      p_player_id:     playerId,
+      p_round_seconds: 30,
+    })
+    if (error || !sid) { console.error(error?.message); return }
+    const { data } = await supabase.rpc('join_session', {
+      p_session_id:   sid,
+      p_display_name: name,
+      p_player_id:    playerId,
+    })
+    dispatch({
+      type:      'SHOW_SESSION_LOBBY',
+      sessionId: sid,
+      session:   data.session,
+      players:   data.players || [],
+      isHost:    true,
+    })
+  }
+
+  // Called when Realtime says status='playing' (from lobby or results)
+  async function handleSessionStart(sess) {
+    const { data: moviesData } = await supabase
+      .from('movies')
+      .select('*')
+      .in('id', sess.movie_ids)
+      .order('id')   // we'll re-sort below
+
+    // Sort to match movie_ids order
+    const sorted = sess.movie_ids.map((id) => moviesData?.find((m) => m.id === id)).filter(Boolean)
+
+    dispatch({ type: 'START_SESSION_GAME', movies: sorted, session: sess })
+  }
+
+  // Called when reveal Realtime gets next session update
+  function handleSessionUpdate(sess) {
+    if (sess.status === 'playing') {
+      dispatch({ type: 'SESSION_NEXT_ROUND', session: sess })
+    } else if (sess.status === 'results') {
+      dispatch({ type: 'SESSION_SHOW_RESULTS' })
+    } else {
+      dispatch({ type: 'SESSION_UPDATE', session: sess })
+    }
   }
 
   async function handleStartDaily() {
     const { data, error } = await supabase.rpc('get_daily_movies')
-    if (error) { console.error('Daily quiz error:', error.message); return }
-    if (!data || data.length < 5) { console.error('Not enough daily movies:', data?.length); return }
+    if (error || !data || data.length < 5) return
     dispatch({ type: 'START_GAME', mode: 'daily', list: { id: null, slug: 'daily', name: 'Daily Quiz' }, movies: data })
-  }
-
-  async function handleRematch(newChallengeId, isChallenger) {
-    const { data: movieData } = await supabase.rpc('get_challenge_movies', { p_id: newChallengeId })
-    if (!movieData || movieData.length < 5) return
-    dispatch({ type: 'SHOW_CHALLENGE_LOBBY', movies: movieData, challengeId: newChallengeId, isChallenger })
   }
 
   async function handlePlayAgain() {
@@ -155,8 +259,6 @@ export default function App() {
       ;({ data } = await supabase.rpc('get_base_game_movies'))
     } else if (mode === 'classics') {
       ;({ data } = await supabase.rpc('get_classics_movies', { p_count: ROUNDS }))
-    } else if (mode === 'challenge') {
-      await handleStartChallenge(); return
     } else {
       ;({ data } = await supabase.rpc('get_random_movies', { p_list_id: selectedList.id, p_count: ROUNDS }))
     }
@@ -166,42 +268,20 @@ export default function App() {
   async function submitDailyScore(total, scoreBreakdown) {
     if (!user) return
     const today = new Date().toISOString().slice(0, 10)
-    await supabase.from('daily_scores').upsert({
-      user_id: user.id,
-      date:    today,
-      scores:  scoreBreakdown,
-      total,
-    }, { onConflict: 'user_id,date' })
+    await supabase.from('daily_scores').upsert(
+      { user_id: user.id, date: today, scores: scoreBreakdown, total },
+      { onConflict: 'user_id,date' }
+    )
     setDailyTotal(total)
   }
 
-  async function submitChallengeScore(name, total, scoreBreakdown) {
-    localStorage.setItem('cinescore_name', name)
-    setPlayerName(name)
-    await supabase.from('challenge_scores').insert({
-      challenge_id: challengeId,
-      display_name: name,
-      scores:       scoreBreakdown,
-      total,
-    })
-    dispatch({ type: 'SHOW_CHALLENGE_RESULT' })
-  }
-
-  // When challenge game ends, ask for name if needed
-  function handleChallengeFinish(total, scoreBreakdown) {
-    if (playerName) {
-      submitChallengeScore(playerName, total, scoreBreakdown)
-    } else {
-      setShowNameModal(true)
-    }
-  }
-
-  const inGame = screen !== 'home' && screen !== 'leaderboard' && screen !== 'challenge-result' && screen !== 'challenge-lobby'
+  const inSessionScreen = screen.startsWith('session-')
+  const inGame = !['home', 'leaderboard'].includes(screen) && !inSessionScreen
 
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center justify-center p-4">
 
-      {/* Back button */}
+      {/* Back button (solo game only) */}
       {inGame && (
         <button
           onClick={() => setShowConfirm(true)}
@@ -220,10 +300,16 @@ export default function App() {
               <div className="text-muted text-sm">Your progress will be lost.</div>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => setShowConfirm(false)} className="flex-1 py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all active:scale-95">
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="flex-1 py-3 bg-transparent border border-border text-muted font-semibold rounded-xl hover:bg-surface2 hover:text-white transition-all"
+              >
                 Keep playing
               </button>
-              <button onClick={() => { setShowConfirm(false); dispatch({ type: 'CHANGE_LIST' }) }} className="flex-1 py-3 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all">
+              <button
+                onClick={() => { setShowConfirm(false); dispatch({ type: 'CHANGE_LIST' }) }}
+                className="flex-1 py-3 bg-accent text-white font-bold rounded-xl hover:opacity-90 transition-all"
+              >
                 Quit
               </button>
             </div>
@@ -231,13 +317,20 @@ export default function App() {
         </div>
       )}
 
-      {/* Name modal for challenge */}
+      {/* Name modal — for session join/create */}
       {showNameModal && (
         <NameModal
           title="What's your name?"
-          onConfirm={name => {
+          placeholder="Enter your name"
+          onConfirm={(name) => {
             setShowNameModal(false)
-            submitChallengeScore(name, finalTotal, scores)
+            savePlayerName(name)
+            if (pendingSession?.create) {
+              handleCreateSession()
+            } else if (pendingSession?.id) {
+              joinSession(pendingSession.id, name)
+            }
+            setPendingSession(null)
           }}
         />
       )}
@@ -248,23 +341,14 @@ export default function App() {
           <HomeScreen
             user={user}
             profile={profile}
-            onStartGame={(list, movies) =>
-              dispatch({ type: 'START_GAME', mode: list.slug, list, movies })
+            onStartGame={(list, movs) =>
+              dispatch({ type: 'START_GAME', mode: list.slug, list, movies: movs })
             }
             onStartDaily={handleStartDaily}
-            onStartChallenge={handleStartChallenge}
+            onStartMultiplayer={handleCreateSession}
             onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
             onSignIn={signInWithGoogle}
             onSignOut={signOut}
-          />
-        )}
-
-        {screen === 'challenge-lobby' && (
-          <ChallengeLobbyScreen
-            challengeId={challengeId}
-            isChallenger={isChallenger}
-            onStart={() => dispatch({ type: 'START_CHALLENGE_GAME' })}
-            onHome={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}
 
@@ -273,17 +357,6 @@ export default function App() {
             user={user}
             userTotal={dailyTotal}
             onClose={() => dispatch({ type: 'CHANGE_LIST' })}
-          />
-        )}
-
-        {screen === 'challenge-result' && (
-          <ChallengeResultScreen
-            challengeId={challengeId}
-            myName={playerName}
-            myTotal={finalTotal}
-            movies={movies}
-            onRematch={handleRematch}
-            onHome={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}
 
@@ -316,13 +389,70 @@ export default function App() {
             scores={scores}
             listName={selectedList?.name}
             isDaily={mode === 'daily'}
-            isChallenge={mode === 'challenge'}
+            isChallenge={false}
             user={user}
             onDailyComplete={submitDailyScore}
-            onChallengeComplete={handleChallengeFinish}
+            onChallengeComplete={() => {}}
             onPlayAgain={handlePlayAgain}
             onChangeList={() => dispatch({ type: 'CHANGE_LIST' })}
             onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
+          />
+        )}
+
+        {/* ── Session screens ─────────────────────────────── */}
+
+        {screen === 'session-lobby' && (
+          <SessionLobbyScreen
+            sessionId={sessionId}
+            playerId={playerId}
+            displayName={playerName}
+            isHost={isHost}
+            hostPlayerId={session?.host_player_id}
+            initialPlayers={sessionPlayers}
+            onStartGame={handleSessionStart}
+            onHome={() => dispatch({ type: 'CHANGE_LIST' })}
+          />
+        )}
+
+        {screen === 'session-game' && (
+          <SessionGameScreen
+            session={session}
+            movies={movies}
+            players={sessionPlayers}
+            playerId={playerId}
+            displayName={playerName}
+            isHost={isHost}
+            onReveal={({ score, myGuess: guess }) =>
+              dispatch({ type: 'SESSION_SHOW_REVEAL', myGuess: guess, myScore: score })
+            }
+            onGuessInsert={() => {}}
+          />
+        )}
+
+        {screen === 'session-reveal' && (
+          <SessionRevealScreen
+            session={session}
+            movies={movies}
+            players={sessionPlayers}
+            playerId={playerId}
+            displayName={playerName}
+            isHost={isHost}
+            myGuess={myGuess}
+            onSessionUpdate={handleSessionUpdate}
+          />
+        )}
+
+        {screen === 'session-results' && (
+          <SessionResultsScreen
+            session={session}
+            movies={movies}
+            players={sessionPlayers}
+            playerId={playerId}
+            displayName={playerName}
+            isHost={isHost}
+            onNewGame={handleSessionStart}
+            onHome={() => dispatch({ type: 'CHANGE_LIST' })}
+            onSessionUpdate={handleSessionUpdate}
           />
         )}
 
