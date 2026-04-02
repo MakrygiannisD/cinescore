@@ -23,19 +23,14 @@ export default function SessionLobbyScreen({
   const shareUrl  = `${window.location.origin}?session=${sessionId}`
   const shareCode = sessionId.toUpperCase()
 
-  // Realtime: keep player list live
+  // Realtime: keep player list and session state live
   useSession({
     sessionId,
     playerId,
     displayName,
-    onPlayersUpdate: (data) => {
-      // data is either a Set of online IDs (from Presence) or a full array (from DB refetch)
-      if (Array.isArray(data)) setPlayers(data)
-    },
+    onPlayersUpdate: (data) => setPlayers(data),
     onSessionUpdate: (sess) => {
-      if (sess.status === 'playing') {
-        onStartGame(sess)
-      }
+      if (sess.status === 'playing') onStartGame(sess)
     },
   })
 
