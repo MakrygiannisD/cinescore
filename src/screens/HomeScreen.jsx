@@ -22,13 +22,16 @@ const CATEGORIES = [
   },
 ]
 
-export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onStartMultiplayer, onShowLeaderboard, onSignIn, onSignOut }) {
+export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onStartMultiplayer, onJoinSession, onShowLeaderboard, onSignIn, onSignOut }) {
   const [listIds, setListIds]   = useState({})
   const [counts,  setCounts]    = useState({})
   const [loading, setLoading]   = useState(true)
   const [starting, setStarting] = useState(null)
   const [playedToday, setPlayedToday] = useState(false)
   const [error, setError]       = useState(null)
+  const [joinCode, setJoinCode] = useState('')
+  const [joining, setJoining]   = useState(false)
+  const [joinError, setJoinError] = useState(null)
 
   useEffect(() => {
     supabase
@@ -94,6 +97,23 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
     } finally {
       setStarting(null)
     }
+  }
+
+  async function handleJoin() {
+    const code = joinCode.trim().toLowerCase()
+    if (code.length !== 6) { setJoinError('Enter the 6-character code'); return }
+    setJoining(true)
+    setJoinError(null)
+    try {
+      await onJoinSession(code)
+    } catch (e) {
+      setJoinError(e.message || 'Session not found')
+      setJoining(false)
+    }
+  }
+
+  function onJoinKey(e) {
+    if (e.key === 'Enter') handleJoin()
   }
 
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
@@ -185,6 +205,38 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
         >
           👥 Multiplayer
         </button>
+      </div>
+
+      {/* Join with code */}
+      <div className="bg-surface border border-white/[0.05] rounded-2xl p-4 flex flex-col gap-3">
+        <p className="text-white/50 text-xs uppercase tracking-widest">Join a Session</p>
+        <div className="flex gap-2">
+          <input
+            value={joinCode}
+            onChange={(e) => {
+              setJoinCode(e.target.value.slice(0, 6))
+              setJoinError(null)
+            }}
+            onKeyDown={onJoinKey}
+            placeholder="Enter 6-char code"
+            maxLength={6}
+            className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white
+              placeholder-muted uppercase tracking-widest font-mono outline-none
+              focus:border-accent/40 focus:bg-white/8 transition-colors"
+          />
+          <button
+            onClick={handleJoin}
+            disabled={joinCode.trim().length !== 6 || joining}
+            className="px-5 py-2.5 rounded-xl bg-accent text-white text-sm font-bold
+              shadow-[0_4px_16px_rgba(99,102,241,0.3)]
+              hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          >
+            {joining ? '…' : 'Join'}
+          </button>
+        </div>
+        {joinError && (
+          <p className="text-red-400 text-xs">{joinError}</p>
+        )}
       </div>
 
       {/* Divider */}

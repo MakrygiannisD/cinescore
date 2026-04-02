@@ -181,7 +181,7 @@ export default function App() {
       p_display_name: name,
       p_player_id:    playerId,
     })
-    if (error) { console.error(error.message); return }
+    if (error) throw new Error(error.message)
     const sess    = data.session
     const players = data.players || []
     dispatch({
@@ -346,6 +346,7 @@ export default function App() {
             }
             onStartDaily={handleStartDaily}
             onStartMultiplayer={handleCreateSession}
+            onJoinSession={joinSession}
             onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
             onSignIn={signInWithGoogle}
             onSignOut={signOut}
