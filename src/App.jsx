@@ -172,13 +172,21 @@ export default function App() {
       (payload) => dispatch({ type: 'SESSION_UPDATE', session: payload.new })
     )
 
-    // session_players — refetch full list on any change
+    // session_players — refetch full list on any change; detect kick
     channel.on(
       'postgres_changes',
       { event: '*', schema: 'public', table: 'session_players', filter: `session_id=eq.${sessionId}` },
       () => supabase
         .from('session_players').select('*').eq('session_id', sessionId).order('joined_at')
-        .then(({ data }) => { if (data) dispatch({ type: 'SESSION_UPDATE_PLAYERS', players: data }) })
+        .then(({ data }) => {
+          if (!data) return
+          // If current player is no longer in the list, they were kicked
+          if (!data.find((p) => p.player_id === playerId)) {
+            dispatch({ type: 'CHANGE_LIST' })
+            return
+          }
+          dispatch({ type: 'SESSION_UPDATE_PLAYERS', players: data })
+        })
     )
 
     // session_guesses INSERT — update submitted count
@@ -288,6 +296,14 @@ export default function App() {
       p_body:         body,
     })
   }, [sessionId, playerId, playerName])
+
+  async function handleKickPlayer(targetPlayerId) {
+    await supabase
+      .from('session_players')
+      .delete()
+      .eq('session_id', sessionId)
+      .eq('player_id', targetPlayerId)
+  }
 
   // Called by SessionGameScreen when player submits a guess
   function onGuessSubmitted(guess, score) {
@@ -515,6 +531,7 @@ export default function App() {
             players={sessionPlayers}
             chatMessages={chatMessages}
             sendChatMessage={sendChatMessage}
+            onKick={handleKickPlayer}
             onHome={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}
@@ -561,6 +578,7 @@ export default function App() {
             isHost={isHost}
             chatMessages={chatMessages}
             sendChatMessage={sendChatMessage}
+            onKick={handleKickPlayer}
             onHome={() => dispatch({ type: 'CHANGE_LIST' })}
           />
         )}

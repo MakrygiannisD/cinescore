@@ -1,4 +1,4 @@
-export default function PlayerList({ players, hostPlayerId, myPlayerId, showReady = false }) {
+export default function PlayerList({ players, hostPlayerId, myPlayerId, showReady = false, onKick }) {
   return (
     <ul className="space-y-2">
       {players.map((p) => {
@@ -34,6 +34,17 @@ export default function PlayerList({ players, hostPlayerId, myPlayerId, showRead
               }`}>
                 {p.is_ready ? 'Ready' : 'Waiting'}
               </span>
+            )}
+
+            {/* Kick button — host only, not for self or other host */}
+            {onKick && !isMe && !isHost && (
+              <button
+                onClick={() => onKick(p.player_id)}
+                className="w-5 h-5 flex items-center justify-center rounded-full text-white/20 hover:text-red-400 hover:bg-red-500/10 transition-all text-xs leading-none"
+                title={`Kick ${p.display_name}`}
+              >
+                ✕
+              </button>
             )}
           </li>
         )

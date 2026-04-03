@@ -13,6 +13,7 @@ export default function SessionResultsScreen({
   isHost,
   chatMessages,
   sendChatMessage,
+  onKick,
   onHome,
 }) {
   const [guesses, setGuesses]   = useState([])
@@ -173,20 +174,33 @@ export default function SessionResultsScreen({
         <div className="bg-surface border border-white/[0.05] rounded-2xl p-5">
           <p className="text-white/60 text-xs uppercase tracking-widest mb-3">Play Again?</p>
           <div className="flex gap-2 mb-4 flex-wrap">
-            {players.map((p) => (
-              <div key={p.player_id} className="flex flex-col items-center gap-1">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border ${
-                  p.is_ready
-                    ? 'bg-green-500/20 border-green-500/40 text-green-400'
-                    : 'bg-white/5 border-white/10 text-muted'
-                }`}>
-                  {p.is_ready ? '✓' : '?'}
+            {players.map((p) => {
+              const isMe = p.player_id === playerId
+              const canKick = isHost && onKick && !isMe && p.player_id !== session.host_player_id
+              return (
+                <div key={p.player_id} className="flex flex-col items-center gap-1 relative">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border ${
+                    p.is_ready
+                      ? 'bg-green-500/20 border-green-500/40 text-green-400'
+                      : 'bg-white/5 border-white/10 text-muted'
+                  }`}>
+                    {p.is_ready ? '✓' : '?'}
+                  </div>
+                  <span className="text-xs text-muted truncate max-w-[56px] text-center">
+                    {p.display_name.split(' ')[0]}
+                  </span>
+                  {canKick && (
+                    <button
+                      onClick={() => onKick(p.player_id)}
+                      className="absolute -top-1 -right-1 w-4 h-4 flex items-center justify-center rounded-full bg-surface border border-white/10 text-white/20 hover:text-red-400 hover:border-red-500/30 transition-all text-[9px] leading-none"
+                      title={`Kick ${p.display_name}`}
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
-                <span className="text-xs text-muted truncate max-w-[56px] text-center">
-                  {p.display_name.split(' ')[0]}
-                </span>
-              </div>
-            ))}
+              )
+            })}
           </div>
           <button
             onClick={handleReady}

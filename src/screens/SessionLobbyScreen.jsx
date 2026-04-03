@@ -14,6 +14,7 @@ export default function SessionLobbyScreen({
   players,
   chatMessages,
   sendChatMessage,
+  onKick,
   onHome,
 }) {
   const [copied, setCopied]             = useState(false)
@@ -84,7 +85,7 @@ export default function SessionLobbyScreen({
             <p className="text-white/60 text-xs uppercase tracking-widest">Players</p>
             <span className="text-xs text-muted">{players.length}/8</span>
           </div>
-          <PlayerList players={players} hostPlayerId={hostPlayerId} myPlayerId={playerId} />
+          <PlayerList players={players} hostPlayerId={hostPlayerId} myPlayerId={playerId} onKick={isHost ? onKick : undefined} />
           {players.length < 2 && (
             <p className="text-center text-muted text-xs mt-4">Waiting for at least one more player…</p>
           )}
