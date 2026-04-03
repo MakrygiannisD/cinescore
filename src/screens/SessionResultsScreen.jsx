@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
 import ChatPanel from '../components/ChatPanel'
+import MovieDetailModal from '../components/MovieDetailModal'
 import { getGrade, gradeColor } from '../lib/scoring'
 
 export default function SessionResultsScreen({
@@ -15,11 +16,12 @@ export default function SessionResultsScreen({
   onKick,
   onHome,
 }) {
-  const [guesses, setGuesses]   = useState([])
-  const [isReady, setIsReady]   = useState(false)
-  const [allReady, setAllReady] = useState(false)
-  const [starting, setStarting] = useState(false)
-  const [shared, setShared]     = useState(false)
+  const [guesses, setGuesses]       = useState([])
+  const [isReady, setIsReady]       = useState(false)
+  const [allReady, setAllReady]     = useState(false)
+  const [starting, setStarting]     = useState(false)
+  const [shared, setShared]         = useState(false)
+  const [selectedMovie, setSelectedMovie] = useState(null)
 
   useEffect(() => {
     supabase
@@ -140,6 +142,7 @@ export default function SessionResultsScreen({
 
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center p-4 pt-8 animate-fadeUp">
+      {selectedMovie && <MovieDetailModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />}
       <div className="w-full max-w-md space-y-4">
 
         {/* My score */}
@@ -225,7 +228,12 @@ export default function SessionResultsScreen({
               <div key={r} className="border-b border-white/[0.03] last:border-0">
                 <div className="flex items-center justify-between px-4 py-3">
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-white truncate">{movie.title}</div>
+                    <button
+                      onClick={() => setSelectedMovie(movie)}
+                      className="text-sm font-semibold text-white text-left hover:text-accent transition-colors underline-offset-2 hover:underline truncate max-w-full"
+                    >
+                      {movie.title}
+                    </button>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-xs text-muted">{movie.year}</span>
                       {roundGuesses.some((g) => g.score === 100) && (

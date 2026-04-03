@@ -1,11 +1,13 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getGrade, gradeColor } from '../lib/scoring'
+import MovieDetailModal from '../components/MovieDetailModal'
 
 export default function FinalScreen({ movies, scores, listName, isDaily, isChallenge, user, onDailyComplete, onChallengeComplete, onPlayAgain, onChangeList, onShowLeaderboard }) {
   const total            = scores.reduce((sum, s) => sum + s.total, 0)
   const { label, sub }   = getGrade(total)
   const color            = gradeColor(total)
   const submittedRef     = useRef(false)
+  const [selectedMovie, setSelectedMovie] = useState(null)
 
   useEffect(() => {
     if (submittedRef.current) return
@@ -16,6 +18,7 @@ export default function FinalScreen({ movies, scores, listName, isDaily, isChall
 
   return (
     <div className="flex flex-col gap-4 animate-fadeUp">
+      {selectedMovie && <MovieDetailModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />}
 
       {isDaily && (
         <div className="text-center text-xs text-accent font-bold uppercase tracking-widest">
@@ -53,16 +56,19 @@ export default function FinalScreen({ movies, scores, listName, isDaily, isChall
             className="bg-surface border border-white/[0.05] rounded-xl px-4 py-3 flex justify-between items-center animate-fadeUp"
             style={{ animationDelay: `${i * 0.07}s` }}
           >
-            <div>
-              <div className="font-semibold text-sm">
-                {movie.title}{' '}
-                <span className="text-muted font-normal text-xs">({movie.year})</span>
-              </div>
+            <div className="flex-1 min-w-0">
+              <button
+                onClick={() => setSelectedMovie(movie)}
+                className="font-semibold text-sm text-left hover:text-accent transition-colors underline-offset-2 hover:underline"
+              >
+                {movie.title}
+              </button>
+              <span className="text-muted font-normal text-xs ml-1.5">({movie.year})</span>
               <div className="text-muted text-xs mt-0.5">
                 IMDb <strong className="text-white/60">{Number(movie.imdb_rating).toFixed(1)}</strong>
               </div>
             </div>
-            <div className="text-right">
+            <div className="text-right ml-3 shrink-0">
               <span className="font-black text-lg">{scores[i].total}</span>
               <span className="text-muted/50 text-xs">/100</span>
             </div>
