@@ -20,7 +20,6 @@ export default function SessionResultsScreen({
   const [isReady, setIsReady]       = useState(false)
   const [allReady, setAllReady]     = useState(false)
   const [starting, setStarting]     = useState(false)
-  const [shared, setShared]         = useState(false)
   const [selectedMovie, setSelectedMovie] = useState(null)
 
   useEffect(() => {
@@ -119,28 +118,7 @@ export default function SessionResultsScreen({
     })
   }
 
-  function handleShare() {
-    const myRoundScores = Array.from({ length: 5 }, (_, r) => {
-      const g = guesses.find(x => x.player_id === playerId && x.round === r)
-      return g ? g.score + (g.streak_bonus || 0) : '–'
-    })
-    const text = [
-      `🎬 CineScore — Game #${session.game_number}`,
-      `${displayName}: ${myTotal}/500 (${grade.label})`,
-      `Rounds: ${myRoundScores.join(' | ')}`,
-      `cinescore-one.vercel.app`,
-    ].join('\n')
-
-    if (navigator.share) {
-      navigator.share({ text }).catch(() => {})
-    } else {
-      navigator.clipboard.writeText(text)
-      setShared(true)
-      setTimeout(() => setShared(false), 2000)
-    }
-  }
-
-  return (
+return (
     <div className="min-h-screen bg-bg flex flex-col items-center p-4 pt-8 animate-fadeUp">
       {selectedMovie && <MovieDetailModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />}
       <div className="w-full max-w-md space-y-4">
@@ -153,18 +131,6 @@ export default function SessionResultsScreen({
           <div className="text-white/60 text-sm">{grade.label}</div>
           <div className="text-muted text-xs mt-0.5">{grade.sub}</div>
         </div>
-
-        {/* Share card */}
-        <button
-          onClick={handleShare}
-          className={`w-full py-3 rounded-2xl text-sm font-semibold border transition-all ${
-            shared
-              ? 'bg-green-500/15 text-green-400 border-green-500/25'
-              : 'bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white'
-          }`}
-        >
-          {shared ? '✓ Copied to clipboard!' : '↗ Share Result'}
-        </button>
 
         {/* Leaderboard */}
         <div className="bg-surface border border-white/[0.05] rounded-2xl overflow-hidden">
