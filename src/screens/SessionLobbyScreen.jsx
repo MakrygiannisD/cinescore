@@ -30,7 +30,7 @@ export default function SessionLobbyScreen({
   }, [roundSeconds, isHost, sessionId])
 
   function copyLink() {
-    navigator.clipboard.writeText(shareUrl)
+    navigator.clipboard.writeText(shareCode)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
