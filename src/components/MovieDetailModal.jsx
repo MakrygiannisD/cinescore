@@ -195,17 +195,29 @@ export default function MovieDetailModal({ movie, onClose }) {
             <MetaRow label="Released" value={movie.released} />
           )}
 
-          {/* IMDb link */}
-          {imdbUrl && (
-            <a
-              href={imdbUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#f5c518]/10 border border-[#f5c518]/20 text-[#f5c518] text-sm font-semibold hover:bg-[#f5c518]/15 transition-all"
-            >
-              ↗ View on IMDb
-            </a>
-          )}
+          {/* External links */}
+          <div className="flex gap-2">
+            {imdbUrl && (
+              <a
+                href={imdbUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#f5c518]/10 border border-[#f5c518]/20 text-[#f5c518] text-sm font-semibold hover:bg-[#f5c518]/15 transition-all"
+              >
+                ↗ IMDb
+              </a>
+            )}
+            {movie.imdb_id && (
+              <a
+                href={`https://web.stremio.com/#/detail/movie/${movie.imdb_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#7b5ea7]/15 border border-[#7b5ea7]/30 text-[#b08fe8] text-sm font-semibold hover:bg-[#7b5ea7]/25 transition-all"
+              >
+                ↗ Stremio
+              </a>
+            )}
+          </div>
 
           {/* Bottom spacer for mobile swipe area */}
           <div className="h-2" />
