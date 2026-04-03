@@ -14,6 +14,7 @@ export default function SessionRevealScreen({
   myGuess,
   chatMessages,
   sendChatMessage,
+  onAdvanceRound,
 }) {
   const [guesses, setGuesses]     = useState([])
   const [countdown, setCountdown] = useState(AUTO_ADVANCE_SECS)
@@ -49,10 +50,7 @@ export default function SessionRevealScreen({
         clearInterval(id)
         if (isHost && !advancedRef.current) {
           advancedRef.current = true
-          supabase.rpc('advance_session_round', {
-            p_session_id: session.id,
-            p_player_id:  playerId,
-          })
+          onAdvanceRound()
         }
       }
     }, 1000)

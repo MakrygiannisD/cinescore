@@ -236,6 +236,18 @@ export default function App() {
     }
   }, [session?.status, session?.current_round, session?.game_number]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── Polling fallback — catches Realtime misses on reveal screen ──
+  // Non-host clients poll the DB every 2s while on reveal screen.
+  // If status changed but Realtime didn't fire, the transition effect above will run.
+  useEffect(() => {
+    if (screen !== 'session-reveal' || !sessionId) return
+    const id = setInterval(async () => {
+      const { data } = await supabase.from('sessions').select('*').eq('id', sessionId).single()
+      if (data) dispatch({ type: 'SESSION_UPDATE', session: data })
+    }, 2000)
+    return () => clearInterval(id)
+  }, [screen, sessionId]) // eslint-disable-line react-hooks/exhaustive-deps
+
   // ── Host: trigger reveal when all players submitted ──
   const triggerRevealRef = useRef(false)
   useEffect(() => {
@@ -288,9 +300,25 @@ export default function App() {
     if (!isHost || triggerRevealRef.current) return
     triggerRevealRef.current = true
     setTimeout(async () => {
-      await supabase.rpc('show_session_reveal', { p_session_id: sessionId, p_player_id: playerId })
+      const { error } = await supabase.rpc('show_session_reveal', { p_session_id: sessionId, p_player_id: playerId })
+      if (error) console.error('show_session_reveal failed:', error)
       triggerRevealRef.current = false
+      // Force-sync in case Realtime is slow
+      const { data } = await supabase.from('sessions').select('*').eq('id', sessionId).single()
+      if (data) dispatch({ type: 'SESSION_UPDATE', session: data })
     }, 1500)
+  }
+
+  // Called by SessionRevealScreen host countdown — advances round or ends game
+  async function handleAdvanceRound() {
+    const { error } = await supabase.rpc('advance_session_round', {
+      p_session_id: sessionId,
+      p_player_id:  playerId,
+    })
+    if (error) { console.error('advance_session_round failed:', error); return }
+    // Force-sync so transition happens even if Realtime is delayed
+    const { data } = await supabase.from('sessions').select('*').eq('id', sessionId).single()
+    if (data) dispatch({ type: 'SESSION_UPDATE', session: data })
   }
 
   // URL param: join via link
@@ -500,6 +528,7 @@ export default function App() {
             myGuess={myGuess}
             chatMessages={chatMessages}
             sendChatMessage={sendChatMessage}
+            onAdvanceRound={handleAdvanceRound}
           />
         )}
 
