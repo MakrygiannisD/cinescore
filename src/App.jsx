@@ -13,6 +13,7 @@ import SessionLobbyScreen        from './screens/SessionLobbyScreen'
 import SessionGameScreen         from './screens/SessionGameScreen'
 import SessionRevealScreen       from './screens/SessionRevealScreen'
 import SessionResultsScreen      from './screens/SessionResultsScreen'
+import PlayerStatsScreen         from './screens/PlayerStatsScreen'
 import NameModal                 from './components/NameModal'
 
 const ROUNDS = 5
@@ -61,6 +62,9 @@ function reducer(state, action) {
 
     case 'SHOW_LEADERBOARD':
       return { ...initialState, screen: 'leaderboard' }
+
+    case 'SHOW_STATS':
+      return { ...initialState, screen: 'stats' }
 
     case 'SHOW_SESSION_LOBBY':
       return {
@@ -130,6 +134,7 @@ export default function App() {
   const [showNameModal, setShowNameModal]   = useState(false)
   const [pendingSession, setPendingSession] = useState(null)
   const [chatMessages, setChatMessages]     = useState([])
+  const [reactions, setReactions]           = useState([])
   const { user, profile, signInWithGoogle, signOut } = useAuth()
 
   const playerId   = getOrCreatePlayerId()
@@ -199,6 +204,13 @@ export default function App() {
     // Broadcast: chat
     channel.on('broadcast', { event: 'chat' }, ({ payload }) => {
       setChatMessages((prev) => [...prev, payload])
+    })
+
+    // Broadcast: reactions
+    channel.on('broadcast', { event: 'reaction' }, ({ payload }) => {
+      const uid = Math.random().toString(36).slice(2)
+      setReactions((prev) => [...prev, { ...payload, uid }])
+      setTimeout(() => setReactions((prev) => prev.filter((r) => r.uid !== uid)), 2600)
     })
 
     channel.subscribe()
@@ -304,6 +316,15 @@ export default function App() {
       .eq('session_id', sessionId)
       .eq('player_id', targetPlayerId)
   }
+
+  const sendReaction = useCallback((emoji) => {
+    const payload = { emoji, x: 20 + Math.random() * 60 }
+    // Show locally too (broadcast doesn't echo to sender)
+    const uid = Math.random().toString(36).slice(2)
+    setReactions((prev) => [...prev, { ...payload, uid }])
+    setTimeout(() => setReactions((prev) => prev.filter((r) => r.uid !== uid)), 2600)
+    channelRef.current?.send({ type: 'broadcast', event: 'reaction', payload })
+  }, [])
 
   // Called by SessionGameScreen when player submits a guess
   function onGuessSubmitted(guess, score) {
@@ -478,6 +499,7 @@ export default function App() {
             onStartMultiplayer={handleCreateSession}
             onJoinSession={joinSession}
             onShowLeaderboard={() => dispatch({ type: 'SHOW_LEADERBOARD' })}
+            onShowStats={() => dispatch({ type: 'SHOW_STATS' })}
             onSignIn={signInWithGoogle}
             onSignOut={signOut}
           />
@@ -485,6 +507,10 @@ export default function App() {
 
         {screen === 'leaderboard' && (
           <LeaderboardScreen user={user} userTotal={dailyTotal} onClose={() => dispatch({ type: 'CHANGE_LIST' })} />
+        )}
+
+        {screen === 'stats' && (
+          <PlayerStatsScreen onClose={() => dispatch({ type: 'CHANGE_LIST' })} />
         )}
 
         {screen === 'game' && (
@@ -524,6 +550,7 @@ export default function App() {
         {screen === 'session-lobby' && (
           <SessionLobbyScreen
             sessionId={sessionId}
+            session={session}
             playerId={playerId}
             displayName={playerName}
             isHost={isHost}
@@ -565,6 +592,8 @@ export default function App() {
             chatMessages={chatMessages}
             sendChatMessage={sendChatMessage}
             onAdvanceRound={handleAdvanceRound}
+            reactions={reactions}
+            sendReaction={sendReaction}
           />
         )}
 

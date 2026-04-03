@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
-import PlayerList from '../components/PlayerList'
 import ChatPanel from '../components/ChatPanel'
 import { getGrade, gradeColor } from '../lib/scoring'
 
@@ -20,6 +19,7 @@ export default function SessionResultsScreen({
   const [isReady, setIsReady]   = useState(false)
   const [allReady, setAllReady] = useState(false)
   const [starting, setStarting] = useState(false)
+  const [shared, setShared]     = useState(false)
 
   useEffect(() => {
     supabase
@@ -30,15 +30,16 @@ export default function SessionResultsScreen({
       .then(({ data }) => { if (data) setGuesses(data) })
   }, [session.id, session.game_number])
 
-  // Watch ready state from players prop (kept live by App-level Realtime)
   useEffect(() => {
     if (players.length === 0) return
     setAllReady(players.every((p) => p.is_ready))
   }, [players])
 
-  // Build per-player totals for this game
+  // Per-player totals (base + streak bonus)
   const totals = {}
-  guesses.forEach((g) => { totals[g.player_id] = (totals[g.player_id] ?? 0) + g.score })
+  guesses.forEach((g) => {
+    totals[g.player_id] = (totals[g.player_id] ?? 0) + g.score + (g.streak_bonus || 0)
+  })
 
   const ranked = [...players]
     .map((p) => ({ ...p, total: totals[p.player_id] ?? 0 }))
@@ -47,6 +48,56 @@ export default function SessionResultsScreen({
   const myTotal = totals[playerId] ?? 0
   const grade   = getGrade(myTotal, 500)
   const color   = gradeColor(myTotal, 500)
+
+  // MVP badges
+  const mvpBadges = useMemo(() => {
+    if (!guesses.length || !movies.length || players.length < 2) return {}
+    const badges = {}
+
+    function add(pid, badge) {
+      badges[pid] = [...(badges[pid] || []), badge]
+    }
+
+    // Champion
+    if (ranked[0]) add(ranked[0].player_id, { icon: '👑', label: 'Champion' })
+
+    // Sharpest Eye — lowest total error
+    const errors = {}
+    players.forEach(p => {
+      errors[p.player_id] = Array.from({ length: 5 }, (_, r) => {
+        const g = guesses.find(x => x.player_id === p.player_id && x.round === r)
+        const m = movies[r]
+        if (!g || !m) return 0
+        return Math.abs(Math.round(g.imdb_guess * 10) / 10 - Math.round(Number(m.imdb_rating) * 10) / 10)
+      }).reduce((s, e) => s + e, 0)
+    })
+    const sharpest = players.reduce((best, p) =>
+      (errors[p.player_id] ?? 99) < (errors[best?.player_id] ?? 99) ? p : best, null)
+    if (sharpest && sharpest.player_id !== ranked[0]?.player_id) {
+      add(sharpest.player_id, { icon: '🎯', label: 'Sharpest Eye' })
+    }
+
+    // On Fire — highest total streak bonus
+    const streaks = {}
+    players.forEach(p => {
+      streaks[p.player_id] = guesses.filter(g => g.player_id === p.player_id)
+        .reduce((s, g) => s + (g.streak_bonus || 0), 0)
+    })
+    const hottest = players.reduce((best, p) =>
+      (streaks[p.player_id] || 0) > (streaks[best?.player_id] || 0) ? p : best, null)
+    if (hottest && (streaks[hottest.player_id] || 0) > 0) {
+      add(hottest.player_id, { icon: '🔥', label: 'On Fire' })
+    }
+
+    // Perfect Round — any score of 100
+    players.forEach(p => {
+      if (guesses.some(g => g.player_id === p.player_id && g.score === 100)) {
+        add(p.player_id, { icon: '💫', label: 'Perfect Round' })
+      }
+    })
+
+    return badges
+  }, [guesses, movies, players, ranked])
 
   async function handleReady() {
     const next = !isReady
@@ -66,6 +117,27 @@ export default function SessionResultsScreen({
     })
   }
 
+  function handleShare() {
+    const myRoundScores = Array.from({ length: 5 }, (_, r) => {
+      const g = guesses.find(x => x.player_id === playerId && x.round === r)
+      return g ? g.score + (g.streak_bonus || 0) : '–'
+    })
+    const text = [
+      `🎬 CineScore — Game #${session.game_number}`,
+      `${displayName}: ${myTotal}/500 (${grade.label})`,
+      `Rounds: ${myRoundScores.join(' | ')}`,
+      `cinescore-one.vercel.app`,
+    ].join('\n')
+
+    if (navigator.share) {
+      navigator.share({ text }).catch(() => {})
+    } else {
+      navigator.clipboard.writeText(text)
+      setShared(true)
+      setTimeout(() => setShared(false), 2000)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center p-4 pt-8 animate-fadeUp">
       <div className="w-full max-w-md space-y-4">
@@ -79,34 +151,64 @@ export default function SessionResultsScreen({
           <div className="text-muted text-xs mt-0.5">{grade.sub}</div>
         </div>
 
+        {/* Share card */}
+        <button
+          onClick={handleShare}
+          className={`w-full py-3 rounded-2xl text-sm font-semibold border transition-all ${
+            shared
+              ? 'bg-green-500/15 text-green-400 border-green-500/25'
+              : 'bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white'
+          }`}
+        >
+          {shared ? '✓ Copied to clipboard!' : '↗ Share Result'}
+        </button>
+
         {/* Leaderboard */}
         <div className="bg-surface border border-white/[0.05] rounded-2xl overflow-hidden">
           <div className="px-4 py-3 border-b border-white/[0.05] text-xs text-muted uppercase tracking-wider">
             Game {session.game_number} Results
           </div>
           {ranked.map((p, i) => {
-            const isMe = p.player_id === playerId
+            const isMe     = p.player_id === playerId
+            const myBadges = mvpBadges[p.player_id] || []
             return (
               <div
                 key={p.player_id}
-                className={`flex items-center gap-3 px-4 py-3 border-b border-white/[0.03] last:border-0 animate-fadeUp ${isMe ? 'bg-accent/5' : ''}`}
+                className={`px-4 py-3 border-b border-white/[0.03] last:border-0 animate-fadeUp ${isMe ? 'bg-accent/5' : ''}`}
                 style={{ animationDelay: `${i * 0.05}s` }}
               >
-                <span className="text-muted text-sm w-5 text-center">
-                  {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`}
-                </span>
-                <span className={`flex-1 text-sm font-medium ${isMe ? 'text-white' : 'text-white/80'}`}>
-                  {p.display_name}
-                  {isMe && <span className="ml-1 text-accent text-xs">(you)</span>}
-                </span>
-                {/* Per-round scores */}
-                <div className="flex gap-1">
-                  {Array.from({ length: 5 }, (_, r) => {
-                    const g = guesses.find((x) => x.player_id === p.player_id && x.round === r)
-                    return <span key={r} className="text-xs text-muted w-6 text-center">{g ? g.score : '–'}</span>
-                  })}
+                <div className="flex items-center gap-3">
+                  <span className="text-muted text-sm w-5 text-center">
+                    {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`}
+                  </span>
+                  <span className={`flex-1 text-sm font-medium ${isMe ? 'text-white' : 'text-white/80'}`}>
+                    {p.display_name}
+                    {isMe && <span className="ml-1 text-accent text-xs">(you)</span>}
+                  </span>
+                  {/* Per-round scores */}
+                  <div className="flex gap-1">
+                    {Array.from({ length: 5 }, (_, r) => {
+                      const g = guesses.find((x) => x.player_id === p.player_id && x.round === r)
+                      const val = g ? g.score + (g.streak_bonus || 0) : null
+                      return (
+                        <span key={r} className={`text-xs w-6 text-center ${val === null ? 'text-muted' : g?.score === 100 ? 'text-green-400' : 'text-white/60'}`}>
+                          {val ?? '–'}
+                        </span>
+                      )
+                    })}
+                  </div>
+                  <span className="font-black text-sm text-white w-10 text-right">{p.total}</span>
                 </div>
-                <span className="font-black text-sm text-white w-10 text-right">{p.total}</span>
+                {/* MVP badges */}
+                {myBadges.length > 0 && (
+                  <div className="flex gap-1.5 mt-1.5 ml-8 flex-wrap">
+                    {myBadges.map((b) => (
+                      <span key={b.label} className="text-[10px] font-bold text-white/60 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
+                        {b.icon} {b.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             )
           })}
@@ -121,15 +223,12 @@ export default function SessionResultsScreen({
             const roundGuesses = guesses.filter((g) => g.round === r)
             return (
               <div key={r} className="border-b border-white/[0.03] last:border-0">
-                {/* Movie header */}
                 <div className="flex items-center justify-between px-4 py-3">
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-white truncate">
-                      {movie.title}
-                    </div>
+                    <div className="text-sm font-semibold text-white truncate">{movie.title}</div>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-xs text-muted">{movie.year}</span>
-                      {guesses.some((g) => g.round === r && g.score === 100) && (
+                      {roundGuesses.some((g) => g.score === 100) && (
                         <span className="text-[10px] font-bold text-green-400 bg-green-500/15 border border-green-500/25 px-1.5 py-0.5 rounded-full">
                           🎯 Perfect
                         </span>
@@ -143,26 +242,26 @@ export default function SessionResultsScreen({
                     <div className="text-xs text-muted">actual</div>
                   </div>
                 </div>
-                {/* Player guesses for this round */}
                 {roundGuesses.length > 0 && (
                   <div className="px-4 pb-3 flex flex-wrap gap-2">
                     {ranked.map((p) => {
                       const g = roundGuesses.find((x) => x.player_id === p.player_id)
                       if (!g) return null
-                      const isMe = p.player_id === playerId
+                      const isMe  = p.player_id === playerId
                       const error = Math.abs(
                         Math.round(g.imdb_guess * 10) / 10 -
-                        Math.round(movie.imdb_rating * 10) / 10
+                        Math.round(Number(movie.imdb_rating) * 10) / 10
                       )
                       const chipColor =
-                        error === 0   ? 'text-green-400 bg-green-500/15 border-green-500/25' :
-                        error <= 0.5  ? 'text-green-300 bg-green-500/10 border-green-500/15' :
-                        error <= 1.5  ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' :
-                                        'text-red-400 bg-red-500/10 border-red-500/20'
+                        error === 0  ? 'text-green-400 bg-green-500/15 border-green-500/25' :
+                        error <= 0.5 ? 'text-green-300 bg-green-500/10 border-green-500/15' :
+                        error <= 1.5 ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' :
+                                       'text-red-400 bg-red-500/10 border-red-500/20'
                       return (
                         <div key={p.player_id} className="flex flex-col items-center gap-0.5">
                           <div className={`text-xs px-2 py-0.5 rounded-full border font-semibold ${chipColor} ${isMe ? 'ring-1 ring-accent/40' : ''}`}>
                             {Number(g.imdb_guess).toFixed(1)}
+                            {(g.streak_bonus || 0) > 0 && <span className="ml-0.5">🔥</span>}
                           </div>
                           <span className="text-[10px] text-muted truncate max-w-[48px] text-center">
                             {p.display_name.split(' ')[0]}
@@ -182,7 +281,7 @@ export default function SessionResultsScreen({
           <p className="text-white/60 text-xs uppercase tracking-widest mb-3">Play Again?</p>
           <div className="flex gap-2 mb-4 flex-wrap">
             {players.map((p) => {
-              const isMe = p.player_id === playerId
+              const isMe    = p.player_id === playerId
               const canKick = isHost && onKick && !isMe && p.player_id !== session.host_player_id
               return (
                 <div key={p.player_id} className="flex flex-col items-center gap-1 relative">

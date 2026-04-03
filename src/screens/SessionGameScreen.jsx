@@ -25,6 +25,7 @@ export default function SessionGameScreen({
   const [imdbGuess, setImdbGuess] = useState(5.0)
   const [submitted, setSubmitted] = useState(false)
   const [myScore, setMyScore]     = useState(null)
+  const [myBonus, setMyBonus]     = useState(0)
   const submittedRef              = useRef(false)
   const imdbGuessRef              = useRef(5.0)
   const mountedAtRef              = useRef(Date.now())
@@ -47,8 +48,10 @@ export default function SessionGameScreen({
       p_imdb_guess: guess,
     })
 
-    const score = (!error && data?.score != null) ? data.score : null
+    const score  = (!error && data?.score != null) ? data.score : null
+    const bonus  = (!error && data?.streak_bonus) ? data.streak_bonus : 0
     setMyScore(score)
+    setMyBonus(bonus)
     onGuessSubmitted?.(guess, score)
   }
 
@@ -96,7 +99,16 @@ export default function SessionGameScreen({
       {/* Guess or waiting */}
       {submitted ? (
         <div className="w-full max-w-md bg-surface border border-white/[0.05] rounded-2xl p-6 text-center">
-          {myScore !== null && <div className="text-4xl font-black text-accent mb-1">{myScore} pts</div>}
+          {myScore !== null && (
+            <div className="text-4xl font-black text-accent mb-1">
+              {myScore === 100
+                ? <span className="text-green-400" style={{ textShadow: '0 0 20px rgba(74,222,128,0.6)' }}>100 ✦</span>
+                : `${myScore} pts`}
+            </div>
+          )}
+          {myBonus > 0 && (
+            <div className="text-orange-400 font-bold text-sm mb-1 animate-scaleIn">🔥 +{myBonus} streak bonus!</div>
+          )}
           <div className="text-muted text-sm">Waiting for others…</div>
         </div>
       ) : (

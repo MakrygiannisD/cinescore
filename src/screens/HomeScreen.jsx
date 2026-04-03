@@ -22,7 +22,7 @@ const CATEGORIES = [
   },
 ]
 
-export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onStartMultiplayer, onJoinSession, onShowLeaderboard, onSignIn, onSignOut }) {
+export default function HomeScreen({ user, profile, onStartGame, onStartDaily, onStartMultiplayer, onJoinSession, onShowLeaderboard, onShowStats, onSignIn, onSignOut }) {
   const [listIds, setListIds]   = useState({})
   const [counts,  setCounts]    = useState({})
   const [loading, setLoading]   = useState(true)
@@ -206,6 +206,14 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
           👥 Multiplayer
         </button>
       </div>
+
+      {/* Stats link */}
+      <button
+        onClick={onShowStats}
+        className="w-full py-2 text-muted text-sm hover:text-white/70 transition-colors"
+      >
+        📊 My Stats
+      </button>
 
       {/* Join with code */}
       <div className="bg-surface border border-white/[0.05] rounded-2xl p-4 flex flex-col gap-3">

@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import ChatPanel from '../components/ChatPanel'
 
 const AUTO_ADVANCE_SECS = 5
+const REACTION_EMOJIS = ['👀', '😭', '🔥', '💀', '🎯', '🤯']
 
 export default function SessionRevealScreen({
   session,
@@ -15,6 +16,8 @@ export default function SessionRevealScreen({
   chatMessages,
   sendChatMessage,
   onAdvanceRound,
+  reactions = [],
+  sendReaction,
 }) {
   const [guesses, setGuesses]     = useState([])
   const [countdown, setCountdown] = useState(AUTO_ADVANCE_SECS)
@@ -24,8 +27,8 @@ export default function SessionRevealScreen({
   const movie       = movies[round]
   const isLastRound = round >= 4
 
-  const myGuessObj  = guesses.find((g) => g.player_id === playerId)
-  const gotPerfect  = myGuessObj?.score === 100
+  const myGuessObj = guesses.find((g) => g.player_id === playerId)
+  const gotPerfect = myGuessObj?.score === 100
 
   // Fetch guesses for this round
   useEffect(() => {
@@ -39,8 +42,7 @@ export default function SessionRevealScreen({
       .then(({ data }) => { if (data) setGuesses(data) })
   }, [session.id, session.game_number, round])
 
-  // Auto-advance countdown — host calls advance_session_round when it hits 0
-  // All clients (incl. host) transition via the Realtime UPDATE on sessions
+  // Auto-advance countdown
   useEffect(() => {
     advancedRef.current = false
     setCountdown(AUTO_ADVANCE_SECS)
@@ -72,6 +74,20 @@ export default function SessionRevealScreen({
 
   return (
     <div className="min-h-screen bg-bg flex flex-col items-center p-4 pt-8 animate-fadeUp">
+
+      {/* Floating emoji reactions */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-30">
+        {reactions.map((r) => (
+          <div
+            key={r.uid}
+            className="absolute bottom-32 text-4xl animate-floatUp"
+            style={{ left: `${r.x ?? 50}%` }}
+          >
+            {r.emoji}
+          </div>
+        ))}
+      </div>
+
       <div className="w-full max-w-md space-y-4">
 
         {/* Perfect score celebration */}
@@ -80,6 +96,15 @@ export default function SessionRevealScreen({
             <div className="text-5xl mb-1" style={{ animation: 'pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275)' }}>🎯</div>
             <div className="text-2xl font-black text-green-400" style={{ textShadow: '0 0 24px rgba(74,222,128,0.6)' }}>
               Perfect!
+            </div>
+          </div>
+        )}
+
+        {/* My streak bonus banner */}
+        {myGuessObj?.streak_bonus > 0 && (
+          <div className="text-center animate-scaleIn">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/15 border border-orange-500/25 rounded-full">
+              <span className="text-orange-400 font-black text-sm">🔥 Streak Bonus +{myGuessObj.streak_bonus}</span>
             </div>
           </div>
         )}
@@ -94,7 +119,7 @@ export default function SessionRevealScreen({
           <div className="grid grid-cols-[1fr_auto_auto] text-xs text-muted uppercase tracking-wider px-4 py-2 border-b border-white/[0.05]">
             <span>Player</span>
             <span className="text-center w-16">Guess</span>
-            <span className="text-right w-16">Score</span>
+            <span className="text-right w-20">Score</span>
           </div>
           {guesses.length === 0 && (
             <div className="text-center text-muted text-sm py-6">Loading…</div>
@@ -105,6 +130,7 @@ export default function SessionRevealScreen({
               Math.round(movie.imdb_rating * 10) / 10
             )
             const isMe = g.player_id === playerId
+            const total = g.score + (g.streak_bonus || 0)
             return (
               <div
                 key={g.id}
@@ -121,14 +147,36 @@ export default function SessionRevealScreen({
                 <div className={`text-xs px-2 py-0.5 rounded-full border text-center w-16 ${diffClass(error)}`}>
                   {Number(g.imdb_guess).toFixed(1)}
                 </div>
-                <div className={`text-right w-16 font-black text-sm ${g.score === 100 ? 'text-green-400' : 'text-white'}`}
-                  style={g.score === 100 ? { textShadow: '0 0 12px rgba(74,222,128,0.7)', animation: 'pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275)' } : {}}>
-                  {g.score === 100 ? '100 ✦' : g.score}
+                <div className="text-right w-20 font-black text-sm">
+                  {g.score === 100 ? (
+                    <span className="text-green-400" style={{ textShadow: '0 0 10px rgba(74,222,128,0.6)' }}>100 ✦</span>
+                  ) : g.streak_bonus > 0 ? (
+                    <span className="text-white">
+                      {total}<span className="text-orange-400 font-normal text-xs ml-0.5">+{g.streak_bonus}🔥</span>
+                    </span>
+                  ) : (
+                    <span className="text-white">{g.score}</span>
+                  )}
                 </div>
               </div>
             )
           })}
         </div>
+
+        {/* Reaction emojis */}
+        {sendReaction && (
+          <div className="flex justify-center gap-3 py-1">
+            {REACTION_EMOJIS.map((emoji) => (
+              <button
+                key={emoji}
+                onClick={() => sendReaction(emoji)}
+                className="text-2xl hover:scale-125 active:scale-110 transition-transform select-none"
+              >
+                {emoji}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="text-center text-muted text-sm">
           {isLastRound ? `Results in ${countdown}s…` : `Next movie in ${countdown}s…`}
