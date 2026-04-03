@@ -108,17 +108,17 @@ DECLARE
   t    NUMERIC;
   curve NUMERIC[][] := ARRAY[
     ARRAY[0.0::NUMERIC, 100::NUMERIC],
-    ARRAY[0.1::NUMERIC,  92::NUMERIC],
-    ARRAY[0.3::NUMERIC,  65::NUMERIC],
-    ARRAY[0.9::NUMERIC,  40::NUMERIC],
-    ARRAY[1.0::NUMERIC,  20::NUMERIC],
-    ARRAY[2.5::NUMERIC,   0::NUMERIC]
+    ARRAY[0.2::NUMERIC,  85::NUMERIC],
+    ARRAY[0.5::NUMERIC,  65::NUMERIC],
+    ARRAY[1.0::NUMERIC,  40::NUMERIC],
+    ARRAY[2.0::NUMERIC,  10::NUMERIC],
+    ARRAY[3.0::NUMERIC,   0::NUMERIC]
   ];
   i INT;
 BEGIN
   err := ABS(ROUND(p_guess, 1) - ROUND(p_actual, 1));
   IF err = 0 THEN RETURN 100; END IF;
-  IF err >= 2.5 THEN RETURN 0; END IF;
+  IF err >= 3.0 THEN RETURN 0; END IF;
   FOR i IN 1..5 LOOP
     x0 := curve[i][1]; y0 := curve[i][2];
     x1 := curve[i+1][1]; y1 := curve[i+1][2];

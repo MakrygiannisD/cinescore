@@ -2,22 +2,22 @@
  * Scoring curve — IMDb only, 0–100 pts per round, 0–500 total.
  *
  * Error  →  Score
- * 0.0        100   (perfect only)
- * 0.1         92
- * 0.3         65
- * 0.9         40
- * 1.0         20
- * ≥ 2.5        0
+ * 0.0        100   (perfect)
+ * 0.2         85
+ * 0.5         65
+ * 1.0         40
+ * 2.0         10
+ * ≥ 3.0        0
  *
  * Points between anchors are linearly interpolated.
  */
 const CURVE = [
   [0.0, 100],
-  [0.1,  92],
-  [0.3,  65],
-  [0.9,  40],
-  [1.0,  20],
-  [2.5,   0],
+  [0.2,  85],
+  [0.5,  65],
+  [1.0,  40],
+  [2.0,  10],
+  [3.0,   0],
 ]
 
 function scoreFromError(error) {

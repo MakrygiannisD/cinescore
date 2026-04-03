@@ -24,6 +24,9 @@ export default function SessionRevealScreen({
   const movie       = movies[round]
   const isLastRound = round >= 4
 
+  const myGuessObj  = guesses.find((g) => g.player_id === playerId)
+  const gotPerfect  = myGuessObj?.score === 100
+
   // Fetch guesses for this round
   useEffect(() => {
     supabase
@@ -71,6 +74,16 @@ export default function SessionRevealScreen({
     <div className="min-h-screen bg-bg flex flex-col items-center p-4 pt-8 animate-fadeUp">
       <div className="w-full max-w-md space-y-4">
 
+        {/* Perfect score celebration */}
+        {gotPerfect && (
+          <div className="text-center animate-fadeUp">
+            <div className="text-5xl mb-1" style={{ animation: 'pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275)' }}>🎯</div>
+            <div className="text-2xl font-black text-green-400" style={{ textShadow: '0 0 24px rgba(74,222,128,0.6)' }}>
+              Perfect!
+            </div>
+          </div>
+        )}
+
         <div className="text-center">
           <p className="text-muted text-xs uppercase tracking-widest mb-1">Round {round + 1} of 5 — Actual Rating</p>
           <div className="text-5xl font-black text-[#f5c518] mb-1">{Number(movie.imdb_rating).toFixed(1)}</div>
@@ -108,7 +121,10 @@ export default function SessionRevealScreen({
                 <div className={`text-xs px-2 py-0.5 rounded-full border text-center w-16 ${diffClass(error)}`}>
                   {Number(g.imdb_guess).toFixed(1)}
                 </div>
-                <div className="text-right w-16 font-black text-sm text-white">{g.score}</div>
+                <div className={`text-right w-16 font-black text-sm ${g.score === 100 ? 'text-green-400' : 'text-white'}`}
+                  style={g.score === 100 ? { textShadow: '0 0 12px rgba(74,222,128,0.7)', animation: 'pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275)' } : {}}>
+                  {g.score === 100 ? '100 ✦' : g.score}
+                </div>
               </div>
             )
           })}
