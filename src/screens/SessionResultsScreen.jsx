@@ -63,7 +63,6 @@ export default function SessionResultsScreen({
       p_session_id: session.id,
       p_player_id:  playerId,
     })
-    // App-level Realtime UPDATE drives all clients to session-game
   }
 
   return (
@@ -107,6 +106,64 @@ export default function SessionResultsScreen({
                   })}
                 </div>
                 <span className="font-black text-sm text-white w-10 text-right">{p.total}</span>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Movie breakdown */}
+        <div className="bg-surface border border-white/[0.05] rounded-2xl overflow-hidden">
+          <div className="px-4 py-3 border-b border-white/[0.05] text-xs text-muted uppercase tracking-wider">
+            Movie Breakdown
+          </div>
+          {movies.map((movie, r) => {
+            const roundGuesses = guesses.filter((g) => g.round === r)
+            return (
+              <div key={r} className="border-b border-white/[0.03] last:border-0">
+                {/* Movie header */}
+                <div className="flex items-center justify-between px-4 py-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-semibold text-white truncate">
+                      {movie.title}
+                    </div>
+                    <div className="text-xs text-muted">{movie.year}</div>
+                  </div>
+                  <div className="text-right ml-3">
+                    <div className="text-[#f5c518] font-black text-lg leading-none">
+                      {Number(movie.imdb_rating).toFixed(1)}
+                    </div>
+                    <div className="text-xs text-muted">actual</div>
+                  </div>
+                </div>
+                {/* Player guesses for this round */}
+                {roundGuesses.length > 0 && (
+                  <div className="px-4 pb-3 flex flex-wrap gap-2">
+                    {ranked.map((p) => {
+                      const g = roundGuesses.find((x) => x.player_id === p.player_id)
+                      if (!g) return null
+                      const isMe = p.player_id === playerId
+                      const error = Math.abs(
+                        Math.round(g.imdb_guess * 10) / 10 -
+                        Math.round(movie.imdb_rating * 10) / 10
+                      )
+                      const chipColor =
+                        error === 0   ? 'text-green-400 bg-green-500/15 border-green-500/25' :
+                        error <= 0.5  ? 'text-green-300 bg-green-500/10 border-green-500/15' :
+                        error <= 1.5  ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' :
+                                        'text-red-400 bg-red-500/10 border-red-500/20'
+                      return (
+                        <div key={p.player_id} className="flex flex-col items-center gap-0.5">
+                          <div className={`text-xs px-2 py-0.5 rounded-full border font-semibold ${chipColor} ${isMe ? 'ring-1 ring-accent/40' : ''}`}>
+                            {Number(g.imdb_guess).toFixed(1)}
+                          </div>
+                          <span className="text-[10px] text-muted truncate max-w-[48px] text-center">
+                            {p.display_name.split(' ')[0]}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
               </div>
             )
           })}
