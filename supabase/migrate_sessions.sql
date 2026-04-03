@@ -182,9 +182,9 @@ BEGIN
     RAISE EXCEPTION 'Session not found';
   END IF;
 
-  -- Allow rejoining if already in session; reject new joins when not in lobby
-  IF sess.status != 'lobby' THEN
-    -- Check if player is already in the session (rejoin)
+  -- Allow joining in lobby or results (between games); reject during active play
+  IF sess.status NOT IN ('lobby', 'results') THEN
+    -- Still allow rejoin for players already in the session
     IF NOT EXISTS (
       SELECT 1 FROM public.session_players
       WHERE session_id = p_session_id AND player_id = p_player_id

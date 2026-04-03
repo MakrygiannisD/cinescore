@@ -336,12 +336,31 @@ export default function App() {
       p_session_id: sid, p_display_name: name, p_player_id: playerId,
     })
     if (error) throw new Error(error.message)
+
+    const sess = data.session
+
+    // If joining mid-results, load movies and drop straight into results screen
+    if (sess.status === 'results' && sess.movie_ids?.length) {
+      const { data: movieRows } = await supabase.from('movies').select('*').in('id', sess.movie_ids)
+      const sorted = sess.movie_ids.map((id) => movieRows?.find((m) => m.id === id)).filter(Boolean)
+      dispatch({
+        type: 'SHOW_SESSION_LOBBY',
+        sessionId: sid,
+        session:   sess,
+        players:   data.players || [],
+        isHost:    sess.host_player_id === playerId,
+      })
+      dispatch({ type: 'START_SESSION_GAME', movies: sorted, session: sess })
+      dispatch({ type: 'SESSION_SHOW_RESULTS' })
+      return
+    }
+
     dispatch({
       type: 'SHOW_SESSION_LOBBY',
       sessionId: sid,
-      session:   data.session,
+      session:   sess,
       players:   data.players || [],
-      isHost:    data.session.host_player_id === playerId,
+      isHost:    sess.host_player_id === playerId,
     })
   }
 
