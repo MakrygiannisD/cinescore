@@ -1,40 +1,28 @@
-export default function CountdownTimer({ secondsLeft, totalSeconds = 30 }) {
-  if (secondsLeft === null) return null
-
-  const pct    = Math.max(0, Math.min(1, secondsLeft / totalSeconds))
+export default function CountdownTimer({ secondsLeft, totalSeconds }) {
+  const size   = 40
+  const stroke = 3
+  const r      = (size - stroke) / 2
+  const C      = 2 * Math.PI * r
+  const frac   = Math.max(0, secondsLeft / totalSeconds)
+  const offset = C * (1 - frac)
   const urgent = secondsLeft <= 5
 
-  const size   = 72
-  const stroke = 5
-  const r      = (size - stroke) / 2
-  const circ   = 2 * Math.PI * r
-  const dash   = circ * pct
-
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
-        {/* Track */}
-        <circle
-          cx={size / 2} cy={size / 2} r={r}
-          fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={stroke}
-        />
-        {/* Fill */}
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgb(var(--c-border))" strokeWidth={stroke} />
         <circle
           cx={size / 2} cy={size / 2} r={r}
           fill="none"
-          stroke={urgent ? '#f87171' : '#6366f1'}
+          stroke={urgent ? 'rgb(var(--c-danger))' : 'rgb(var(--c-accent))'}
           strokeWidth={stroke}
           strokeLinecap="round"
-          strokeDasharray={`${dash} ${circ}`}
-          style={{ transition: 'stroke-dasharray 0.5s linear, stroke 0.3s' }}
+          strokeDasharray={C}
+          strokeDashoffset={offset}
+          className="transition-all duration-1000 ease-linear"
         />
       </svg>
-      <span
-        className={`text-lg font-black tabular-nums -mt-[58px] mb-[10px] ${
-          urgent ? 'text-red-400 animate-pulse' : 'text-white'
-        }`}
-        style={{ lineHeight: `${size}px` }}
-      >
+      <span className={`absolute text-xs font-bold ${urgent ? 'text-red-400' : 'text-white/60'}`}>
         {secondsLeft}
       </span>
     </div>

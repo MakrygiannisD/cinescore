@@ -19,8 +19,8 @@ export default function SessionGameScreen({
   chatMessages,
   sendChatMessage,
   displayName,
-  onGuessSubmitted,  // (guess, score) → stored in App for reveal screen
-  onTimerExpired,    // () → host calls triggerReveal
+  onGuessSubmitted,
+  onTimerExpired,
 }) {
   const [imdbGuess, setImdbGuess] = useState(5.0)
   const [submitted, setSubmitted] = useState(false)
@@ -34,7 +34,6 @@ export default function SessionGameScreen({
   const movie    = movies?.[round]
   const deadline = session.round_deadline
 
-  // Keep ref in sync for use inside timer callback
   useEffect(() => { imdbGuessRef.current = imdbGuess }, [imdbGuess])
 
   async function submitGuess(guess) {
@@ -55,8 +54,6 @@ export default function SessionGameScreen({
     onGuessSubmitted?.(guess, score)
   }
 
-  // Timer — minimum 3s on screen before auto-submit fires
-  // This prevents instant auto-submit if deadline has already passed on mount
   const secondsLeft = useSessionTimer(deadline, () => {
     const timeOnScreen = Date.now() - mountedAtRef.current
     const delay = Math.max(0, 3000 - timeOnScreen)
@@ -66,7 +63,6 @@ export default function SessionGameScreen({
     }, delay)
   })
 
-  // Host: also trigger reveal 3s after timer hits 0 (catches any remaining submits)
   const timerFiredRef = useRef(false)
   useEffect(() => {
     if (!isHost || secondsLeft !== 0) return
@@ -117,7 +113,7 @@ export default function SessionGameScreen({
           <button
             onClick={() => submitGuess(imdbGuess)}
             className="w-full py-4 rounded-2xl font-bold text-lg bg-accent text-white
-              shadow-[0_4px_24px_rgba(99,102,241,0.35)] hover:brightness-110 transition-all"
+              shadow-accent-lg hover:brightness-110 transition-all"
           >
             Submit Guess
           </button>

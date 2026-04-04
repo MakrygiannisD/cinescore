@@ -39,7 +39,7 @@ export default function ChallengeLobbyScreen({ challengeId, isChallenger, onStar
             className={`px-4 py-2 text-sm font-bold rounded-xl shrink-0 transition-all active:scale-95 ${
               copied
                 ? 'bg-green-500/15 text-green-400 border border-green-500/25'
-                : 'bg-accent text-white hover:opacity-90 shadow-[0_4px_20px_rgba(99,102,241,0.25)]'
+                : 'bg-accent text-white hover:opacity-90 shadow-accent'
             }`}
           >
             {copied ? '✓ Copied' : 'Copy'}
@@ -66,7 +66,7 @@ export default function ChallengeLobbyScreen({ challengeId, isChallenger, onStar
 
       <button
         onClick={onStart}
-        className="w-full py-4 bg-accent text-white font-black text-lg rounded-2xl hover:opacity-90 active:scale-95 transition-all shadow-[0_4px_28px_rgba(99,102,241,0.3)]"
+        className="w-full py-4 bg-accent text-white font-black text-lg rounded-2xl hover:opacity-90 active:scale-95 transition-all shadow-accent-lg"
       >
         {isChallenger ? "I'm Ready — Start!" : 'Accept Challenge →'}
       </button>

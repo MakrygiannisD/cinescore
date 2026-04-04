@@ -133,7 +133,7 @@ export default function SessionLobbyScreen({
                     onClick={() => setRoundSeconds(s)}
                     className={`flex-1 py-2 rounded-xl text-sm font-semibold border transition-all ${
                       roundSeconds === s
-                        ? 'bg-accent text-white border-accent shadow-[0_0_16px_rgba(99,102,241,0.3)]'
+                        ? 'bg-accent text-white border-accent shadow-accent-btn'
                         : 'bg-white/5 text-white/50 border-white/10 hover:bg-white/10 hover:text-white/70'
                     }`}
                   >
@@ -158,7 +158,7 @@ export default function SessionLobbyScreen({
                     onClick={() => setGenreFilter(g.value)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
                       genreFilter === g.value
-                        ? 'bg-accent text-white border-accent shadow-[0_0_12px_rgba(99,102,241,0.3)]'
+                        ? 'bg-accent text-white border-accent shadow-accent-btn'
                         : 'bg-white/5 text-white/50 border-white/10 hover:bg-white/10 hover:text-white/70'
                     }`}
                   >
@@ -175,7 +175,7 @@ export default function SessionLobbyScreen({
             onClick={handleStart}
             disabled={players.length < 2 || starting}
             className="w-full py-4 rounded-2xl font-bold text-lg bg-accent text-white
-              shadow-[0_4px_24px_rgba(99,102,241,0.35)] hover:brightness-110
+              shadow-accent-lg hover:brightness-110
               disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
             {starting ? 'Starting…' : 'Start Game'}

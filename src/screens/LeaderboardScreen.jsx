@@ -22,7 +22,7 @@ export default function LeaderboardScreen({ user, userTotal, onClose }) {
       </div>
 
       {userTotal != null && (
-        <div className="bg-accent/8 border border-accent/20 rounded-2xl py-5 text-center shadow-[0_0_30px_rgba(99,102,241,0.08)]">
+        <div className="bg-accent/8 border border-accent/20 rounded-2xl py-5 text-center shadow-accent-glow">
           <div className="text-muted text-xs uppercase tracking-widest mb-1 font-semibold">Your Score</div>
           <div className="text-4xl font-black text-accent">{userTotal}</div>
           <div className="text-muted/50 text-xs mt-1">/ 500</div>

@@ -20,7 +20,7 @@ function RatingReveal({ label, isImdb, actual, guess, score }) {
   const guessPct  = isImdb ? (guess  / 10) * 100 : guess
   const diff      = Math.round(Math.abs(guess - actual) * (isImdb ? 10 : 1)) / (isImdb ? 10 : 1)
   const pill      = diffPill(diff, isImdb ? 0.5 : 5, isImdb ? 1.5 : 15)
-  const barColor  = isImdb ? '#f5c518' : '#fa320a'
+  const barColor  = isImdb ? 'rgb(var(--c-imdb))' : 'rgb(var(--c-rt))'
   const barGlow   = isImdb ? 'rgba(245,197,24,0.35)' : 'rgba(250,50,10,0.35)'
 
   return (
@@ -128,7 +128,7 @@ export default function RevealScreen({ movie, imdbGuess, score, round, totalRoun
 
       <button
         onClick={onNext}
-        className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-[0_4px_24px_rgba(99,102,241,0.25)]"
+        className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-accent"
       >
         {isLastRound ? 'See Final Score →' : 'Next Round →'}
       </button>

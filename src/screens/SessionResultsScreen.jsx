@@ -223,7 +223,7 @@ return (
                     </div>
                   </div>
                   <div className="text-right ml-3">
-                    <div className="text-[#f5c518] font-black text-lg leading-none">
+                    <div className="text-imdb font-black text-lg leading-none">
                       {Number(movie.imdb_rating).toFixed(1)}
                     </div>
                     <div className="text-xs text-muted">actual</div>
@@ -312,7 +312,7 @@ return (
             onClick={handleStartNext}
             disabled={!allReady || starting}
             className="w-full py-4 rounded-2xl font-bold text-lg bg-accent text-white
-              shadow-[0_4px_24px_rgba(99,102,241,0.35)] hover:brightness-110
+              shadow-accent-lg hover:brightness-110
               disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
             {starting ? 'Starting…' : allReady ? 'Start Next Game →' : 'Waiting for everyone…'}

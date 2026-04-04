@@ -68,12 +68,12 @@ export default function FinalScreen({ movies, scores, listName, isDaily, isChall
       {/* Actions */}
       <div className="flex flex-col gap-2">
         {isDaily && (
-          <button onClick={onShowLeaderboard} className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-[0_4px_24px_rgba(99,102,241,0.25)]">
+          <button onClick={onShowLeaderboard} className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-accent">
             View Leaderboard →
           </button>
         )}
         {!isDaily && !isChallenge && (
-          <button onClick={onPlayAgain} className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-[0_4px_24px_rgba(99,102,241,0.25)]">
+          <button onClick={onPlayAgain} className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-accent">
             Play Again
           </button>
         )}

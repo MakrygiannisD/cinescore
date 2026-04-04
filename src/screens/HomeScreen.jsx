@@ -127,7 +127,7 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
         <h1 className="text-2xl font-black tracking-tight">
           Cine<span
             className="bg-clip-text text-transparent"
-            style={{ backgroundImage: 'linear-gradient(135deg, #6366f1, #818cf8)' }}
+            style={{ backgroundImage: 'linear-gradient(135deg, var(--c-accent), var(--c-accent2))' }}
           >Score</span>
         </h1>
         {user === undefined ? null : user ? (
@@ -153,7 +153,7 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
       </div>
 
       {/* Daily Quiz card */}
-      <div className="relative bg-surface border border-accent/20 rounded-2xl p-5 flex flex-col gap-3 overflow-hidden shadow-[0_0_40px_rgba(99,102,241,0.07)]">
+      <div className="relative bg-surface border border-accent/20 rounded-2xl p-5 flex flex-col gap-3 overflow-hidden shadow-accent-glow">
         {/* subtle top glow line */}
         <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
         <div className="flex items-start justify-between">
@@ -176,7 +176,7 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
           <button
             onClick={onStartDaily}
             disabled={!ready || !!starting}
-            className="w-full py-3.5 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 shadow-[0_4px_24px_rgba(99,102,241,0.3)]"
+            className="w-full py-3.5 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 shadow-accent"
           >
             {starting === 'daily' ? 'Loading…' : 'Play Daily Quiz'}
           </button>
@@ -236,7 +236,7 @@ export default function HomeScreen({ user, profile, onStartGame, onStartDaily, o
             onClick={handleJoin}
             disabled={joinCode.trim().length !== 6 || joining}
             className="px-5 py-2.5 rounded-xl bg-accent text-white text-sm font-bold
-              shadow-[0_4px_16px_rgba(99,102,241,0.3)]
+              shadow-accent
               hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
             {joining ? '…' : 'Join'}

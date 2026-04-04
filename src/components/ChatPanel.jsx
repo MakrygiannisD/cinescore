@@ -54,7 +54,7 @@ export default function ChatPanel({ messages, onSend, displayName }) {
         onClick={() => setOpen((o) => !o)}
         className="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-accent
           flex items-center justify-center text-white text-xl
-          shadow-[0_4px_20px_rgba(99,102,241,0.5)]
+          shadow-accent-float
           hover:brightness-110 transition-all"
       >
         {open ? '×' : '💬'}
@@ -68,7 +68,7 @@ export default function ChatPanel({ messages, onSend, displayName }) {
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-20 right-5 z-40 w-72 bg-[#15151f] border border-white/[0.07]
+        <div className="fixed bottom-20 right-5 z-40 w-72 bg-surface border border-white/[0.07]
           rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.6)] flex flex-col overflow-hidden
           animate-scaleIn"
           style={{ height: 340 }}

@@ -30,7 +30,6 @@ export default function SessionRevealScreen({
   const myGuessObj = guesses.find((g) => g.player_id === playerId)
   const gotPerfect = myGuessObj?.score === 100
 
-  // Fetch guesses for this round
   useEffect(() => {
     supabase
       .from('session_guesses')
@@ -42,7 +41,6 @@ export default function SessionRevealScreen({
       .then(({ data }) => { if (data) setGuesses(data) })
   }, [session.id, session.game_number, round])
 
-  // Auto-advance countdown
   useEffect(() => {
     advancedRef.current = false
     setCountdown(AUTO_ADVANCE_SECS)
@@ -111,7 +109,7 @@ export default function SessionRevealScreen({
 
         <div className="text-center">
           <p className="text-muted text-xs uppercase tracking-widest mb-1">Round {round + 1} of 5 — Actual Rating</p>
-          <div className="text-5xl font-black text-[#f5c518] mb-1">{Number(movie.imdb_rating).toFixed(1)}</div>
+          <div className="text-5xl font-black text-imdb mb-1">{Number(movie.imdb_rating).toFixed(1)}</div>
           <p className="text-white/60 text-sm">{movie.title} ({movie.year})</p>
         </div>
 

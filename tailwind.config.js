@@ -4,15 +4,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg:       '#09090e',
-        surface:  '#111118',
-        surface2: '#1a1a24',
-        border:   '#222232',
-        muted:    '#6464a0',
-        imdb:     '#f5c518',
-        rt:       '#fa320a',
-        accent:   '#6366f1',
-        accent2:  '#818cf8',
+        bg:       'rgb(var(--c-bg) / <alpha-value>)',
+        surface:  'rgb(var(--c-surface) / <alpha-value>)',
+        surface2: 'rgb(var(--c-surface2) / <alpha-value>)',
+        border:   'rgb(var(--c-border) / <alpha-value>)',
+        muted:    'rgb(var(--c-muted) / <alpha-value>)',
+        imdb:     'rgb(var(--c-imdb) / <alpha-value>)',
+        rt:       'rgb(var(--c-rt) / <alpha-value>)',
+        accent:   'rgb(var(--c-accent) / <alpha-value>)',
+        accent2:  'rgb(var(--c-accent2) / <alpha-value>)',
+      },
+      boxShadow: {
+        'accent':      '0 4px 24px rgb(var(--c-accent) / 0.25)',
+        'accent-lg':   '0 4px 24px rgb(var(--c-accent) / 0.35)',
+        'accent-glow': '0 0 40px rgb(var(--c-accent) / 0.08)',
+        'accent-btn':  '0 0 16px rgb(var(--c-accent) / 0.3)',
+        'accent-dot':  '0 0 6px rgb(var(--c-accent) / 0.6)',
+        'accent-float':'0 4px 20px rgb(var(--c-accent) / 0.5)',
       },
       keyframes: {
         fadeUp: {

@@ -40,20 +40,23 @@ export function scoreRound(imdbGuess, _rtGuess, imdbActual, _rtActual) {
   return { imdbPts: total, rtPts: 0, total }
 }
 
+/* Grade labels + colors — all use CSS custom properties */
+const GRADES = [
+  { min: 0.95, label: '🎬 Film Critic',    sub: 'Extraordinary. You live and breathe cinema.', color: 'rgb(var(--c-success))' },
+  { min: 0.80, label: '🍿 Movie Buff',      sub: 'Impressive! You really know your ratings.',   color: 'rgb(var(--c-info))' },
+  { min: 0.65, label: '🎥 Cinephile',       sub: 'Solid knowledge of the critical world.',      color: 'rgb(var(--c-accent))' },
+  { min: 0.45, label: '🎞️ Casual Viewer',  sub: "Not bad — but the ratings surprised you.",    color: 'rgb(var(--c-warning))' },
+  { min: 0,    label: '😅 First Timer',      sub: 'The ratings caught you off guard this time!', color: 'rgb(var(--c-danger))' },
+]
+
 export function getGrade(totalScore, maxScore = 500) {
   const pct = totalScore / maxScore
-  if (pct >= 0.95) return { label: '🎬 Film Critic',   sub: 'Extraordinary. You live and breathe cinema.' }
-  if (pct >= 0.80) return { label: '🍿 Movie Buff',     sub: 'Impressive! You really know your ratings.' }
-  if (pct >= 0.65) return { label: '🎥 Cinephile',      sub: 'Solid knowledge of the critical world.' }
-  if (pct >= 0.45) return { label: '🎞️ Casual Viewer', sub: "Not bad — but the ratings surprised you." }
-  return               { label: '😅 First Timer',      sub: 'The ratings caught you off guard this time!' }
+  const g = GRADES.find(g => pct >= g.min) || GRADES[GRADES.length - 1]
+  return { label: g.label, sub: g.sub }
 }
 
 export function gradeColor(totalScore, maxScore = 500) {
   const pct = totalScore / maxScore
-  if (pct >= 0.95) return '#4ade80'
-  if (pct >= 0.80) return '#60a5fa'
-  if (pct >= 0.65) return '#6366f1'
-  if (pct >= 0.45) return '#facc15'
-  return '#f87171'
+  const g = GRADES.find(g => pct >= g.min) || GRADES[GRADES.length - 1]
+  return g.color
 }

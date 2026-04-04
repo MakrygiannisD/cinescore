@@ -4,10 +4,10 @@ import { gradeColor, getGrade } from '../lib/scoring'
 
 /* ── accuracy block color ────────────────────────────────── */
 function blockColor(score) {
-  if (score >= 85) return '#4ade80' // green
-  if (score >= 55) return '#facc15' // yellow
-  if (score >= 25) return '#fb923c' // orange
-  return '#f87171'                  // red
+  if (score >= 85) return 'rgb(var(--c-success))'
+  if (score >= 55) return 'rgb(var(--c-warning))'
+  if (score >= 25) return '#fb923c'
+  return 'rgb(var(--c-danger))'
 }
 
 function blockEmoji(score) {
@@ -22,19 +22,25 @@ function fmtDate() {
   return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
+/* ── resolve CSS variable (RGB channels) to rgb() for image capture ── */
+function resolveVar(varName) {
+  const channels = getComputedStyle(document.documentElement).getPropertyValue(varName).trim()
+  return `rgb(${channels})`
+}
+
 /* ═══════════════════════════════════════════════════════════
    ShareCard — works for daily + multiplayer
    ═══════════════════════════════════════════════════════════ */
 export default function ShareCard({
   total,
   maxScore = 500,
-  roundScores,        // array of per-round totals, e.g. [92, 85, 62, 96, 85]
-  mode = 'daily',     // 'daily' | 'multiplayer'
-  rank = null,        // multiplayer rank (1-based)
-  playerCount = null, // multiplayer player count
-  mvpBadges = [],     // [{ icon, label }]
+  roundScores,
+  mode = 'daily',
+  rank = null,
+  playerCount = null,
+  mvpBadges = [],
   listName = null,
-  posterUrl = null,   // best-round movie poster for background
+  posterUrl = null,
 }) {
   const cardRef   = useRef(null)
   const [busy, setBusy]       = useState(false)
@@ -50,7 +56,7 @@ export default function ShareCard({
     return toPng(cardRef.current, {
       pixelRatio: 3,
       cacheBust: true,
-      backgroundColor: '#09090e',
+      backgroundColor: resolveVar('--c-bg'),
     })
   }, [])
 
@@ -61,12 +67,10 @@ export default function ShareCard({
       const dataUrl = await capture()
       if (!dataUrl) return
 
-      // convert to blob
       const res  = await fetch(dataUrl)
       const blob = await res.blob()
       const file = new File([blob], 'cinescore-result.png', { type: 'image/png' })
 
-      // text version for clipboard / share body
       const blocks = roundScores.map(s => blockEmoji(s)).join('')
       const textLines = [
         `🎬 CineScore ${mode === 'daily' ? 'Daily' : 'Multiplayer'}`,
@@ -79,13 +83,11 @@ export default function ShareCard({
       ]
       const shareText = textLines.join('\n')
 
-      // try native share with image
       if (navigator.canShare?.({ files: [file] })) {
         await navigator.share({ files: [file], text: shareText })
       } else if (navigator.share) {
         await navigator.share({ text: shareText })
       } else {
-        // fallback: copy text to clipboard
         await navigator.clipboard.writeText(shareText)
         setCopied(true)
         setTimeout(() => setCopied(false), 2500)
@@ -125,7 +127,7 @@ export default function ShareCard({
       <div
         ref={cardRef}
         style={{
-          background: '#09090e',
+          background: 'rgb(var(--c-bg))',
           borderRadius: 20,
           padding: 0,
           position: 'relative',
@@ -151,8 +153,8 @@ export default function ShareCard({
         <div style={{
           position: 'absolute', inset: 0,
           background: posterUrl
-            ? 'linear-gradient(180deg, rgba(9,9,14,0.55) 0%, rgba(9,9,14,0.85) 50%, rgba(9,9,14,0.97) 100%)'
-            : 'linear-gradient(170deg, #0f0f1a 0%, #09090e 40%, #0a0a14 100%)',
+            ? `linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.85) 50%, rgba(8,8,8,0.97) 100%)`
+            : `linear-gradient(170deg, rgb(var(--c-surface)) 0%, rgb(var(--c-bg)) 40%, rgb(var(--c-surface)) 100%)`,
         }} />
 
         {/* content wrapper (above poster) */}
@@ -161,22 +163,22 @@ export default function ShareCard({
         {/* top glow */}
         <div style={{
           position: 'absolute', top: 0, left: '15%', right: '15%', height: 1,
-          background: `linear-gradient(to right, transparent, ${color}40, transparent)`,
+          background: `linear-gradient(to right, transparent, rgb(var(--c-accent) / 0.25), transparent)`,
         }} />
 
         {/* corner accent */}
         <div style={{
           position: 'absolute', top: -40, right: -40, width: 120, height: 120,
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${color}12 0%, transparent 70%)`,
+          background: `radial-gradient(circle, rgb(var(--c-accent) / 0.07) 0%, transparent 70%)`,
         }} />
 
         {/* header */}
         <div style={{ textAlign: 'center', marginBottom: 24 }}>
-          <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: 3, color: '#6366f1', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: 3, color: 'rgb(var(--c-accent))', textTransform: 'uppercase' }}>
             CineScore
           </div>
-          <div style={{ fontSize: 11, color: '#6464a0', marginTop: 2, letterSpacing: 1.5, textTransform: 'uppercase' }}>
+          <div style={{ fontSize: 11, color: 'rgb(var(--c-muted))', marginTop: 2, letterSpacing: 1.5, textTransform: 'uppercase' }}>
             {mode === 'daily' ? 'Daily Quiz' : 'Multiplayer'}{listName ? ` • ${listName}` : ''}
           </div>
         </div>
@@ -186,12 +188,11 @@ export default function ShareCard({
           <div style={{ textAlign: 'center', marginBottom: 16 }}>
             <span style={{ fontSize: 28 }}>{rankIcon}</span>
             <div style={{
-              fontSize: 20, fontWeight: 900, color: '#f0f0f5', marginTop: 4,
-              textShadow: `0 0 20px ${color}60`,
+              fontSize: 20, fontWeight: 900, color: 'rgb(var(--c-text))', marginTop: 4,
             }}>
               {rankLabel} Place
             </div>
-            <div style={{ fontSize: 11, color: '#6464a0', marginTop: 2 }}>
+            <div style={{ fontSize: 11, color: 'rgb(var(--c-muted))', marginTop: 2 }}>
               out of {playerCount} player{playerCount !== 1 ? 's' : ''}
             </div>
           </div>
@@ -202,11 +203,11 @@ export default function ShareCard({
           <div style={{
             width: 120, height: 120, borderRadius: '50%',
             border: `5px solid ${color}`,
-            boxShadow: `0 0 40px ${color}25, 0 0 80px ${color}10, inset 0 0 30px ${color}08`,
+            boxShadow: `0 0 40px rgb(var(--c-accent) / 0.15), 0 0 80px rgb(var(--c-accent) / 0.06)`,
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           }}>
             <span style={{ fontSize: 42, fontWeight: 900, color, lineHeight: 1 }}>{total}</span>
-            <span style={{ fontSize: 11, color: '#6464a080', marginTop: 2 }}>/ {maxScore}</span>
+            <span style={{ fontSize: 11, color: 'rgb(var(--c-muted))', marginTop: 2, opacity: 0.5 }}>/ {maxScore}</span>
           </div>
         </div>
 
@@ -220,13 +221,13 @@ export default function ShareCard({
           {roundScores.map((s, i) => (
             <div key={i} style={{
               width: 44, height: 44, borderRadius: 10,
-              background: `${blockColor(s)}18`,
-              border: `1.5px solid ${blockColor(s)}40`,
+              background: `rgb(var(--c-accent) / 0.06)`,
+              border: `1.5px solid rgb(var(--c-accent) / 0.15)`,
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
               position: 'relative',
             }}>
               <span style={{ fontSize: 15, fontWeight: 800, color: blockColor(s), lineHeight: 1 }}>{s}</span>
-              <span style={{ fontSize: 8, color: '#6464a080', marginTop: 1 }}>R{i + 1}</span>
+              <span style={{ fontSize: 8, color: 'rgb(var(--c-muted))', marginTop: 1, opacity: 0.5 }}>R{i + 1}</span>
             </div>
           ))}
         </div>
@@ -236,8 +237,8 @@ export default function ShareCard({
           <div style={{ display: 'flex', justifyContent: 'center', gap: 6, flexWrap: 'wrap', marginTop: 16 }}>
             {mvpBadges.map((b) => (
               <span key={b.label} style={{
-                fontSize: 10, fontWeight: 700, color: '#ffffffaa',
-                background: '#ffffff08', border: '1px solid #ffffff15',
+                fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.67)',
+                background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
                 padding: '3px 10px', borderRadius: 99,
               }}>
                 {b.icon} {b.label}
@@ -249,13 +250,13 @@ export default function ShareCard({
         {/* footer */}
         <div style={{
           marginTop: 20, paddingTop: 16,
-          borderTop: '1px solid #ffffff08',
+          borderTop: '1px solid rgba(255,255,255,0.03)',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#6366f1', letterSpacing: 0.5 }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: 'rgb(var(--c-accent))', letterSpacing: 0.5 }}>
             cinescore.gr
           </span>
-          <span style={{ fontSize: 10, color: '#6464a060' }}>
+          <span style={{ fontSize: 10, color: 'rgb(var(--c-muted))', opacity: 0.4 }}>
             {fmtDate()}
           </span>
         </div>
@@ -269,7 +270,7 @@ export default function ShareCard({
           onClick={handleShare}
           disabled={busy}
           className="flex-1 py-3.5 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95
-            transition-all shadow-[0_4px_24px_rgba(99,102,241,0.3)] disabled:opacity-50 flex items-center justify-center gap-2"
+            transition-all shadow-accent disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {copied ? (
             <><CheckIcon /> Copied!</>
@@ -314,7 +315,7 @@ function DownloadIcon() {
 
 function CheckIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-success)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12" />
     </svg>
   )

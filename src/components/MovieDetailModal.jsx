@@ -19,20 +19,20 @@ export default function MovieDetailModal({ movie, onClose }) {
   const runtime  = movie.runtime ? `${movie.runtime} min` : null
 
   function imdbColor(r) {
-    if (r >= 8.0) return '#4ade80'
-    if (r >= 7.0) return '#60a5fa'
-    if (r >= 6.0) return '#f5c518'
-    return '#f87171'
+    if (r >= 8.0) return 'rgb(var(--c-success))'
+    if (r >= 7.0) return 'rgb(var(--c-info))'
+    if (r >= 6.0) return 'rgb(var(--c-imdb))'
+    return 'rgb(var(--c-danger))'
   }
   function rtColor(r) {
-    if (r >= 75) return '#fa320a'
+    if (r >= 75) return 'rgb(var(--c-rt))'
     if (r >= 60) return '#fa8c00'
-    return '#6464a0'
+    return 'rgb(var(--c-muted))'
   }
   function metaColor(m) {
-    if (m >= 75) return '#4ade80'
-    if (m >= 60) return '#facc15'
-    return '#f87171'
+    if (m >= 75) return 'rgb(var(--c-success))'
+    if (m >= 60) return 'rgb(var(--c-warning))'
+    return 'rgb(var(--c-danger))'
   }
 
   return (
@@ -45,7 +45,7 @@ export default function MovieDetailModal({ movie, onClose }) {
 
       {/* Card */}
       <div
-        className="relative w-full sm:max-w-sm max-h-[92dvh] flex flex-col bg-[#0d0d14] border border-white/[0.08] rounded-t-3xl sm:rounded-2xl overflow-hidden animate-fadeUp shadow-2xl"
+        className="relative w-full sm:max-w-sm max-h-[92dvh] flex flex-col bg-surface border border-white/[0.08] rounded-t-3xl sm:rounded-2xl overflow-hidden animate-fadeUp shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
 
@@ -62,7 +62,7 @@ export default function MovieDetailModal({ movie, onClose }) {
             <div className="w-full h-full bg-surface2" />
           )}
           {/* Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d14] via-[#0d0d14]/40 to-transparent" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgb(var(--c-surface)), transparent 60%)' }} />
 
           {/* Close button */}
           <button
@@ -202,7 +202,7 @@ export default function MovieDetailModal({ movie, onClose }) {
                 href={imdbUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#f5c518]/10 border border-[#f5c518]/20 text-[#f5c518] text-sm font-semibold hover:bg-[#f5c518]/15 transition-all"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-imdb/10 border border-imdb/20 text-imdb text-sm font-semibold hover:bg-imdb/15 transition-all"
               >
                 ↗ IMDb
               </a>
@@ -212,7 +212,13 @@ export default function MovieDetailModal({ movie, onClose }) {
                 href={`https://web.stremio.com/#/detail/movie/${movie.imdb_id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#7b5ea7]/15 border border-[#7b5ea7]/30 text-[#b08fe8] text-sm font-semibold hover:bg-[#7b5ea7]/25 transition-all"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                style={{
+                  background: 'rgba(123, 94, 167, 0.15)',
+                  borderWidth: 1,
+                  borderColor: 'rgba(123, 94, 167, 0.3)',
+                  color: 'var(--c-stremio-text)',
+                }}
               >
                 ↗ Stremio
               </a>
@@ -232,7 +238,7 @@ function RatingBadge({ label, value, sub, color }) {
   return (
     <div className="bg-surface2 rounded-xl p-2.5 text-center flex flex-col items-center gap-0.5">
       <div className="text-[10px] text-muted uppercase tracking-widest">{label}</div>
-      <div className="text-2xl font-black leading-none" style={{ color, textShadow: `0 0 16px ${color}40` }}>
+      <div className="text-2xl font-black leading-none" style={{ color, textShadow: `0 0 16px color-mix(in srgb, ${color} 25%, transparent)` }}>
         {value}
       </div>
       <div className="text-[10px] text-muted/70">{sub}</div>

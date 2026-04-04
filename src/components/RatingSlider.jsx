@@ -8,7 +8,7 @@ export default function RatingSlider({ type, value, onChange }) {
   const ticks   = isImdb
     ? ['0', '2', '4', '6', '8', '10']
     : ['0%', '25%', '50%', '75%', '100%']
-  const fillColor = isImdb ? '#f5c518' : '#fa320a'
+  const fillColor = isImdb ? 'rgb(var(--c-imdb))' : 'rgb(var(--c-rt))'
   const fillPct   = ((value - min) / (max - min)) * 100
 
   function handleChange(e) {

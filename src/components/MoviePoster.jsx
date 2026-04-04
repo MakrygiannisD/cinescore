@@ -10,7 +10,7 @@ export default function MoviePoster({ movie }) {
         <div
           className="absolute inset-0 animate-shimmer"
           style={{
-            background: 'linear-gradient(90deg, #1a1a24 25%, #222232 50%, #1a1a24 75%)',
+            background: 'linear-gradient(90deg, rgb(var(--c-surface2)) 25%, rgb(var(--c-border)) 50%, rgb(var(--c-surface2)) 75%)',
             backgroundSize: '200% 100%',
           }}
         />

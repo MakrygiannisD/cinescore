@@ -18,12 +18,12 @@ export default function NameModal({ title, placeholder, onConfirm }) {
           onChange={e => setName(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && name.trim() && onConfirm(name.trim())}
           placeholder={placeholder ?? 'Your name'}
-          className="w-full bg-surface2 border border-border rounded-xl px-4 py-3 text-white placeholder-muted outline-none focus:border-accent/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.1)] transition-all"
+          className="w-full bg-surface2 border border-border rounded-xl px-4 py-3 text-white placeholder-muted outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
         />
         <button
           onClick={() => name.trim() && onConfirm(name.trim())}
           disabled={!name.trim()}
-          className="w-full py-3 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 shadow-[0_4px_20px_rgba(99,102,241,0.25)]"
+          className="w-full py-3 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 shadow-accent"
         >
           Let's go →
         </button>

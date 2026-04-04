@@ -33,7 +33,7 @@ export default function GameScreen({ movie, round, totalRounds, runningScore, on
 
       <button
         onClick={() => onSubmit(imdbGuess, movie.rt_rating)}
-        className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-[0_4px_24px_rgba(99,102,241,0.25)] hover:shadow-[0_4px_32px_rgba(99,102,241,0.4)]"
+        className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-accent hover:shadow-accent-lg"
       >
         Submit Guess
       </button>
