@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { getGrade, gradeColor } from '../lib/scoring'
 import MovieDetailModal from '../components/MovieDetailModal'
+import ShareCard from '../components/ShareCard'
 
 export default function FinalScreen({ movies, scores, listName, isDaily, isChallenge, user, onDailyComplete, onChallengeComplete, onPlayAgain, onChangeList, onShowLeaderboard }) {
   const total            = scores.reduce((sum, s) => sum + s.total, 0)
@@ -26,27 +27,15 @@ export default function FinalScreen({ movies, scores, listName, isDaily, isChall
         </div>
       )}
 
-      {/* Score hero */}
-      <div className="bg-surface border border-white/[0.05] rounded-2xl p-8 text-center flex flex-col items-center gap-3 relative overflow-hidden">
-        <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-        <div
-          className="w-36 h-36 rounded-full border-[6px] flex flex-col items-center justify-center animate-scaleIn"
-          style={{
-            borderColor: color,
-            boxShadow: `0 0 40px ${color}30, 0 0 80px ${color}12`,
-          }}
-        >
-          <span className="text-5xl font-black leading-none" style={{ color }}>{total}</span>
-          <span className="text-muted/60 text-xs mt-1">/ 500</span>
-        </div>
-        <div className="text-xl font-black mt-1" style={{ color }}>{label}</div>
-        <div className="text-muted text-sm max-w-[200px] leading-relaxed">{sub}</div>
-        {listName && (
-          <div className="text-xs text-muted/50 mt-1">
-            Played: <span className="text-muted/80">{listName}</span>
-          </div>
-        )}
-      </div>
+      {/* Shareable card */}
+      <ShareCard
+        total={total}
+        maxScore={500}
+        roundScores={scores.map(s => s.total)}
+        mode={isDaily ? 'daily' : 'practice'}
+        listName={listName}
+        posterUrl={movies[scores.reduce((best, s, i) => s.total > scores[best].total ? i : best, 0)]?.poster_url}
+      />
 
       {/* Per-round breakdown */}
       <div className="flex flex-col gap-2">

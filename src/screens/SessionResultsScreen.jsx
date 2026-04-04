@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
 import ChatPanel from '../components/ChatPanel'
 import MovieDetailModal from '../components/MovieDetailModal'
+import ShareCard from '../components/ShareCard'
 import { getGrade, gradeColor } from '../lib/scoring'
 
 export default function SessionResultsScreen({
@@ -123,14 +124,26 @@ return (
       {selectedMovie && <MovieDetailModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />}
       <div className="w-full max-w-md space-y-4">
 
-        {/* My score */}
-        <div className="text-center">
-          <div className="text-6xl font-black mb-1" style={{ color, textShadow: `0 0 30px ${color}60` }}>
-            {myTotal}
-          </div>
-          <div className="text-white/60 text-sm">{grade.label}</div>
-          <div className="text-muted text-xs mt-0.5">{grade.sub}</div>
-        </div>
+        {/* Shareable card */}
+        {guesses.length > 0 && (() => {
+          const myRoundScores = Array.from({ length: 5 }, (_, r) => {
+            const g = guesses.find(x => x.player_id === playerId && x.round === r)
+            return g ? g.score + (g.streak_bonus || 0) : 0
+          })
+          const bestRound = myRoundScores.reduce((best, s, i) => s > myRoundScores[best] ? i : best, 0)
+          return (
+            <ShareCard
+              total={myTotal}
+              maxScore={500}
+              roundScores={myRoundScores}
+              mode="multiplayer"
+              rank={ranked.findIndex(p => p.player_id === playerId) + 1}
+              playerCount={players.length}
+              mvpBadges={mvpBadges[playerId] || []}
+              posterUrl={movies[bestRound]?.poster_url}
+            />
+          )
+        })()}
 
         {/* Leaderboard */}
         <div className="bg-surface border border-white/[0.05] rounded-2xl overflow-hidden">
